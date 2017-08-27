@@ -1,7 +1,7 @@
 # dotfiles
 
 ## Summary
-dotfiles設定ファイル  
+The repository for dotfiles.  
 ほぼ `.emacs.d` 保存用
 
 ## Installation
