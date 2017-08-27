@@ -1,0 +1,12 @@
+# dirs
+.emacs.d/auto-save-list/
+.emacs.d/elpa/
+.emacs.d/eshell/
+.emacs.d/url/
+
+# files
+kkcrc
+network-security.data
+tramp
+type-break
+ac-comphist.dat
