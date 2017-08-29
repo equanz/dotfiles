@@ -3,6 +3,7 @@
 # make symbolic link
 ln -nfs $(cd $(dirname $0) && pwd)/.zshrc $HOME/.zshrc
 ln -nfs $(cd $(dirname $0) && pwd)/.vimrc $HOME/.vimrc
+ln -nfs $(cd $(dirname $0) && pwd)/.tmux.conf $HOME/.tmux.conf
 ln -nfs $(cd $(dirname $0) && pwd)/.emacs.d/ $HOME/.emacs.d
 
 # message
