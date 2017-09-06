@@ -118,4 +118,4 @@
  '(neo-vc-integration (quote (face char)))
  '(package-selected-packages
    (quote
-    (company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex pdf-tools exec-path-from-shell typescript-mode flycheck yascroll atom-one-dark-theme magit markdown-mode smooth-scroll smartparens rainbow-mode powerline neotree mozc evil emmet-mode auto-complete all-the-icons))))
+    (yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex pdf-tools exec-path-from-shell typescript-mode flycheck yascroll atom-one-dark-theme magit markdown-mode smooth-scroll smartparens rainbow-mode powerline neotree mozc evil emmet-mode auto-complete all-the-icons))))

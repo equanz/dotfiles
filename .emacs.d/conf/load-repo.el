@@ -61,6 +61,7 @@
     term+mux
     typescript-mode
     web-mode
+    yaml-mode
     yascroll
     yatex
   ))

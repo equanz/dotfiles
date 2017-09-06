@@ -94,8 +94,10 @@ export TERM=xterm-256color
 export PATH=$PATH:$HOME/.nodebrew/current/bin
 
 # SYSLAN proxy
-source $HOME/src/sh/proxy.sh
-alias proxy_toggle='source ~/src/sh/proxy_toggler.sh'
+if [ -e $HOME/src/sh/proxy_toggler.sh ]; then
+  source $HOME/src/sh/proxy.sh
+  alias proxy_toggle='source $HOME/src/sh/proxy_toggler.sh'
+fi
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -122,7 +124,7 @@ SAVEHIST=100000
 setopt share_history
 
 # zsh-completions
-fpath=(/path/to/homebrew/share/zsh-completions $fpath)
+fpath=(/usr/local/Cellar/zsh-completions/0.25.0/share/zsh-completions/ $fpath)
 
 autoload -U compinit
 compinit -u
