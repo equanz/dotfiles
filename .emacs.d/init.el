@@ -30,6 +30,7 @@
 (load "bind-key-init") ;; bind-keyの設定
 (load "pdf-view-mode-init") ;; pdf-view-modeの設定
 (load "calendar-init") ;; calendar系の設定
+(load "go-mode-init") ;; go-modeの設定
 
 
 (load "keybind")   ;; キーバインドの設定

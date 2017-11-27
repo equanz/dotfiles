@@ -86,8 +86,14 @@
 
 (setq-default require-final-newline t) ;; final-newlineの設定
 
+;; hoge
+(if window-system (progn
 (if (eq system-type 'darwin)
     mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control)))
     ;; マウススクロールの速度を無視
     (setq mouse-wheel-progressive-speed nil))
+
+
+  ;; ここまで
+))
 

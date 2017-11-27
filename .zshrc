@@ -108,11 +108,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# Golang
-#export GOROOT=$HOME/go
-#export PATH=$PATH:$GOROOT/bin
-
 # goenv
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
 eval "$(goenv init -)"
 
 # value of history

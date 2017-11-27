@@ -21,5 +21,5 @@
       ("ghostview\\|gv" . ".ps")
       ("acroread\\|pdf\\|Preview\\|open" . ".pdf")))
 
-;; M-RETをC-jに設定
+;; set intelligent-newline keymap (M-j)
 (bind-key "M-j" 'YaTeX-intelligent-newline YaTeX-mode-map)

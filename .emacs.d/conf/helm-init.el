@@ -10,5 +10,3 @@
 ;; helm-M-xの割り当て(M-x)
 (bind-key "M-x" 'helm-M-x)
 
-;; 補完キーの割り当て(TAB)
-(bind-key "<tab>" 'helm-execute-persistent-action helm-read-file-map)
