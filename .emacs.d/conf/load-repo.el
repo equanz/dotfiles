@@ -27,7 +27,6 @@
     tab-group
     tablist
     undo-tree
-    web-mode
     with-editor
 
     ;; installed
@@ -52,7 +51,6 @@
     markdown-mode
     mozc
     neotree
-    pdf-tools
     powerline
     rainbow-mode
     smartparens
