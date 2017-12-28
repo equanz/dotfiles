@@ -17,9 +17,11 @@
     dash
     epl
     font-lock+
+    ghub
     git-commit
     goto-chg
     helm-core
+    let-alist
     magit-popup
     memoize
     pkg-info
