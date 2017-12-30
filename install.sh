@@ -9,12 +9,13 @@ do
   [[ "$f" == ".DS_Store" ]] && continue
   [[ "$f" == ".gitignore" ]] && continue
 
-  if [ -f "$f" ]; then
-    # file
-    ln -ns $(cd $(dirname $0) && pwd)/$f $HOME/$f
-  else
+  echo $f
+  if [ -d "$f" ]; then
     # directory
     ln -ns $(cd $(dirname $0) && pwd)/$f/ $HOME/$f
+  else
+    # file
+    ln -ns $(cd $(dirname $0) && pwd)/$f $HOME/$f
   fi
 done
 
