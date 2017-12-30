@@ -1,8 +1,9 @@
 #!/bin/sh
 
 # make symbolic link
-for f in .??*
+for f_d in $(cd $(dirname $0) && pwd)/.??*
 do
+  f=$(basename $f_d)
   # ignores
   [[ "$f" == ".git" ]] && continue
   [[ "$f" == ".DS_Store" ]] && continue
@@ -10,10 +11,10 @@ do
 
   if [ -f "$f" ]; then
     # file
-    ln -nfs $(cd $(dirname $0) && pwd)/$f $HOME/$f
+    ln -ns $(cd $(dirname $0) && pwd)/$f $HOME/$f
   else
     # directory
-    ln -nfs $(cd $(dirname $0) && pwd)/$f/ $HOME/$f
+    ln -ns $(cd $(dirname $0) && pwd)/$f/ $HOME/$f
   fi
 done
 
