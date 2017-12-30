@@ -27,7 +27,6 @@
     pkg-info
     popup
     tab-group
-    tablist
     undo-tree
     with-editor
 

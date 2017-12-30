@@ -1,10 +1,28 @@
 #!/bin/sh
 
 # make symbolic link
-ln -nfs $(cd $(dirname $0) && pwd)/.zshrc $HOME/.zshrc
-ln -nfs $(cd $(dirname $0) && pwd)/.vimrc $HOME/.vimrc
-ln -nfs $(cd $(dirname $0) && pwd)/.tmux.conf $HOME/.tmux.conf
-ln -nfs $(cd $(dirname $0) && pwd)/.emacs.d/ $HOME/.emacs.d
+for f in .??*
+do
+  # ignores
+  [[ "$f" == ".git" ]] && continue
+  [[ "$f" == ".DS_Store" ]] && continue
+  [[ "$f" == ".gitignore" ]] && continue
+
+  if [ -f "$f" ]; then
+    # file
+    ln -nfs $(cd $(dirname $0) && pwd)/$f $HOME/$f
+  else
+    # directory
+    ln -nfs $(cd $(dirname $0) && pwd)/$f/ $HOME/$f
+  fi
+done
+
+# TODO: install brew or linuxbrew
+
+# TODO: build and install emacs
+
+# TODO: install some commands
+# e.g. tmux, hub, zsh
 
 # message
 echo "Install Completed"
