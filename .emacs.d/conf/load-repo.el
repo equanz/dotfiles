@@ -19,7 +19,6 @@
     font-lock+
     ghub
     git-commit
-    goto-chg
     helm-core
     let-alist
     magit-popup
@@ -27,7 +26,6 @@
     pkg-info
     popup
     tab-group
-    undo-tree
     with-editor
 
     ;; installed
@@ -39,7 +37,6 @@
     company
     diminish
     emmet-mode
-    evil
     exec-path-from-shell
     expand-region
     flycheck
@@ -59,6 +56,7 @@
     term+
     term+mux
     typescript-mode
+    undo-tree
     web-mode
     yaml-mode
     yascroll
