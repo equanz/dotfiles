@@ -16,7 +16,6 @@
     async
     dash
     epl
-    font-lock+
     ghub
     git-commit
     helm-core
