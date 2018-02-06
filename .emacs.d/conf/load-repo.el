@@ -1,9 +1,9 @@
 (require 'package)
 
 ;; MELPAを追加
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 ;; MELPA-stableを追加
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 (package-initialize)
 
@@ -57,6 +57,7 @@
     typescript-mode
     undo-tree
     web-mode
+    which-key
     yaml-mode
     yascroll
     yatex
