@@ -30,6 +30,7 @@
 (load "bind-key-init") ;; bind-keyの設定
 (load "calendar-init") ;; calendar系の設定
 (load "go-mode-init") ;; go-modeの設定
+(load "which-key-init") ;; which-keyの設定
 
 
 (load "keybind")   ;; キーバインドの設定
@@ -118,4 +119,4 @@
  '(neo-vc-integration (quote (face char)))
  '(package-selected-packages
    (quote
-    (undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode flycheck yascroll atom-one-dark-theme magit markdown-mode smooth-scroll smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
+    (which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode flycheck yascroll atom-one-dark-theme magit markdown-mode smooth-scroll smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
