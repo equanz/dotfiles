@@ -7,7 +7,7 @@ The repository for dotfiles.
 ## Installation
 
 ```
-% git clone https://github.com/rikyuusima/dotfiles.git
+% git clone https://github.com/equanz/dotfiles.git
 % cd path/to/dotfiles/
 % ./install.sh
 ```
