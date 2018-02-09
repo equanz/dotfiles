@@ -49,7 +49,7 @@
 ;; 日付の表示
 (setq display-time-day-and-date t)
 (setq display-time-string-forms
- '((format "%s/%s(%s) %s:%s" month day dayname 24-hours minutes
+ '((format "%s/%s/%s(%s) %s:%s" year month day dayname 24-hours minutes
    )))
 
 (display-time)
