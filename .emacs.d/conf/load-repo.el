@@ -59,7 +59,6 @@
     web-mode
     which-key
     yaml-mode
-    yascroll
     yatex
   ))
 

@@ -100,11 +100,8 @@
 (if window-system (progn
   (load-theme 'atom-one-dark t) ;; atom-one-darkテーマの適用
 
-  ;; yascrollの設定
+  ;; disable scroll bar
   (scroll-bar-mode 0)
-  (require 'yascroll)
-  (global-yascroll-bar-mode 1)
-  ;; ここまで
 ))
 ;; ここまで
 
@@ -117,4 +114,4 @@
  '(neo-vc-integration (quote (face char)))
  '(package-selected-packages
    (quote
-    (which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode flycheck yascroll atom-one-dark-theme magit markdown-mode smooth-scroll smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
+    (which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode flycheck atom-one-dark-theme magit markdown-mode smooth-scroll smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
