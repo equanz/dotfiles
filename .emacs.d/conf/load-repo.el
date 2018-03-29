@@ -35,6 +35,7 @@
     calfw
     company
     diminish
+    dockerfile-mode
     emmet-mode
     exec-path-from-shell
     expand-region
