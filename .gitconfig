@@ -1,9 +1,8 @@
 [core]
 	commentChar = %
 	excludesfile = ~/.gitignore_global
-[user]
-	name = equanz
-	email = equanz324@gmail.com
+[include]
+	path = ~/.gitconfig_local
 [alias]
 	br = branch
 	st = status
