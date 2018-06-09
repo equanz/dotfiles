@@ -30,6 +30,7 @@
 (load "go-mode-init") ;; go-modeの設定
 (load "which-key-init") ;; which-keyの設定
 (load "dockerfile-mode-init") ;; dockerfile-modeの設定
+(load "ein-init") ;; emacs-ipython-notebookの設定
 
 
 (load "keybind")   ;; キーバインドの設定
@@ -115,4 +116,4 @@
  '(neo-vc-integration (quote (face char)))
  '(package-selected-packages
    (quote
-    (dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode flycheck atom-one-dark-theme magit markdown-mode smooth-scroll smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
+    (ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode flycheck atom-one-dark-theme magit markdown-mode smooth-scroll smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))

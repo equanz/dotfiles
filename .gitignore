@@ -3,6 +3,7 @@
 .emacs.d/elpa/
 .emacs.d/eshell/
 .emacs.d/url/
+.emacs.d/request/
 
 # files
 kkcrc
