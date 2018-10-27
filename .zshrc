@@ -140,3 +140,7 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # direnv
 eval "$(direnv hook zsh)"
 
+# TreeTagger
+export PATH="$PATH:/Applications/TreeTagger/cmd"
+export PATH="$PATH:/Applications/TreeTagger/bin"
+
