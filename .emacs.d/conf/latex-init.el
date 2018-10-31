@@ -11,15 +11,10 @@
 ;; ここまで
 
 ;; YaTeX のコマンド定義
-;; TeXShopの使用
 (setq tex-command "platex")
 (setq dviprint-command-format "dvipdfmx %s")
 
 (setq dvi2-command "open -a Skim")
-(defvar YaTeX-dvi2-command-ext-alist
-  '(("xdvi" . ".dvi")
-      ("ghostview\\|gv" . ".ps")
-      ("acroread\\|pdf\\|Preview\\|open" . ".pdf")))
 
 ;; set intelligent-newline keymap (M-j)
 (bind-key "M-j" 'YaTeX-intelligent-newline YaTeX-mode-map)

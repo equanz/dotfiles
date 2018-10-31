@@ -3,9 +3,8 @@
 ;; ここまで
 
 ;; neotreeの設定
-(add-to-list 'load-path "/directory/containing/neotree/")
 (require 'neotree)
-(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow)) ;; setup neotree's theme
 (bind-key "<f8>" 'neotree-toggle) ;; f8キーでトグル
 (bind-key* "C-c o" 'neotree-show) ;; C-c oでカレントバッファをneotreeに
 (bind-key "C-u" 'neotree-select-up-and-unfold-node neotree-mode-map) ;; 親ディレクトリをアンフォールド
