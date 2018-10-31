@@ -1,6 +1,7 @@
 [core]
 	commentChar = %
 	excludesfile = ~/.gitignore_global
+	quotepath = false
 [include]
 	path = ~/.gitconfig_local
 [alias]
