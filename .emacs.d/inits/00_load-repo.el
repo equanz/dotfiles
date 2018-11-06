@@ -62,6 +62,7 @@
     neotree
     powerline
     rainbow-mode
+    smart-tab
     smartparens
     smooth-scroll
     term+
