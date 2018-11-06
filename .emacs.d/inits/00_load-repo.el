@@ -15,16 +15,26 @@
     ;; dependency
     async
     dash
+    deferred
     epl
     ghub
     git-commit
+    graphql
     helm-core
+    js2-mode
     let-alist
     magit-popup
     memoize
     pkg-info
     popup
+    request
+    request-deferred
+    s
+    simple-httpd
+    skewer-mode
     tab-group
+    treepy
+    websocket
     with-editor
 
     ;; installed
@@ -36,6 +46,7 @@
     company
     diminish
     dockerfile-mode
+    ein
     emmet-mode
     exec-path-from-shell
     expand-region
