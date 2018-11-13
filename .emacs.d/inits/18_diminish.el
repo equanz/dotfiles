@@ -10,4 +10,8 @@
 (diminish 'rainbow-mode)
 (diminish 'flyspell-mode)
 (diminish 'helm-mode)
+(diminish 'smooth-scroll-mode)
+(diminish 'which-key-mode)
+(diminish 'smart-tab-mode)
+(diminish 'eldoc-mode)
 
