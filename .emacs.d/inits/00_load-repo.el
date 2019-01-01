@@ -17,9 +17,7 @@
     dash
     deferred
     epl
-    ghub
     git-commit
-    graphql
     helm-core
     js2-mode
     let-alist
@@ -28,12 +26,10 @@
     pkg-info
     popup
     request
-    request-deferred
     s
     simple-httpd
     skewer-mode
     tab-group
-    treepy
     websocket
     with-editor
 
