@@ -127,6 +127,9 @@ fpath=(/usr/local/Cellar/zsh-completions/0.25.0/share/zsh-completions/ $fpath)
 autoload -U compinit
 compinit -u
 
+# with-readline alias (sftp)
+alias sftp="with-readline sftp"
+
 # keybind of backspace(C-d)
 stty eof undef
 bindkey "^D" backward-delete-char
