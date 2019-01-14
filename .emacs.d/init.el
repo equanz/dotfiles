@@ -3,6 +3,8 @@
 ;; =================
 
 (package-initialize) ;; initialize package
+(setq load-path (append '("~/.emacs.d/conf") load-path)) ;; append to load-path
+(load "load-repo") ;; load repository config directly
 (init-loader-load) ;; load el with init-loader
 
 (custom-set-variables
