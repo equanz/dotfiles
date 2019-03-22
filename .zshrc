@@ -93,12 +93,6 @@ export TERM=xterm-256color
 # nodebrew
 export PATH=$PATH:$HOME/.nodebrew/current/bin
 
-# SYSLAN proxy
-if [ -e $HOME/src/sh/proxy_toggler.sh ]; then
-  source $HOME/src/sh/proxy.sh
-  alias proxy_toggle='source $HOME/src/sh/proxy_toggler.sh'
-fi
-
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
