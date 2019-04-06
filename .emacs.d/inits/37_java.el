@@ -17,3 +17,7 @@
 (setq help-at-pt-timer-delay 0.1)
 (help-at-pt-set-timer)
 
+;; company setup
+(require 'company-emacs-eclim)
+(company-emacs-eclim-setup)
+

@@ -12,11 +12,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(eclim-eclipse-dirs (quote ("/Applications/Eclipse_Java.app")))
+ '(eclim-executable
+   "/Applications/Eclipse_Java.app/Contents/Eclipse/plugins/org.eclim_2.8.0/bin/eclim")
+ '(eclimd-default-workspace "~/eclipse-workspace")
  '(flycheck-disabled-checkers (quote (javascript-jshint javascript-jscs)))
  '(neo-vc-integration (quote (face char)))
  '(package-selected-packages
    (quote
-    (ac-emacs-eclim eclim smart-tab ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode flycheck atom-one-dark-theme magit markdown-mode smooth-scroll smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
+    (company-emacs-eclim eclim smart-tab ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode flycheck atom-one-dark-theme magit markdown-mode smooth-scroll smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

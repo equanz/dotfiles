@@ -1,38 +1,17 @@
 (require 'package)
 
-;; MELPAを追加
+;; add MELPA to list
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; MELPA-stableを追加
+;; add MELPA-stable to list
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 (package-initialize)
 
 (package-refresh-contents)
 
-;; インストールするパッケージ
+;; package list
 (defvar my-packages
   '(
-    ;; dependency
-    async
-    dash
-    deferred
-    epl
-    git-commit
-    helm-core
-    js2-mode
-    let-alist
-    magit-popup
-    memoize
-    pkg-info
-    popup
-    request
-    s
-    simple-httpd
-    skewer-mode
-    tab-group
-    websocket
-    with-editor
-
     ;; installed
     all-the-icons
     atom-one-dark-theme
@@ -40,8 +19,10 @@
     bind-key
     calfw
     company
+    company-emacs-eclim
     diminish
     dockerfile-mode
+    eclim
     ein
     emmet-mode
     exec-path-from-shell
