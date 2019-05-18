@@ -52,7 +52,7 @@
     yatex
   ))
 
-(require 'request)
+;; (require 'request)
 
 ;; check the connection to MELPA
 ;; (defun can-retreive-packages ()
