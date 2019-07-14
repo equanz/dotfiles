@@ -51,7 +51,7 @@ ZSH_THEME="blinks"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby osx bundler brew rails emoji-clock powerline)
+plugins=(git ruby osx bundler brew emoji-clock)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -89,6 +89,9 @@ export PATH="$HOME/usr/bin:$PATH"
 
 # tmux
 export TERM=xterm-256color
+
+# homebrew
+export PATH=/usr/local/sbin:$PATH
 
 # nodebrew
 export PATH=$PATH:$HOME/.nodebrew/current/bin
