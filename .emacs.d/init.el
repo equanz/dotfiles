@@ -15,7 +15,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#282C34" :foreground "#ABB2BF" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "Source Han Code JP"))))
- ;; '(mode-line ((t (:background "#6600ff" :foreground "#ffffff")))) failed in macOS Mojave
  '(neo-vc-ignored-face ((t (:foreground "#585858"))))
  '(powerline-active1 ((t (:inherit mode-line :background "#9966ff" :foreground "#fff"))))
  '(powerline-active2 ((t (:inherit mode-line :background "#b9aeff" :foreground "#000"))))
@@ -93,4 +92,4 @@
  '(neo-vc-integration (quote (face char)))
  '(package-selected-packages
    (quote
-    (ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode flycheck atom-one-dark-theme magit markdown-mode smooth-scroll smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
+    (smart-tab company-emacs-eclim eclim lsp-ui ripgrep lsp-mode company-lsp migemo ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode flycheck atom-one-dark-theme magit markdown-mode smooth-scroll smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))

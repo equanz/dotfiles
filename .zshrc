@@ -141,3 +141,7 @@ eval "$(direnv hook zsh)"
 export PATH="$PATH:/Applications/TreeTagger/cmd"
 export PATH="$PATH:/Applications/TreeTagger/bin"
 
+# Google Cloud SDK
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+

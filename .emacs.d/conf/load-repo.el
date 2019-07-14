@@ -20,6 +20,7 @@
     calfw
     company
     company-emacs-eclim
+    company-lsp
     diminish
     dockerfile-mode
     eclim
@@ -33,12 +34,16 @@
     howm
     init-loader
     less-css-mode
+    lsp-mode
+    lsp-ui
     magit
     markdown-mode
+    migemo
     mozc
     neotree
     powerline
     rainbow-mode
+    ripgrep
     smart-tab
     smartparens
     smooth-scroll
