@@ -1,4 +1,3 @@
-;; web-modeの設定
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . web-mode))
@@ -32,13 +31,16 @@
 )
 (web-mode-indent 2)
 
-;; タグの自動補完
+;; autocomplete tag
 (setq web-mode-auto-close-style 2)
 (setq web-mode-tag-auto-close-style 2)
 (setq web-mode-enable-auto-pairing nil)
-;; ここまで
-;; ここまで
 
-;; less-css-modeの設定
+;; less-css-mode config
 (require 'less-css-mode)
-;; ここまで
+
+;; lsp config
+(add-hook 'web-mode-hook
+          (lambda () (when (and (stringp buffer-file-name)
+                                (or (string-match "\\.js\\'" buffer-file-name))) (lsp-deferred))))
+
