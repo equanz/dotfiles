@@ -20,16 +20,17 @@
         ("blade"  . "\\.blade\\."))
 )
 
-(defun web-mode-indent (num)
-  (interactive "nIndent: ")
-  (setq web-mode-markup-indent-offset num)
-  (setq web-mode-css-indent-offset num)
-  (setq web-mode-style-padding num)
-  (setq web-mode-code-indent-offset num)
-  (setq web-mode-script-padding num)
-  (setq web-mode-block-padding num)
-)
-(web-mode-indent 2)
+;; set indent size to 2
+(let ((offset 2))
+  (setq web-mode-markup-indent-offset offset)
+  (setq web-mode-css-indent-offset offset)
+  (setq web-mode-style-padding offset)
+  (setq web-mode-code-indent-offset offset)
+  (setq web-mode-script-padding offset)
+  (setq web-mode-block-padding offset))
+
+;; disable auto indent
+(setq web-mode-enable-auto-indentation nil)
 
 ;; autocomplete tag
 (setq web-mode-auto-close-style 2)
