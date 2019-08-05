@@ -10,31 +10,32 @@
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration nil)
 
- ;; show line number
+;; show line number
 (if (version<= "26.0.50" emacs-version)
     (global-display-line-numbers-mode t)
   (global-linum-mode t))
- ;; highlight current line
+;; highlight current line
 (global-hl-line-mode t)
- ;; scroll by 1 step
-;(setq scroll-step 1)
-(setq scroll-conservatively 1)
- ;; highlight pair brackets
+;; scroll by 1 step
+(setq scroll-step 1)
+(setq scroll-conservatively 10000)
+(setq auto-window-vscroll nil)
+;; highlight pair brackets
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
- ;; highlight selected region
+;; highlight selected region
 (transient-mark-mode t)
- ;; auto indent
+;; auto indent
 (electric-indent-mode 0)
- ;; change (yes-no) to (y-n)
+;; change (yes-no) to (y-n)
 (fset 'yes-or-no-p 'y-or-n-p)
- ;; hide toolbar
+;; hide toolbar
 (tool-bar-mode -1)
- ;; ignore startup screen
+;; ignore startup screen
 (setq inhibit-startup-message t)
- ;; autorevert when file changed
+;; autorevert when file changed
 (global-auto-revert-mode 1)
- ;; ignore beep
+;; ignore beep
 (setq ring-bell-function 'ignore)
 
 ;; ignore tab indent by default
@@ -71,7 +72,8 @@
 
 (set-face-attribute 'whitespace-trailing nil
                     :foreground "#585858")
-
+(set-face-attribute 'trailing-whitespace nil
+                    :foreground "#585858")
 
 ;; auto cleanup whitespace
 (setq whitespace-action '(auto-cleanup))
