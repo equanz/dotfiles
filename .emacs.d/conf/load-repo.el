@@ -35,7 +35,7 @@
     init-loader
     less-css-mode
     lsp-mode
-    lsp-ui
+    ;; lsp-ui
     magit
     markdown-mode
     migemo
@@ -46,7 +46,6 @@
     ripgrep
     smart-tab
     smartparens
-    smooth-scroll
     term+
     term+mux
     typescript-mode

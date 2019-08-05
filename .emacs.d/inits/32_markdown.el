@@ -17,4 +17,10 @@
               (list "open" "-a" "Firefox" buffer-file-name)
               " "))
   )
+
+;; ignore auto cleanup whitespace
+(add-hook 'markdown-mode-hook
+          '(lambda ()
+             (set (make-local-variable 'whitespace-action) nil)))
+
 ;; end of config
