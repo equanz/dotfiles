@@ -23,6 +23,7 @@
     company-lsp
     diminish
     dockerfile-mode
+    doom-modeline
     eclim
     ein
     emmet-mode
@@ -56,7 +57,46 @@
     yatex
   ))
 
-;; (require 'request)
+;; (setq lexical-binding t)
+
+;; (require 'url)
+;; ;; callbackの時点でこの関数の返り値として定義できない
+;; (defun is-archive-alive (archives)
+;;   (if (null archive-list)
+;;       t
+;;     (url-retrieve (cdr (car archive-list))
+;;                   #'(lambda (status)
+;;                       (if (null (assoc 'error status))
+;;                           (ris-archive-alive (cdr archive-list))
+;;                         nil)))))
+;; (labels ((rec (archive-list)
+;;               (if (null archive-list)
+;;                   t
+;;                 (url-retrieve (cdr (car archive-list))
+;;                               #'(lambda (status)
+;;                                   (if (null (assoc 'error status))
+;;                                       (rec (cdr archive-list))
+;;                                     nil))))))
+;;   (rec archives))
+
+;; (print (is-archive-alive package-archives))
+
+;; (url-retrieve (cdr (car package-archives))
+;;               #'(lambda (status)
+;;                   (if (null (assoc 'error status))
+;;                       (print "foo")
+;;                     nil)))
+
+;; (defun our-length (lst)
+;;   (labels ((rec (lst acc)
+;;            (if (null lst)
+;;                acc
+;;                (rec (cdr lst) (1+ acc)))))
+;;     (rec lst 0)))
+
+;; (our-length '(1 2 3 4))
+
+; (require 'request)
 
 ;; check the connection to MELPA
 ;; (defun can-retreive-packages ()
