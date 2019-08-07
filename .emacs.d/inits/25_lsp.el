@@ -17,3 +17,7 @@
 (setq lsp-ui-flycheck-enable t)
 (setq lsp-prefer-flymake nil)
 
+;; disable yasnippet
+(with-eval-after-load 'lsp-mode
+  (setq lsp-enable-snippet nil))
+

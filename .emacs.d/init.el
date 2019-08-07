@@ -2,6 +2,8 @@
 ;; | Emacs init.el |
 ;; =================
 
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
 (package-initialize) ;; initialize package
 (setq load-path (append '("~/.emacs.d/conf") load-path)) ;; append to load-path
 (load "load-repo") ;; load repository config directly
@@ -92,4 +94,4 @@
  '(neo-vc-integration (quote (face char)))
  '(package-selected-packages
    (quote
-    (doom-modeline smart-tab company-emacs-eclim eclim ripgrep lsp-mode company-lsp migemo ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode flycheck atom-one-dark-theme magit markdown-mode smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
+    (let-alist lsp-ui doom-modeline smart-tab company-emacs-eclim eclim ripgrep lsp-mode company-lsp migemo ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode atom-one-dark-theme magit markdown-mode smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
