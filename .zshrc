@@ -105,10 +105,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# goenv
+# golang
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
-eval "$(goenv init -)"
 
 # value of history
 HISTFILE=~/.zsh_history
