@@ -13,6 +13,7 @@
 ;; show line number
 (if (version<= "26.0.50" emacs-version)
     (global-display-line-numbers-mode t)
+  (setq display-line-numbers-width 3)
   (global-linum-mode t))
 ;; highlight current line
 (global-hl-line-mode t)
