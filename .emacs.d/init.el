@@ -94,4 +94,4 @@
  '(neo-vc-integration (quote (face char)))
  '(package-selected-packages
    (quote
-    (let-alist lsp-ui doom-modeline smart-tab company-emacs-eclim eclim ripgrep lsp-mode company-lsp migemo ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader yatex exec-path-from-shell typescript-mode atom-one-dark-theme magit markdown-mode smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
+    (flycheck yatex let-alist lsp-ui doom-modeline smart-tab company-emacs-eclim eclim ripgrep lsp-mode company-lsp migemo ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader exec-path-from-shell typescript-mode atom-one-dark-theme magit markdown-mode smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))

@@ -1,6 +1,6 @@
 (require 'expand-region)
 
-(bind-key* "C-d" 'backward-delete-char-untabify) ;; BackSpaceの割り当て(C-d)
-(bind-key "C-z" 'undo)        ;; Undoの割り当て(C-/)
-;(bind-key "C-j" 'newline) ;; newlineの割り当て(C-j)
+(bind-key* "C-h" 'backward-delete-char-untabify) ;; BackSpace
+(bind-key "C-z" 'undo)        ;; Undo
+;(bind-key "C-j" 'newline) ;; newline
 

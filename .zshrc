@@ -126,10 +126,6 @@ compinit -u
 # with-readline alias (sftp)
 alias sftp="with-readline sftp"
 
-# keybind of backspace(C-d)
-stty eof undef
-bindkey "^D" backward-delete-char
-
 # hub
 eval "$(hub alias -s)"
 
