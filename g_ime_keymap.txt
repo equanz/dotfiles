@@ -132,6 +132,10 @@ Conversion	Ctrl j	Commit
 Composition	Ctrl j	Commit
 Composition	Ctrl d	Backspace
 Conversion	Ctrl d	Cancel
+Conversion	Ctrl n	ConvertNext
+Conversion	Ctrl p	ConvertPrev
+Conversion	Ctrl f	SegmentFocusRight
+Conversion	Ctrl b	SegmentFocusLeft
 Composition	ASCII	InsertCharacter
 Composition	Hankaku/Zenkaku	IMEOff
 Composition	Kanji	IMEOff
