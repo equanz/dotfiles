@@ -1,21 +1,30 @@
 #!/bin/sh
 
-# make symbolic link
-for f_d in $(cd $(dirname $0) && pwd)/.??*
-do
-  f=$(basename $f_d)
+is_ignores() {
   # ignores
-  [[ "$f" == ".git" ]] && continue
-  [[ "$f" == ".DS_Store" ]] && continue
-  [[ "$f" == ".gitignore" ]] && continue
+  for ignore in ".git" ".DS_Store" ".gitignore"; do
+    [[ $1 == $ignore ]] && return 1
+  done
+  return 0
+}
 
-  echo $f
-  if [ -d "$f" ]; then
+# make symbolic link
+dotfiles_dir=$(cd $(dirname $0) && pwd)
+for dot_path in $dotfiles_dir/.??*; do
+  dot_name=$(basename $dot_path)
+
+  # check ignores
+  is_ignores $dot_name || continue
+
+  # check already exists
+  ls $HOME/$dot_name > /dev/null 2>&1 && echo "File or directory already exists: $dot_name" && continue || echo $dot_name
+
+  if [ -d "$dot_name" ]; then
     # directory
-    ln -ns $(cd $(dirname $0) && pwd)/$f/ $HOME/$f
+    ln -ns $dotfiles_dir/$dot_name/ $HOME/$dot_name
   else
     # file
-    ln -ns $(cd $(dirname $0) && pwd)/$f $HOME/$f
+    ln -ns $dotfiles_dir/$dot_name $HOME/$dot_name
   fi
 done
 
