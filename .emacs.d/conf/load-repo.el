@@ -19,12 +19,10 @@
     bind-key
     calfw
     company
-    company-emacs-eclim
     company-lsp
     diminish
     dockerfile-mode
     doom-modeline
-    eclim
     ein
     emmet-mode
     exec-path-from-shell

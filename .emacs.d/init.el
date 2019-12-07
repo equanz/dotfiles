@@ -86,12 +86,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(eclim-eclipse-dirs (quote ("/Applications/Eclipse_Java.app")))
- '(eclim-executable
-   "/Applications/Eclipse_Java.app/Contents/Eclipse/plugins/org.eclim_2.8.0/bin/eclim")
- '(eclimd-default-workspace "~/eclipse-workspace")
  '(flycheck-disabled-checkers (quote (javascript-jshint javascript-jscs)))
  '(neo-vc-integration (quote (face char)))
  '(package-selected-packages
    (quote
-    (flycheck yatex let-alist lsp-ui doom-modeline smart-tab company-emacs-eclim eclim ripgrep lsp-mode company-lsp migemo ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader exec-path-from-shell typescript-mode atom-one-dark-theme magit markdown-mode smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
+    (flycheck yatex let-alist lsp-ui doom-modeline smart-tab ripgrep lsp-mode company-lsp migemo ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader exec-path-from-shell typescript-mode atom-one-dark-theme magit markdown-mode smartparens rainbow-mode powerline neotree mozc emmet-mode auto-complete all-the-icons))))
