@@ -143,3 +143,7 @@ export PATH="$PATH:/Applications/TreeTagger/bin"
 source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
+# add libxml2 to C handler
+export CPATH=/usr/local/opt/libxml2/include/libxml2/
+
+
