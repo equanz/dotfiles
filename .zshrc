@@ -84,6 +84,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# disable RPROMPT
+export RPROMPT=''
+
 # local usr
 export PATH="$HOME/usr/bin:$PATH"
 
