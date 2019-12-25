@@ -84,6 +84,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# autoload add-zsh-hook
+autoload -Uz add-zsh-hook
+
 # edit PROMPT
 function set_prompt() {
     export PROMPT="%{%f%k%b%}
