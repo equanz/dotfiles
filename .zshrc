@@ -84,8 +84,16 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# disable RPROMPT
-export RPROMPT=''
+# edit PROMPT
+function set_prompt() {
+    export PROMPT="%{%f%k%b%}
+%{%F{green}%}%n%{%F{blue}%}@%{%F{cyan}%}%m%{%F{green}%} %{%F{yellow}%}%~%{%F{green}%}$(git_prompt_info | sed -e 's/%B//g' -e 's/%K{[^}]*}//g')%{%f%k%b%}%E
+$(_prompt_char) %#%{%f%} "
+    export RPROMPT=''
+}
+set_prompt
+# fill PROMPT when precmd
+add-zsh-hook precmd set_prompt
 
 # local usr
 export PATH="$HOME/usr/bin:$PATH"
