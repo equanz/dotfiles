@@ -8,3 +8,5 @@
 	br = branch
 	st = status
 	co = checkout
+	sw = switch
+	rs = restore
