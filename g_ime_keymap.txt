@@ -60,7 +60,6 @@ Conversion	Ctrl d	SegmentFocusRight
 Conversion	Ctrl Down	CommitOnlyFirstSegment
 Conversion	Ctrl e	ConvertPrev
 Conversion	Ctrl Enter	Commit
-Conversion	Ctrl f	SegmentFocusLast
 Conversion	Ctrl g	Cancel
 Conversion	Ctrl h	Cancel
 Conversion	Ctrl i	ConvertToFullKatakana
@@ -130,8 +129,6 @@ Suggestion	Down	PredictAndConvert
 Suggestion	Shift Enter	CommitFirstSuggestion
 Conversion	Ctrl j	Commit
 Composition	Ctrl j	Commit
-Composition	Ctrl d	Backspace
-Conversion	Ctrl d	Cancel
 Conversion	Ctrl n	ConvertNext
 Conversion	Ctrl p	ConvertPrev
 Conversion	Ctrl f	SegmentFocusRight

@@ -95,7 +95,7 @@ $(_prompt_char) %#%{%f%} "
     export RPROMPT=''
 }
 set_prompt
-# fill PROMPT when precmd
+# fill PROMPT when zsh hook precmd
 add-zsh-hook precmd set_prompt
 
 # local usr
@@ -123,7 +123,7 @@ eval "$(pyenv init -)"
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 
-# value of history
+# history
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
@@ -149,15 +149,9 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # direnv
 eval "$(direnv hook zsh)"
 
-# TreeTagger
-export PATH="$PATH:/Applications/TreeTagger/cmd"
-export PATH="$PATH:/Applications/TreeTagger/bin"
-
 # Google Cloud SDK
 source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
 # add libxml2 to C handler
 export CPATH=/usr/local/opt/libxml2/include/libxml2/
-
-
