@@ -21,3 +21,12 @@
 (with-eval-after-load 'lsp-mode
   (setq lsp-enable-snippet nil))
 
+;; lsp-mode config
+(setq lsp-document-sync-method 'incremental)
+(setq lsp-response-timeout 5)
+(setq lsp-enable-completion-at-point nil)
+
+;; company-lsp config
+(setq company-lsp-async t)
+(setq company-lsp-cache-candidates 'auto)
+(setq company-lsp-enable-recompletion nil)
