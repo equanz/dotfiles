@@ -1,88 +1,22 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=${HOME}/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="blinks"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby osx bundler brew emoji-clock)
+if [ $(uname -s) = 'Darwin' ]; then
+    plugins=(git ruby macos bundler brew emoji-clock)
+else
+    plugins=(git ruby bundler brew emoji-clock)
+fi
 
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+source ${ZSH}/oh-my-zsh.sh
 
 # autoload add-zsh-hook
 autoload -Uz add-zsh-hook
@@ -108,20 +42,28 @@ export TERM=xterm-256color
 export PATH=/usr/local/sbin:$PATH
 
 # nodebrew
-export PATH=$PATH:$HOME/.nodebrew/current/bin
+if $(builtin command -v nodebrew > /dev/null); then
+    export PATH=${PATH}:${HOME}/.nodebrew/current/bin
+fi
 
 # rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if $(builtin command -v rbenv > /dev/null); then
+    export PATH=${HOME}/.rbenv/bin:${PATH}
+    eval "$(rbenv init -)"
+fi
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+if $(builtin command -v pyenv > /dev/null); then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
 
 # golang
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
+if $(builtin command -v go > /dev/null); then
+    export GOPATH=$HOME/go
+    export PATH=$GOPATH/bin:$PATH
+fi
 
 # history
 HISTFILE=~/.zsh_history
@@ -132,26 +74,50 @@ SAVEHIST=100000
 setopt share_history
 
 # zsh-completions
-fpath=(/usr/local/Cellar/zsh-completions/0.25.0/share/zsh-completions/ $fpath)
+fpath=(/usr/local/share/zsh-completions/ $fpath)
 
 autoload -U compinit
 compinit -u
 
 # with-readline alias (sftp)
-alias sftp="with-readline sftp"
+if $(builtin command -v with-readline > /dev/null); then
+    alias sftp="with-readline sftp"
+fi
 
 # hub
-eval "$(hub alias -s)"
+if $(builtin command -v hub > /dev/null); then
+    eval "$(hub alias -s)"
+fi
 
 # zsh-autosuggestions
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 # direnv
-eval "$(direnv hook zsh)"
+if $(builtin command -v direnv > /dev/null); then
+    eval "$(direnv hook zsh)"
+fi
 
 # Google Cloud SDK
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+if [ -d /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk ]; then
+    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+fi
+
+# OpenSSL
+if [ -d /usr/local/opt/openssl/bin ]; then
+    export PATH="/usr/local/opt/openssl/bin:${PATH}"
+fi
+
+# Java
+alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)"
+alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11)"
+if [ -f /usr/libexec/java_home ]; then
+    j8
+fi
 
 # add libxml2 to C handler
-export CPATH=/usr/local/opt/libxml2/include/libxml2/
+if [ -d /usr/local/opt/libxml2/include/libxml2 ]; then
+    export CPATH=/usr/local/opt/libxml2/include/libxml2
+fi
