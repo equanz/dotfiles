@@ -123,10 +123,10 @@ if [ -d ${BREW_PATH_PREFIX}/opt/openssl@1.1/bin ]; then
 fi
 
 # Java
+alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)"
+alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11)"
+alias j17="export JAVA_HOME=$(/usr/libexec/java_home -v 17)"
 if [ -f /usr/libexec/java_home ]; then
-    alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)"
-    alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11)"
-    alias j17="export JAVA_HOME=$(/usr/libexec/java_home -v 17)"
     j8
 fi
 
