@@ -4,7 +4,7 @@ export ZSH=${HOME}/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="blinks"
+ZSH_THEME='blinks'
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -32,37 +32,45 @@ set_prompt
 # fill PROMPT when zsh hook precmd
 add-zsh-hook precmd set_prompt
 
-# local usr
-export PATH="$HOME/usr/bin:$PATH"
-
 # tmux
 export TERM=xterm-256color
 
 # homebrew
-export PATH=/usr/local/sbin:$PATH
+if [ $(uname -s) = 'Darwin' ]; then
+    if [ $(uname -m) = 'arm64' ]; then
+        BREW_PATH_PREFIX=/opt/homebrew
+        export PATH=${BREW_PATH_PREFIX}/sbin:${BREW_PATH_PREFIX}/bin${PATH+:${PATH}}
+    else
+        BREW_PATH_PREFIX=/usr/local
+        export PATH=${BREW_PATH_PREFIX}/sbin${PATH+:${PATH}}
+    fi
+fi
+export CPATH=${BREW_PATH_PREFIX}/include${CPATH+:${CPATH}}
+export LIBRARY_PATH=${BREW_PATH_PREFIX}/lib${LIBRARY_PATH+:${LIBRARY_PATH}}
+export LD_LIBRARY_PATH=${BREW_PATH_PREFIX}/lib${LD_LIBRARY_PATH+:${LD_LIBRARY_PATH}}
 
 # nodebrew
 if $(builtin command -v nodebrew > /dev/null); then
-    export PATH=${PATH}:${HOME}/.nodebrew/current/bin
+    export PATH=${HOME}/.nodebrew/current/bin${PATH+:${PATH}}
 fi
 
 # rbenv
 if $(builtin command -v rbenv > /dev/null); then
-    export PATH=${HOME}/.rbenv/bin:${PATH}
+    export PATH=${HOME}/.rbenv/bin${PATH+:${PATH}}
     eval "$(rbenv init -)"
 fi
 
 # pyenv
 if $(builtin command -v pyenv > /dev/null); then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
+    export PYENV_ROOT=${HOME}/.pyenv
+    export PATH=${PYENV_ROOT}/bin${PATH+:${PATH}}
     eval "$(pyenv init -)"
 fi
 
 # golang
 if $(builtin command -v go > /dev/null); then
-    export GOPATH=$HOME/go
-    export PATH=$GOPATH/bin:$PATH
+    export GOPATH=${HOME}/go
+    export PATH=${GOPATH}/bin${PATH+:${PATH}}
 fi
 
 # history
@@ -74,14 +82,18 @@ SAVEHIST=100000
 setopt share_history
 
 # zsh-completions
-fpath=(/usr/local/share/zsh-completions/ $fpath)
-
+if [ -d ${BREW_PATH_PREFIX}/share/zsh/site-functions ]; then
+    FPATH=${BREW_PATH_PREFIX}/share/zsh/site-functions${FPATH+:${FPATH}}
+fi
+if [ -d ${BREW_PATH_PREFIX}/share/zsh-completions ]; then
+    FPATH=${BREW_PATH_PREFIX}/share/zsh-completions${FPATH+:${FPATH}}
+fi
 autoload -U compinit
 compinit -u
 
 # with-readline alias (sftp)
 if $(builtin command -v with-readline > /dev/null); then
-    alias sftp="with-readline sftp"
+    alias sftp='with-readline sftp'
 fi
 
 # hub
@@ -90,8 +102,8 @@ if $(builtin command -v hub > /dev/null); then
 fi
 
 # zsh-autosuggestions
-if [ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [ -f ${BREW_PATH_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source ${BREW_PATH_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
 # direnv
@@ -100,24 +112,24 @@ if $(builtin command -v direnv > /dev/null); then
 fi
 
 # Google Cloud SDK
-if [ -d /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk ]; then
-    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+if [ -d ${BREW_PATH_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk ]; then
+    source ${BREW_PATH_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+    source ${BREW_PATH_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 fi
 
 # OpenSSL
-if [ -d /usr/local/opt/openssl/bin ]; then
-    export PATH="/usr/local/opt/openssl/bin:${PATH}"
+if [ -d ${BREW_PATH_PREFIX}/opt/openssl@1.1/bin ]; then
+    export PATH=${BREW_PATH_PREFIX}/opt/openssl@1.1/bin${PATH+:${PATH}}
 fi
 
 # Java
-alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)"
-alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11)"
 if [ -f /usr/libexec/java_home ]; then
+    alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)"
+    alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11)"
+    alias j17="export JAVA_HOME=$(/usr/libexec/java_home -v 17)"
     j8
 fi
 
-# add libxml2 to C handler
-if [ -d /usr/local/opt/libxml2/include/libxml2 ]; then
-    export CPATH=/usr/local/opt/libxml2/include/libxml2
-fi
+# local usr
+# this line sould be placed at the end
+export PATH=${HOME}/usr/bin${PATH+:${PATH}}
