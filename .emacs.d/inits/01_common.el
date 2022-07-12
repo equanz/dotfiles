@@ -8,7 +8,7 @@
 
 ;; show syntax highlight
 (global-font-lock-mode t)
-(setq font-lock-maximum-decoration nil)
+(setq font-lock-maximum-decoration '((t . 2)))
 
 ;; show line number
 (if (version<= "26.0.50" emacs-version)
@@ -87,4 +87,3 @@
       (if (eq system-type 'darwin)
           mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control)))
           (setq mouse-wheel-progressive-speed nil))))
-

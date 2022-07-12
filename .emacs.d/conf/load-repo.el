@@ -5,6 +5,7 @@
 ;; add MELPA-stable to list
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
+;; initialize package
 (package-initialize)
 
 (package-refresh-contents)
@@ -18,8 +19,8 @@
     auto-complete
     bind-key
     calfw
+    cargo
     company
-    company-lsp
     diminish
     dockerfile-mode
     doom-modeline
@@ -40,9 +41,11 @@
     migemo
     mozc
     neotree
+    php-mode
     powerline
     rainbow-mode
     ripgrep
+    rust-mode
     smart-tab
     smartparens
     term+
