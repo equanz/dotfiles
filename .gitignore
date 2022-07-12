@@ -1,17 +1,17 @@
 # dirs
+.emacs.d/.cache/
 .emacs.d/auto-save-list/
 .emacs.d/elpa/
 .emacs.d/eshell/
-.emacs.d/url/
 .emacs.d/request/
 .emacs.d/transient/
+.emacs.d/url/
 
 # files
+.lsp-session*
+ac-comphist.dat
+jet_err_201.txt
 kkcrc
 network-security.data
 tramp
 type-break
-ac-comphist.dat
-jet_err_201.txt
-.lsp-session*
-

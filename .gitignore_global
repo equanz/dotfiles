@@ -6,3 +6,6 @@
 
 # Jupyter
 .ipynb_checkpoints/
+
+# IntelliJ IDEA
+.idea/
