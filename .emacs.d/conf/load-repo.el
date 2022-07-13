@@ -39,7 +39,6 @@
     magit
     markdown-mode
     migemo
-    mozc
     neotree
     php-mode
     powerline

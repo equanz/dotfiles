@@ -2,6 +2,8 @@
 (setq language-environment 'Japanese)
 (prefer-coding-system 'utf-8)
 
+(setq default-input-method "MacOSX")
+
 ;; ignore backup files
 (setq make-backup-files nil)
 (setq auto-save-default nil)
