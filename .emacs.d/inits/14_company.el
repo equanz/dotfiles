@@ -8,4 +8,3 @@
 (bind-key "M-p" 'nil company-active-map)
 (bind-key "C-n" 'company-select-next company-active-map)
 (bind-key "C-p" 'company-select-previous company-active-map)
-

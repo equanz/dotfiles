@@ -23,4 +23,4 @@
 ;; lsp-mode config
 (setq lsp-document-sync-method 'incremental)
 (setq lsp-response-timeout 5)
-(setq lsp-enable-completion-at-point nil)
+(setq lsp-completion-enable nil)

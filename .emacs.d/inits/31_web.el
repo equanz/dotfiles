@@ -44,4 +44,3 @@
 (add-hook 'web-mode-hook
           (lambda () (when (and (stringp buffer-file-name)
                                 (or (string-match "\\.js\\'" buffer-file-name))) (lsp-deferred))))
-

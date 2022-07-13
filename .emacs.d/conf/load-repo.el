@@ -116,7 +116,7 @@
 ;; (if (can-retreive-packages) "true" "false")
 
 
-;; my-packagesからパッケージをインストール
+;; install my-packages
 (dolist (package my-packages)
   (unless (package-installed-p package)
     (package-install package)))

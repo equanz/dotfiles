@@ -27,4 +27,3 @@
   (interactive)
   (shell-command "open ./")
 )
-

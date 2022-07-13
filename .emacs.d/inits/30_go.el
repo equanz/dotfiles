@@ -3,4 +3,3 @@
 
 ;; lsp config
 (add-hook 'go-mode-hook #'lsp-deferred)
-

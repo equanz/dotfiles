@@ -1,6 +1,7 @@
 (require 'migemo)
 
 ;; migemo command
+;; TODO: shouldn't add environment specific path
 (setq migemo-command "cmigemo")
 (setq migemo-options '("-q" "--emacs"))
 
@@ -11,4 +12,3 @@
 (setq migemo-regex-dictionary nil)
 (setq migemo-coding-system 'utf-8-unix)
 (migemo-init)
-

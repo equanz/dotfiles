@@ -1,9 +1,9 @@
-;; aspellの使用
+;; use aspell
 (setq-default ispell-program-name "aspell")
 
-;; 日本語まじりでも判断可能
+;; skip Japanese
 (eval-after-load "ispell"
  '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
 
-;; yatex-modeで起動
+;; apply ispell to yatex-mode
 (add-hook 'yatex-mode-hook' flyspell-mode)

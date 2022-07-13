@@ -15,4 +15,3 @@
 (diminish 'smart-tab-mode)
 (diminish 'eldoc-mode)
 (diminish 'yas-minor-mode)
-

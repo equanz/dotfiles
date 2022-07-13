@@ -2,7 +2,7 @@
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-;; web-modeへの適用
+;; apply flycheck to web-mode
 (add-hook 'web-mode-hook
           (lambda ()
             (when (equal web-mode-content-type "jsx")

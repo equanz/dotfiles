@@ -5,4 +5,3 @@
 
 ;; show which-key window into Minibuffer
 (which-key-setup-minibuffer)
-
