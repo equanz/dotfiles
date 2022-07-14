@@ -31,6 +31,7 @@
     flycheck
     go-mode
     helm
+    helm-ag
     howm
     init-loader
     less-css-mode
@@ -42,13 +43,15 @@
     neotree
     php-mode
     powerline
+    projectile
     rainbow-mode
-    ripgrep
     rust-mode
     smart-tab
     smartparens
     term+
     term+mux
+    treemacs
+    treemacs-projectile
     typescript-mode
     undo-tree
     web-mode
