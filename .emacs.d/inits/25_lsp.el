@@ -1,15 +1,22 @@
 (require 'lsp-mode)
 
-;; option
 (require 'lsp-ui)
 
-;; enable xref
-(setq lsp-enable-xref t)
+;; lsp-ui-sideline
+(setq lsp-ui-sideline-enable t)
+(setq lsp-ui-sideline-show-diagnostics t)
+(setq lsp-ui-sideline-show-hover t)
+(setq lsp-ui-sideline-show-code-actions t)
 
-;; disable lsp-ui
+;; lsp-ui-peek
+(setq lsp-ui-peek-enable t)
+(bind-key [remap xref-find-definitions] 'lsp-ui-peek-find-definitions lsp-ui-mode-map)
+(bind-key [remap xref-find-references] 'lsp-ui-peek-find-references lsp-ui-mode-map)
+
+;; lsp-ui-doc
 (setq lsp-ui-doc-enable nil)
-(setq lsp-ui-peek-enable nil)
-(setq lsp-ui-sideline-enable nil)
+
+;; lsp-ui-imenu
 (setq lsp-ui-imenu-enable nil)
 
 ;; use flycheck instead of flymake
@@ -20,7 +27,8 @@
 (with-eval-after-load 'lsp-mode
   (setq lsp-enable-snippet nil))
 
-;; lsp-mode config
-(setq lsp-document-sync-method 'incremental)
+;;(setq lsp-document-sync-method 'incremental)
 (setq lsp-response-timeout 5)
-(setq lsp-completion-enable nil)
+(setq lsp-completion-enable t)
+(setq lsp-enable-xref t)
+(setq lsp-eldoc-enable-hover nil)
