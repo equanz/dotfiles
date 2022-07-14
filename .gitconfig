@@ -14,3 +14,7 @@
 	log = "if [ -f $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight ]; then $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight | less; else less; fi"
 	show = "if [ -f $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight ]; then $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight | less; else less; fi"
 	diff = "if [ -f $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight ]; then $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight | less; else less; fi"
+[interactive]
+	diffFilter = "if [ -f $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight ]; then $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight; else cat; fi"
+[diff]
+	compactionHeuristic = true
