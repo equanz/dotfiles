@@ -6,6 +6,7 @@
 .emacs.d/request/
 .emacs.d/transient/
 .emacs.d/url/
+.emacs.d/**/*.eld
 
 # files
 .lsp-session*

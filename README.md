@@ -1,17 +1,16 @@
 # dotfiles
 
 ## Summary
-The repository for dotfiles.  
-ほぼ `.emacs.d` 保存用
+The repository for dotfiles.
 
 ## Installation
-
 ```
 % git clone https://github.com/equanz/dotfiles.git
 % cd path/to/dotfiles/
 % ./install.sh
 ```
 
-## License
-特に記述のないものについては， [MIT License](./LICENSE)
+Additionaly, read [here](./.emacs.d/README.md) for GNU Emacs.
 
+## License
+Licensed under [MIT License](./LICENSE) if not mentioned.
