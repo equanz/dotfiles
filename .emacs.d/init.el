@@ -20,6 +20,7 @@
  '(powerline-active1 ((t (:inherit mode-line :background "#9966ff" :foreground "#fff"))))
  '(powerline-active2 ((t (:inherit mode-line :background "#b9aeff" :foreground "#000"))))
  '(trailing-whitespace ((t (:background "red"))))
+ '(treemacs-root-face ((t (:inherit font-lock-constant-face :underline t :weight bold))))
  '(whitespace-empty ((t (:foreground "#585858"))))
  '(whitespace-hspace ((t (:foreground "#585858"))))
  '(whitespace-indentation ((t (:foreground "#585858"))))

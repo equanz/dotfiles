@@ -2,9 +2,15 @@
 (require 'treemacs)
 
 (treemacs-resize-icons 15)
+(setq treemacs-width 35)
+(setq treemacs--width-is-locked nil)
+(setq treemacs-width-is-initially-locked nil)
 (bind-key* "C-c o" 'treemacs-select-window)
 (bind-key "C-c c" 'treemacs-select-directory treemacs-mode-map)
 (bind-key "<SPC>" 'treemacs-RET-action treemacs-mode-map)
+
+;; disable line numbers
+(add-hook 'treemacs-mode-hook #'(lambda () (display-line-numbers-mode -1)))
 
 (require 'projectile)
 (require 'treemacs-projectile)
