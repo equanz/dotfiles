@@ -10,7 +10,7 @@ The repository for dotfiles.
 % ./install.sh
 ```
 
-Additionaly, read [here](./.emacs.d/README.md) for GNU Emacs.
+Additionaly, read [here](./.emacs.d/README.org) for GNU Emacs.
 
 ## License
 Licensed under [MIT License](./LICENSE) if not mentioned.
