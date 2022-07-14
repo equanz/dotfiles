@@ -1,6 +1,11 @@
-;; ripgrep binary
-;; TODO: shouldn't add environment specific path
-(setq ripgrep-executable "/usr/local/bin/rg")
+(setq helm-ag-base-command "rg --no-heading --hidden --glob=!.git/")
+(setq helm-ag-success-exit-status '(0 2))
 
-;; option
-(setq ripgrep-arguments '("-S"))
+(bind-key* "C-M-g" 'helm-do-ag-projectile)
+
+(defun helm-do-ag-projectile (&optional query)
+  "search on projectile root"
+  (interactive)
+  (unless (projectile-project-root)
+    (error "Could not find the projectile root."))
+  (helm-do-ag (projectile-project-root) nil query))
