@@ -1,21 +1,20 @@
-# .emacs.d
-
-## Summary
+* .emacs.d
+** Summary
 Configuration files for GNU Emacs.
 
-## Instructions
-### Build Emacs
+** Instructions
+*** TODO Build Emacs
 
-### Install dependencies
+*** Install dependencies
 On macOS
-```sh
+#+BEGIN_SRC shell
 $ brew install cmigemo ripgrep
 
 # for lsp-mode
 $ go install golang.org/x/tools/gopls@latest
 $ brew install rust-analyzer
 $ npm i -g typescript-language-server typescript
-```
+#+END_SRC
 
-## License
-Licensed under [GPL-3.0](./LICENSE) if not mentioned.
+** License
+Licensed under [[./LICENSE][GPL-3.0]] if not mentioned.
