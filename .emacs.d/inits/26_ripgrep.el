@@ -1,7 +1,7 @@
 (setq helm-ag-base-command "rg --no-heading --hidden --glob=!.git/")
 (setq helm-ag-success-exit-status '(0 2))
 
-(bind-key* "C-M-g" 'helm-do-ag-projectile)
+(bind-key* "C-c C-g" 'helm-do-ag-projectile)
 
 (defun helm-do-ag-projectile (&optional query)
   "search on projectile root"

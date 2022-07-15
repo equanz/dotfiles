@@ -36,6 +36,7 @@
     init-loader
     less-css-mode
     lsp-mode
+    lsp-treemacs
     lsp-ui
     magit
     markdown-mode

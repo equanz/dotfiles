@@ -5,6 +5,7 @@
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 (setq load-path (append '("~/.emacs.d/conf") load-path)) ;; append to load-path
+(setq init-loader-show-log-after-init 'error-only)
 (load "load-repo") ;; load repository config directly
 (init-loader-load) ;; load el with init-loader
 
@@ -16,6 +17,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#282C34" :foreground "#ABB2BF" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "Source Han Code JP"))))
+ '(lsp-ui-sideline-global ((t (:background "#031A25"))))
  '(neo-vc-ignored-face ((t (:foreground "#585858"))))
  '(powerline-active1 ((t (:inherit mode-line :background "#9966ff" :foreground "#fff"))))
  '(powerline-active2 ((t (:inherit mode-line :background "#b9aeff" :foreground "#000"))))
@@ -89,4 +91,4 @@
  '(flycheck-disabled-checkers '(javascript-jshint javascript-jscs emacs-lisp-checkdoc))
  '(neo-vc-integration '(face char))
  '(package-selected-packages
-   '(helm-ag treemacs-projectile projectile treemacs cargo rust-mode yasnippet php-mode flycheck yatex let-alist lsp-ui doom-modeline smart-tab lsp-mode company-lsp migemo ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader exec-path-from-shell typescript-mode atom-one-dark-theme magit markdown-mode smartparens rainbow-mode powerline neotree emmet-mode auto-complete all-the-icons)))
+   '(docker-tramp lsp-treemacs helm-ag treemacs-projectile projectile treemacs cargo rust-mode yasnippet php-mode flycheck yatex let-alist lsp-ui doom-modeline smart-tab lsp-mode company-lsp migemo ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader exec-path-from-shell typescript-mode atom-one-dark-theme magit markdown-mode smartparens rainbow-mode powerline neotree emmet-mode auto-complete all-the-icons)))

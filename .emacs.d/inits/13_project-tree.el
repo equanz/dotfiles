@@ -8,6 +8,8 @@
 (bind-key* "C-c o" 'treemacs-select-window)
 (bind-key "C-c c" 'treemacs-select-directory treemacs-mode-map)
 (bind-key "<SPC>" 'treemacs-RET-action treemacs-mode-map)
+(bind-key "C-c C-f" 'projectile-find-file)
+(bind-key "C-c C-d" 'projectile-find-dir)
 
 ;; disable line numbers
 (add-hook 'treemacs-mode-hook #'(lambda () (display-line-numbers-mode -1)))

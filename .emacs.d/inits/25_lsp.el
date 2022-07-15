@@ -7,6 +7,7 @@
 (setq lsp-ui-sideline-show-diagnostics t)
 (setq lsp-ui-sideline-show-hover t)
 (setq lsp-ui-sideline-show-code-actions t)
+(setq lsp-ui-sideline-delay 2)
 
 ;; lsp-ui-peek
 (setq lsp-ui-peek-enable t)
@@ -26,6 +27,9 @@
 ;; disable yasnippet
 (with-eval-after-load 'lsp-mode
   (setq lsp-enable-snippet nil))
+
+;; treemacs
+(lsp-treemacs-sync-mode 1)
 
 ;;(setq lsp-document-sync-method 'incremental)
 (setq lsp-response-timeout 5)
