@@ -130,6 +130,11 @@ if [ -f /usr/libexec/java_home ]; then
     j8
 fi
 
+# makeinfo
+if [ -d ${BREW_PATH_PREFIX}/opt/texinfo ]; then
+    export PATH=${BREW_PATH_PREFIX}/opt/texinfo/bin${PATH+:${PATH}}
+fi
+
 # local usr
 # this line sould be placed at the end
 export PATH=${HOME}/usr/bin${PATH+:${PATH}}
