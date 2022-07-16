@@ -4,15 +4,17 @@
 .emacs.d/elpa/
 .emacs.d/eshell/
 .emacs.d/request/
+.emacs.d/straight/*
+!.emacs.d/straight/versions
 .emacs.d/transient/
 .emacs.d/url/
-.emacs.d/**/*.eld
 
 # files
-.lsp-session*
+.emacs.d/**/.lsp-session*
+.emacs.d/**/*.eld
+.emacs.d/**/tramp
 ac-comphist.dat
 jet_err_201.txt
 kkcrc
 network-security.data
-tramp
 type-break
