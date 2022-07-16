@@ -1,23 +1,22 @@
-(require 'all-the-icons)
-(require 'treemacs)
+(use-package all-the-icons)
+(use-package treemacs
+  :init
+  (setq treemacs-width 35)
+  (setq treemacs--width-is-locked nil)
+  (setq treemacs-width-is-initially-locked nil)
+  ;; disable line numbers
+  (add-hook 'treemacs-mode-hook #'(lambda () (display-line-numbers-mode -1)))
+  :config
+  (treemacs-resize-icons 15)
+  :bind (("C-c o" . treemacs-select-window)
+         :map treemacs-mode-map
+         ("C-c c" . treemacs-select-directory)
+         ("<SPC>" . treemacs-RET-action)))
 
-(treemacs-resize-icons 15)
-(setq treemacs-width 35)
-(setq treemacs--width-is-locked nil)
-(setq treemacs-width-is-initially-locked nil)
-(bind-key* "C-c o" 'treemacs-select-window)
-(bind-key "C-c c" 'treemacs-select-directory treemacs-mode-map)
-(bind-key "<SPC>" 'treemacs-RET-action treemacs-mode-map)
-(bind-key "C-c C-f" 'projectile-find-file)
-(bind-key "C-c C-d" 'projectile-find-dir)
-
-;; disable line numbers
-(add-hook 'treemacs-mode-hook #'(lambda () (display-line-numbers-mode -1)))
-
-(require 'projectile)
-(require 'treemacs-projectile)
-
-(treemacs)
+(use-package projectile
+  :bind (("C-c C-f" . projectile-find-file)
+         ("C-c C-d" . projectile-find-dir)))
+(use-package treemacs-projectile)
 
 ;; (require 'all-the-icons)
 

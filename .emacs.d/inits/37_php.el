@@ -1,1 +1,1 @@
-(require 'php-mode)
+(use-package php-mode)

@@ -1,2 +1,3 @@
-(require 'smart-tab)
-(global-smart-tab-mode 1) ;; setup smart-tab
+(use-package smart-tab
+  :init
+  (global-smart-tab-mode 1))

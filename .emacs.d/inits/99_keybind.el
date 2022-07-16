@@ -1,5 +1,3 @@
-(require 'expand-region)
-
 (bind-key* "C-h" 'backward-delete-char-untabify) ;; BackSpace
 (bind-key "C-z" 'undo) ;; Undo
 (bind-key* "C-y" #'(lambda () (interactive) (yank) (call-interactively 'indent-region))) ;; yank and indent

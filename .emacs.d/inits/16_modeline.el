@@ -1,3 +1,3 @@
-(require 'doom-modeline)
-
-(doom-modeline-mode 1)
+(use-package doom-modeline
+  :init
+  (doom-modeline-mode 1))

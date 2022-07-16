@@ -4,10 +4,32 @@
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
-(setq load-path (append '("~/.emacs.d/conf") load-path)) ;; append to load-path
-(setq init-loader-show-log-after-init 'error-only)
-(load "load-repo") ;; load repository config directly
-(init-loader-load) ;; load el with init-loader
+;; use straight.el for package management
+(setq package-enable-at-startup nil)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; install use-package
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
+
+;; install and setup init-loader
+(use-package init-loader
+  :init
+  (setq init-loader-show-log-after-init 'error-only)
+  :config
+  ;; load el with init-loader
+  (init-loader-load))
 
 ;; common(CUI or GUI) face config
 ;; by list-face-display command
@@ -36,7 +58,10 @@
 
 ;; only GUI config
 (if window-system (progn
-  (load-theme 'atom-one-dark t) ;; enable atom-one-dark theme
+  ;; enable atom-one-dark theme
+  (use-package atom-one-dark-theme
+    :config
+    (load-theme 'atom-one-dark t))
 
   ;; disable scroll bar
   (scroll-bar-mode 0)
@@ -89,6 +114,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(flycheck-disabled-checkers '(javascript-jshint javascript-jscs emacs-lisp-checkdoc))
- '(neo-vc-integration '(face char))
- '(package-selected-packages
-   '(docker-tramp lsp-treemacs helm-ag treemacs-projectile projectile treemacs cargo rust-mode yasnippet php-mode flycheck yatex let-alist lsp-ui doom-modeline smart-tab lsp-mode company-lsp migemo ein dockerfile-mode which-key undo-tree web-mode yaml-mode company calfw howm go-mode bind-key term+mux helm expand-region diminish less-css-mode term+ init-loader exec-path-from-shell typescript-mode atom-one-dark-theme magit markdown-mode smartparens rainbow-mode powerline neotree emmet-mode auto-complete all-the-icons)))
+ '(neo-vc-integration '(face char)))

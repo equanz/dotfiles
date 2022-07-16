@@ -9,6 +9,7 @@ Configuration files for GNU Emacs.
 On macOS
 #+BEGIN_SRC shell
 $ brew install cmigemo ripgrep
+$ npm install -g marked
 
 # for lsp-mode
 $ go install golang.org/x/tools/gopls@latest

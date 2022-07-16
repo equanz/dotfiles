@@ -1,5 +1,3 @@
-;; require
-(require 'go-mode)
-
-;; lsp config
-(add-hook 'go-mode-hook #'lsp-deferred)
+(use-package go-mode
+  :init
+  (add-hook 'go-mode-hook #'lsp-deferred))
