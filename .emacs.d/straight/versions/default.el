@@ -5,7 +5,7 @@
  ("cargo.el" . "0b9821b029f49654565edffdbfd68ca0f6ca9434")
  ("cfrs" . "f3a21f237b2a54e6b9f8a420a9da42b4f0a63121")
  ("company-mode" . "890797d3d7ca9c6703aac11753dd1513de67d46d")
- ("compat" . "86a63eead1671f7081ee353f8e0147c3ae646818")
+ ("compat" . "617d6c58bc4d5ae4fbe6c813d2aad61227848dea")
  ("dash.el" . "0ac1ecf6b56eb67bb81a3cf70f8d4354b5782341")
  ("diminish.el" . "6b7e837b0cf0129e9d7d6abae48093cf599bb9e8")
  ("dockerfile-mode" . "b63a3d12b7dea0cb9efc7f78d7ad5672ceab2a3f")
