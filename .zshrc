@@ -130,6 +130,11 @@ if [ -f /usr/libexec/java_home ]; then
     j8
 fi
 
+# Rust
+if [ -f ${HOME}/.cargo/env ]; then
+    source ${HOME}/.cargo/env
+fi
+
 # makeinfo
 if [ -d ${BREW_PATH_PREFIX}/opt/texinfo ]; then
     export PATH=${BREW_PATH_PREFIX}/opt/texinfo/bin${PATH+:${PATH}}
