@@ -1,5 +1,14 @@
 (use-package lsp-mode
   :init
+  ;; disable yasnippet
+  (setq lsp-enable-snippet nil)
+
+  ;;(setq lsp-document-sync-method 'incremental)
+  (setq lsp-response-timeout 5)
+  (setq lsp-completion-enable t)
+  (setq lsp-enable-xref t)
+  (setq lsp-eldoc-enable-hover nil)
+
   (use-package lsp-ui
     :init
     ;; lsp-ui-sideline
@@ -21,17 +30,11 @@
 
   ;; treemacs
   (use-package lsp-treemacs
-    :init
+    :config
     (lsp-treemacs-sync-mode 1))
 
-  ;; disable yasnippet
-  (setq lsp-enable-snippet nil)
+  (use-package docker-tramp)
 
-  ;;(setq lsp-document-sync-method 'incremental)
-  (setq lsp-response-timeout 5)
-  (setq lsp-completion-enable t)
-  (setq lsp-enable-xref t)
-  (setq lsp-eldoc-enable-hover nil)
   :bind (:map lsp-ui-mode-map
          ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
          ([remap xref-find-references] . lsp-ui-peek-find-references)))

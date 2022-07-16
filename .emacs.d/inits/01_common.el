@@ -84,6 +84,9 @@
 ;; config of final-newline
 (setq-default require-final-newline t)
 
+;; disable eol conversion
+(setq inhibit-eol-conversion t)
+
 ;; scroll config on macOS
 (if window-system
     (progn
