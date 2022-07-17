@@ -29,7 +29,7 @@ for dot_path in ${dotfiles_dir}/.??*; do
 done
 
 if [ $(uname -s) = 'Darwin' ]; then
-    echo '\n----Darwin spcific steps----\n'
+    echo '\n----Darwin specific steps----\n'
 
     # install Homebrew
     if ! $(builtin command -v brew > /dev/null); then
@@ -80,7 +80,7 @@ if [ $(uname -s) = 'Darwin' ]; then
         echo 'GNU Emacs is already installed'
     fi
 else
-    echo 'non-Darwin specific steps.\nDo nothing'
+    echo '\n----non-Darwin specific steps----\nDo nothing'
 fi
 
 echo '\n====End of env specific steps====\n'
