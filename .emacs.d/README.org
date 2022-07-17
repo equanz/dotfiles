@@ -3,9 +3,29 @@
 Configuration files for GNU Emacs.
 
 ** Instructions
-*** TODO Build Emacs
+*** Build Emacs
+On macOS
+#+BEGIN_SRC shell
+# install build dependencies
+$ brew install autoconf gnutls pkg-config texinfo
 
-*** Install dependencies
+# download sources
+$ EMACS_VERSION=28.1
+$ curl -LO https://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.gz
+$ tar xzf emacs-${EMACS_VERSION}.tar.gz
+$ cd emacs-${EMACS_VERSION}
+
+# apply patches to emacs if needed
+
+# build
+$ ./autogen.sh
+$ ./configure --without-x --with-ns --with-modules --with-xwidgets CC=clang
+# use number of cores instead of 8
+$ make -j8
+$ make install -j8
+#+END_SRC
+
+*** Install runtime dependencies
 On macOS
 #+BEGIN_SRC shell
 $ brew install cmigemo ripgrep
