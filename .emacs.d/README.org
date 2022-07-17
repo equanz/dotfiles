@@ -18,4 +18,5 @@ $ npm i -g typescript-language-server typescript
 #+END_SRC
 
 ** License
+Emacs Config  Copyright (C) 2017  equanz\\
 Licensed under [[./LICENSE][GPL-3.0]] if not mentioned.
