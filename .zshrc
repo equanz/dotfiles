@@ -35,19 +35,21 @@ add-zsh-hook precmd set_prompt
 # tmux
 export TERM=xterm-256color
 
-# homebrew
+# init
+PACKAGE_MANAGER_PREFIX_PATH=/usr/local
 if [ $(uname -s) = 'Darwin' ]; then
+    # homebrew
     if [ $(uname -m) = 'arm64' ]; then
-        BREW_PATH_PREFIX=/opt/homebrew
-        export PATH=${BREW_PATH_PREFIX}/sbin:${BREW_PATH_PREFIX}/bin${PATH+:${PATH}}
+        PACKAGE_MANAGER_PREFIX_PATH=/opt/homebrew
+        export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/sbin:${PACKAGE_MANAGER_PREFIX_PATH}/bin${PATH+:${PATH}}
     else
-        BREW_PATH_PREFIX=/usr/local
-        export PATH=${BREW_PATH_PREFIX}/sbin${PATH+:${PATH}}
+        PACKAGE_MANAGER_PREFIX_PATH=/usr/local
+        export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/sbin${PATH+:${PATH}}
     fi
 fi
-export CPATH=${BREW_PATH_PREFIX}/include${CPATH+:${CPATH}}
-export LIBRARY_PATH=${BREW_PATH_PREFIX}/lib${LIBRARY_PATH+:${LIBRARY_PATH}}
-export LD_LIBRARY_PATH=${BREW_PATH_PREFIX}/lib${LD_LIBRARY_PATH+:${LD_LIBRARY_PATH}}
+export CPATH=${PACKAGE_MANAGER_PREFIX_PATH}/include${CPATH+:${CPATH}}
+export LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LIBRARY_PATH+:${LIBRARY_PATH}}
+export LD_LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LD_LIBRARY_PATH+:${LD_LIBRARY_PATH}}
 
 # nodebrew
 if $(builtin command -v nodebrew > /dev/null); then
@@ -82,11 +84,11 @@ SAVEHIST=100000
 setopt share_history
 
 # zsh-completions
-if [ -d ${BREW_PATH_PREFIX}/share/zsh/site-functions ]; then
-    FPATH=${BREW_PATH_PREFIX}/share/zsh/site-functions${FPATH+:${FPATH}}
+if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh/site-functions ]; then
+    FPATH=${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh/site-functions${FPATH+:${FPATH}}
 fi
-if [ -d ${BREW_PATH_PREFIX}/share/zsh-completions ]; then
-    FPATH=${BREW_PATH_PREFIX}/share/zsh-completions${FPATH+:${FPATH}}
+if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh-completions ]; then
+    FPATH=${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh-completions${FPATH+:${FPATH}}
 fi
 autoload -U compinit
 compinit -u
@@ -102,8 +104,8 @@ if $(builtin command -v hub > /dev/null); then
 fi
 
 # zsh-autosuggestions
-if [ -f ${BREW_PATH_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-    source ${BREW_PATH_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [ -f ${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source ${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
 # direnv
@@ -112,14 +114,14 @@ if $(builtin command -v direnv > /dev/null); then
 fi
 
 # Google Cloud SDK
-if [ -d ${BREW_PATH_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk ]; then
-    source ${BREW_PATH_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-    source ${BREW_PATH_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk ]; then
+    source ${PACKAGE_MANAGER_PREFIX_PATH}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+    source ${PACKAGE_MANAGER_PREFIX_PATH}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 fi
 
 # OpenSSL
-if [ -d ${BREW_PATH_PREFIX}/opt/openssl@1.1/bin ]; then
-    export PATH=${BREW_PATH_PREFIX}/opt/openssl@1.1/bin${PATH+:${PATH}}
+if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/openssl@1.1/bin ]; then
+    export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/openssl@1.1/bin${PATH+:${PATH}}
 fi
 
 # Java
@@ -136,8 +138,8 @@ if [ -f ${HOME}/.cargo/env ]; then
 fi
 
 # makeinfo
-if [ -d ${BREW_PATH_PREFIX}/opt/texinfo ]; then
-    export PATH=${BREW_PATH_PREFIX}/opt/texinfo/bin${PATH+:${PATH}}
+if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/texinfo ]; then
+    export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/texinfo/bin${PATH+:${PATH}}
 fi
 
 # local usr
