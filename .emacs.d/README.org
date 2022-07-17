@@ -35,6 +35,8 @@ $ npm install -g marked
 $ go install golang.org/x/tools/gopls@latest
 $ brew install rust-analyzer
 $ npm i -g typescript-language-server typescript
+$ npm i -g intelephense
+
 #+END_SRC
 
 ** License
