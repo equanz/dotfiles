@@ -5,7 +5,6 @@ The repository for dotfiles.
 
 ## Installation
 ```
-$ cd ~
 $ git clone https://github.com/equanz/dotfiles.git
 $ cd dotfiles/
 $ ./install.sh
