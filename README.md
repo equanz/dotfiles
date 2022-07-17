@@ -5,9 +5,10 @@ The repository for dotfiles.
 
 ## Installation
 ```
-% git clone https://github.com/equanz/dotfiles.git
-% cd path/to/dotfiles/
-% ./install.sh
+$ cd ~
+$ git clone https://github.com/equanz/dotfiles.git
+$ cd dotfiles/
+$ ./install.sh
 ```
 
 Additionaly, read [here](./.emacs.d/README.org) for GNU Emacs.
