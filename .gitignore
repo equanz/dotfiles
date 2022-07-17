@@ -3,6 +3,7 @@
 .emacs.d/auto-save-list/
 .emacs.d/elpa/
 .emacs.d/eshell/
+.emacs.d/lsp-cache/
 .emacs.d/request/
 .emacs.d/straight/*
 !.emacs.d/straight/versions
