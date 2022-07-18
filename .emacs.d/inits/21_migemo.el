@@ -11,4 +11,5 @@
   (setq migemo-regex-dictionary nil)
   (setq migemo-coding-system 'utf-8-unix)
   :config
-  (migemo-init))
+  (migemo-init)
+  (helm-migemo-mode 1))
