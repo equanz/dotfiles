@@ -56,7 +56,7 @@ if [ $(uname -s) = 'Darwin' ]; then
         brew install autoconf gnutls pkg-config texinfo
 
         # download sources
-        curl -LO emacs-${EMACS_VERSION}.tar.gz https://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.gz
+        curl -L -o emacs-${EMACS_VERSION}.tar.gz https://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.gz
         tar xzf emacs-${EMACS_VERSION}.tar.gz
         pushd emacs-${EMACS_VERSION}
 
