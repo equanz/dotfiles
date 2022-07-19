@@ -56,6 +56,12 @@ if $(builtin command -v nodebrew > /dev/null); then
     export PATH=${HOME}/.nodebrew/current/bin${PATH+:${PATH}}
 fi
 
+# n
+if $(builtin command -v n > /dev/null); then
+    export N_PREFIX=${HOME}/.n
+    export PATH=${N_PREFIX}/bin${PATH+:${PATH}}
+fi
+
 # rbenv
 if $(builtin command -v rbenv > /dev/null); then
     export PATH=${HOME}/.rbenv/bin${PATH+:${PATH}}

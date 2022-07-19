@@ -86,6 +86,7 @@ fi
 echo '\n====End of env specific steps====\n'
 
 if [ ! -d ${HOME}/.oh-my-zsh ]; then
+    echo 'Install Oh My Zsh'
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended --keep-zshrc"
     echo 'You should change shell to zsh'
 else
