@@ -1,21 +1,7 @@
-# dirs
-.emacs.d/.cache/
-.emacs.d/auto-save-list/
-.emacs.d/elpa/
-.emacs.d/eshell/
-.emacs.d/lsp-cache/
-.emacs.d/request/
-.emacs.d/straight/*
+# GNU Emacs
+.emacs.d/*
+!.emacs.d/inits
 !.emacs.d/straight/versions
-.emacs.d/transient/
-.emacs.d/url/
-
-# files
-.emacs.d/**/.lsp-session*
-.emacs.d/**/*.eld
-.emacs.d/**/tramp
-ac-comphist.dat
-jet_err_201.txt
-kkcrc
-network-security.data
-type-break
+!.emacs.d/LICENSE
+!.emacs.d/README.org
+!.emacs.d/init.el

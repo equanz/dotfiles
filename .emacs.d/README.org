@@ -28,7 +28,7 @@ $ make install -j8
 *** Install runtime dependencies
 On macOS
 #+BEGIN_SRC shell
-$ brew install cmigemo ripgrep
+$ brew install aspell cmigemo ripgrep
 $ npm install -g marked
 
 # for lsp-mode
