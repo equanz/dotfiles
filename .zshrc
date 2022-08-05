@@ -36,16 +36,17 @@ add-zsh-hook precmd set_prompt
 export TERM=xterm-256color
 
 # init
-PACKAGE_MANAGER_PREFIX_PATH=/usr/local
 if [ $(uname -s) = 'Darwin' ]; then
     # homebrew
     if [ $(uname -m) = 'arm64' ]; then
-        PACKAGE_MANAGER_PREFIX_PATH=/opt/homebrew
+        export PACKAGE_MANAGER_PREFIX_PATH=/opt/homebrew
         export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/sbin:${PACKAGE_MANAGER_PREFIX_PATH}/bin${PATH+:${PATH}}
     else
-        PACKAGE_MANAGER_PREFIX_PATH=/usr/local
+        export PACKAGE_MANAGER_PREFIX_PATH=/usr/local
         export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/sbin${PATH+:${PATH}}
     fi
+else
+    export PACKAGE_MANAGER_PREFIX_PATH=/usr/local
 fi
 export CPATH=${PACKAGE_MANAGER_PREFIX_PATH}/include${CPATH+:${CPATH}}
 export LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LIBRARY_PATH+:${LIBRARY_PATH}}
