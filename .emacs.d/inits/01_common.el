@@ -34,7 +34,7 @@
 ;; change (yes-no) to (y-n)
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; hide toolbar
-(tool-bar-mode -1)
+(add-hook 'emacs-startup-hook (lambda () (tool-bar-mode -1)))
 ;; ignore startup screen
 (setq inhibit-startup-message t)
 ;; autorevert when file changed
@@ -60,10 +60,13 @@
 (display-time)
 
 ;; use env from shell
-(use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
-  :config
-  (exec-path-from-shell-initialize))
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (use-package exec-path-from-shell
+              :if (memq window-system '(mac ns))
+              :config
+              (add-to-list 'exec-path-from-shell-variables "PACKAGE_MANAGER_PREFIX_PATH")
+              (exec-path-from-shell-initialize))))
 
 ;; show invisible characters
 (global-whitespace-mode t)

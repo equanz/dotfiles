@@ -18,7 +18,7 @@
   :bind (("C-c C-f" . projectile-find-file)
          ("C-c C-d" . projectile-find-dir)))
 (use-package treemacs-projectile
-  :commands (projectile-find-file projectile-find-dir helm-do-ag-projectile))
+  :commands (projectile-project-root projectile-find-file projectile-find-dir helm-do-ag-projectile))
 
 ;; (require 'all-the-icons)
 
