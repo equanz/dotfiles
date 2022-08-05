@@ -9,7 +9,7 @@
     (setq helm-swoop-split-with-multiple-windows t)
     (setq helm-swoop-split-direction 'split-window-vertically)
     (setq helm-swoop-move-to-line-cycle t)
-    :bind (("C-s" . helm-swoop-from-isearch)
+    :bind (("C-S-s" . helm-swoop-from-isearch)
            :map helm-swoop-map
            ("C-s" . helm-next-line)
            ("C-r" . helm-previous-line)

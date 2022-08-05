@@ -11,7 +11,7 @@
   :bind (("C-c o" . treemacs-select-window)
          :map treemacs-mode-map
          ("C-c c" . treemacs-select-directory)
-         ("<SPC>" . treemacs-RET-action)))
+         ("<SPC>" . treemacs-TAB-action)))
 
 (use-package projectile
   :bind (("C-c C-f" . projectile-find-file)
