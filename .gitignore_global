@@ -9,3 +9,7 @@
 
 # IntelliJ IDEA
 .idea/
+
+# Language Server Protocol
+.cache/clangd/index/
+compile_commands.json

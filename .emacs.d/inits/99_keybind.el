@@ -6,6 +6,8 @@
 (bind-key* "<C-wheel-up>" 'ignore)
 (bind-key* "<C-wheel-down>" 'ignore)
 
+(bind-key "s-q" nil)
+
 ;; expand current window to specific direction
 ;; can't shrink current window directly
 (bind-key "C-S-n" #'(lambda () (interactive) (adjust-window-trailing-edge (selected-window) 1)))
