@@ -1,5 +1,6 @@
 (use-package web-mode
-  :init
+  :commands (web-mode)
+  :config
   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
   (setq web-mode-content-types-alist '(("json" . "\\.json\\'")))
   (setq web-mode-engines-alist
@@ -38,4 +39,5 @@
          ("\\.vue\\'" . web-mode))
   )
 
-(use-package less-css-mode)
+(use-package less-css-mode
+  :commands (less-css-mode))

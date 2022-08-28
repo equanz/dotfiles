@@ -1,9 +1,11 @@
 (use-package rust-mode
-  :init
+  :commands (rust-mode)
+  :config
   (add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
   (setq lsp-rust-server 'rust-analyzer)
 
   (use-package cargo
+    :commands (rust-mode)
     :init
     (add-hook 'rust-mode-hook 'cargo-minor-mode))
 

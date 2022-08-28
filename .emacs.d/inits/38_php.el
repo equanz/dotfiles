@@ -1,3 +1,4 @@
 (use-package php-mode
-  :init
+  :commands (php-mode)
+  :config
   (add-hook 'php-mode-hook #'lsp-deferred))

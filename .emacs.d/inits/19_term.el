@@ -1,5 +1,6 @@
 (use-package term+
-  :init
+  :commands (term+mux-new)
+  :config
   (use-package term+mux)
   :bind (("C-c t" . term+mux-new)
          :map term-mode-map

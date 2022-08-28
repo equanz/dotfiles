@@ -1,3 +1,4 @@
 (use-package go-mode
-  :init
+  :commands (go-mode)
+  :config
   (add-hook 'go-mode-hook #'lsp-deferred))

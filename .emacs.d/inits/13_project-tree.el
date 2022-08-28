@@ -1,5 +1,6 @@
 (use-package all-the-icons)
 (use-package treemacs
+  :commands (treemacs-select-window)
   :init
   (setq treemacs-width 35)
   (setq treemacs--width-is-locked nil)
@@ -16,7 +17,8 @@
 (use-package projectile
   :bind (("C-c C-f" . projectile-find-file)
          ("C-c C-d" . projectile-find-dir)))
-(use-package treemacs-projectile)
+(use-package treemacs-projectile
+  :commands (projectile-find-file projectile-find-dir helm-do-ag-projectile))
 
 ;; (require 'all-the-icons)
 
