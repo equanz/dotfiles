@@ -32,6 +32,8 @@ set_prompt
 # fill PROMPT when zsh hook precmd
 add-zsh-hook precmd set_prompt
 
+export LC_TIME='C.UTF-8'
+
 # tmux
 export TERM=xterm-256color
 
