@@ -1,12 +1,12 @@
 (bind-key* "C-h" 'backward-delete-char-untabify) ;; BackSpace
 (bind-key "C-z" 'undo) ;; Undo
-(bind-key* "C-y" #'(lambda () (interactive) (yank) (call-interactively 'indent-region))) ;; yank and indent
-(bind-key "C-S-y" 'yank)
+(bind-key "C-S-y" #'(lambda () (interactive) (yank) (call-interactively 'indent-region))) ;; yank and indent
 
 (bind-key* "<C-wheel-up>" 'ignore)
 (bind-key* "<C-wheel-down>" 'ignore)
 
 (bind-key "s-q" nil)
+(bind-key "s-w" nil)
 
 ;; expand current window to specific direction
 ;; can't shrink current window directly
