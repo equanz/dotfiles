@@ -1,5 +1,4 @@
 (use-package lsp-mode
-  :commands (lsp-deferred)
   :config
   ;; disable yasnippet
   (setq lsp-enable-snippet nil)
