@@ -32,7 +32,7 @@ set_prompt
 # fill PROMPT when zsh hook precmd
 add-zsh-hook precmd set_prompt
 
-export LC_TIME='C.UTF-8'
+export LC_TIME='C'
 
 # tmux
 export TERM=xterm-256color
@@ -151,6 +151,11 @@ fi
 # makeinfo
 if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/texinfo ]; then
     export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/texinfo/bin${PATH+:${PATH}}
+fi
+
+# Haskell
+if [ -f ${HOME}/.ghcup/env ]; then
+    source /Users/equanz/.ghcup/env
 fi
 
 # local usr
