@@ -138,9 +138,8 @@ if [ -f /usr/libexec/java_home ]; then
     alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)"
     alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11)"
     alias j17="export JAVA_HOME=$(/usr/libexec/java_home -v 17)"
-fi
-if $(builtin command -v j8); then
-    j8
+
+    eval j8
 fi
 
 # Rust
@@ -155,7 +154,7 @@ fi
 
 # Haskell
 if [ -f ${HOME}/.ghcup/env ]; then
-    source /Users/equanz/.ghcup/env
+    source ${HOME}/.ghcup/env
 fi
 
 # local usr
