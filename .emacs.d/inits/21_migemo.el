@@ -12,4 +12,7 @@
   (setq migemo-coding-system 'utf-8-unix)
   :config
   (migemo-init)
-  (helm-migemo-mode 1))
+  (helm-migemo-mode 1)
+
+  :bind ((:map isearch-mode-map
+          ("C-h" . isearch-delete-char))))

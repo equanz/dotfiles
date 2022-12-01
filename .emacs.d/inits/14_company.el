@@ -6,4 +6,6 @@
           ("M-n" . nil)
           ("M-p" . nil)
           ("C-n" . company-select-next)
-          ("C-p" . company-select-previous))))
+          ("C-p" . company-select-previous)
+          ("C-j" . company-complete-selection)
+          ("C-h" . nil))))
