@@ -4,9 +4,9 @@ Composition	Ctrl a	MoveCursorToBeginning
 Composition	Ctrl Backspace	Backspace
 Composition	Ctrl d	MoveCursorRight
 Composition	Ctrl Down	MoveCursorToEnd
-Composition	Ctrl e	MoveCursorToBeginning
+Composition	Ctrl e	MoveCursorToEnd
 Composition	Ctrl Enter	Commit
-Composition	Ctrl f	MoveCursorToEnd
+Composition	Ctrl f	MoveCursorRight
 Composition	Ctrl g	Delete
 Composition	Ctrl h	Backspace
 Composition	Ctrl i	ConvertToFullKatakana
@@ -133,6 +133,7 @@ Conversion	Ctrl n	ConvertNext
 Conversion	Ctrl p	ConvertPrev
 Conversion	Ctrl f	SegmentFocusRight
 Conversion	Ctrl b	SegmentFocusLeft
+Composition	Ctrl b	MoveCursorLeft
 Composition	ASCII	InsertCharacter
 Composition	Hankaku/Zenkaku	IMEOff
 Composition	Kanji	IMEOff
