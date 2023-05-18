@@ -157,6 +157,11 @@ if [ -f ${HOME}/.ghcup/env ]; then
     source ${HOME}/.ghcup/env
 fi
 
+# Rancher Desktop
+if [ -d ${HOME}/.rd/bin ]; then
+    export PATH=${HOME}/.rd/bin${PATH+:${PATH}}
+fi
+
 # local usr
 # this line sould be placed at the end
 export PATH=${HOME}/usr/bin${PATH+:${PATH}}

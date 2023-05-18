@@ -1,6 +1,7 @@
 (bind-key* "C-h" 'backward-delete-char-untabify) ;; BackSpace
 (bind-key "C-z" 'undo) ;; Undo
 (bind-key "C-S-y" #'(lambda () (interactive) (yank) (call-interactively 'indent-region))) ;; yank and indent
+(bind-key "C-x C-c" #'(lambda () (interactive) (if (y-or-n-p (format "Kill Emacs?")) (save-buffers-kill-emacs) (message "Aborted."))))
 
 (bind-key* "<C-wheel-up>" 'ignore)
 (bind-key* "<C-wheel-down>" 'ignore)
