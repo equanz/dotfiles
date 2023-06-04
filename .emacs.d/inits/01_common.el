@@ -66,19 +66,13 @@
   (exec-path-from-shell-initialize))
 
 ;; show invisible characters
-(global-whitespace-mode t)
-(setq whitespace-style '(space-mark tab-mark face spaces trailing))
+(setq whitespace-style '(face spaces tabs trailing space-mark tab-mark trailing-mark))
 (setq whitespace-display-mappings
   '(
-    (trailing ?\n    [?¬ ?\n] [?$ ?\n])    ; end-of-line
-    (tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t]) ; tab - left quote mark
-    (space-mark   ?\     [?\u00B7]     [?.]) ; space - centered dot
+    (tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t]) ; tab - right-pointing double angle quotation mark
+    (space-mark ?\ [?\u00B7] [?.]) ; space - middle dot
   ))
-
-(set-face-attribute 'whitespace-trailing nil
-                    :foreground "#585858")
-(set-face-attribute 'trailing-whitespace nil
-                    :foreground "#585858")
+(global-whitespace-mode t)
 
 ;; auto cleanup whitespace
 (setq whitespace-action '(auto-cleanup))
