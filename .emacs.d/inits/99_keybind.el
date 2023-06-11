@@ -8,6 +8,7 @@
 
 (bind-key "s-q" nil)
 (bind-key "s-w" nil)
+(bind-key "s-t" nil)
 
 ;; expand current window to specific direction
 ;; can't shrink current window directly

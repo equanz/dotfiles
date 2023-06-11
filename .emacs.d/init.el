@@ -38,8 +38,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#282C34" :foreground "#ABB2BF" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "Source Han Code JP"))))
- '(lsp-ui-sideline-global ((t (:background "#031A25"))))
+ '(default ((t (:inherit nil :stipple nil :background "#282c34" :foreground "#abb2bf" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "Source Han Code JP"))))
+ '(git-gutter:added ((t (:foreground "#56905e" :background "#56905e"))))
+ '(git-gutter:deleted ((t (:foreground "#52433e" :background "#52433e"))))
+ '(git-gutter:modified ((t (:foreground "#3460a8" :background "#3460a8"))))
+ '(lsp-ui-sideline-global ((t (:background "#031a25"))))
  '(neo-vc-ignored-face ((t (:foreground "#585858"))))
  '(powerline-active1 ((t (:inherit mode-line :background "#9966ff" :foreground "#fff"))))
  '(powerline-active2 ((t (:inherit mode-line :background "#b9aeff" :foreground "#000"))))
