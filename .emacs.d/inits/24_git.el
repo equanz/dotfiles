@@ -3,9 +3,9 @@
   (setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
   (global-git-gutter-mode t)
   :bind (:map git-gutter-mode-on-hook
-         ("C-c p" . toggle-hunk-in-posframe)))
+         ("C-c C-p" . git-gutter-toggle-hunk-in-posframe)))
 
-(defun toggle-hunk-in-posframe ()
+(defun git-gutter-toggle-hunk-in-posframe ()
   (interactive)
   (lexical-let ((my-buffer-name "*git-gutter-hunk-posframe*"))
     ;; TODO: Use posframe-hide instead of posframe--kill-buffer.
