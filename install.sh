@@ -40,20 +40,20 @@ if [ $(uname -s) = 'Darwin' ]; then
     fi
 
     # install base commands
-    brew install git hub tmux zsh
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install git hub tmux zsh
 
     # build and install GNU Emacs
     # TODO: split to another file
     if [ ! -d /Applications/Emacs.app ]; then
         echo 'Install GNU Emacs'
 
-        DEFAULT_EMACS_VERSION=28.1
+        DEFAULT_EMACS_VERSION=29.1
         read -p "Enter GNU Emacs version (default: ${DEFAULT_EMACS_VERSION}): " EMACS_VERSION
         EMACS_VERSION=${EMACS_VERSION:-${DEFAULT_EMACS_VERSION}}
         pushd ~/Downloads
 
         # install build dependencies
-        brew install autoconf gnutls pkg-config texinfo
+        HOMEBREW_NO_AUTO_UPDATE=1 brew install autoconf gnutls pkg-config texinfo
 
         # download sources
         curl -L -o emacs-${EMACS_VERSION}.tar.gz https://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.gz

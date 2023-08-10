@@ -3,6 +3,7 @@
 ;; =================
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+(add-to-list 'image-types 'svg)
 
 ;; use straight.el for package management
 (setq package-enable-at-startup nil)

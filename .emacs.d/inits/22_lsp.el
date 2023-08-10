@@ -33,7 +33,7 @@
     :config
     (lsp-treemacs-sync-mode 1))
 
-  (use-package docker-tramp)
+  ;; (use-package docker-tramp)
 
   :bind (:map lsp-ui-mode-map
          ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
