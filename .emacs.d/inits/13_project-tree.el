@@ -1,4 +1,3 @@
-(use-package all-the-icons)
 (use-package treemacs
   :init
   (setq treemacs-width 35)
