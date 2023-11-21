@@ -48,6 +48,8 @@
  '(powerline-active1 ((t (:inherit mode-line :background "#9966ff" :foreground "#fff"))))
  '(powerline-active2 ((t (:inherit mode-line :background "#b9aeff" :foreground "#000"))))
  '(treemacs-root-face ((t (:inherit font-lock-constant-face :underline t :weight bold))))
+ '(vr/match-0 ((t (:background "steelblue4" :foreground "#abb2bf"))))
+ '(vr/match-1 ((t (:background "dodgerblue4" :foreground "#abb2bf"))))
  '(whitespace-empty ((t (:foreground "#585858"))))
  '(whitespace-hspace ((t (:foreground "#585858"))))
  '(whitespace-indentation ((t (:foreground "#585858"))))
