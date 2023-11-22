@@ -1,8 +1,8 @@
 ;; set langugage, encoding
-(setq language-environment 'Japanese)
+(set-language-environment 'Japanese)
 (prefer-coding-system 'utf-8)
 
-(setq default-input-method "MacOSX")
+(setq default-input-method "macOS")
 
 ;; ignore backup files
 (setq make-backup-files nil)
