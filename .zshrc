@@ -1,4 +1,5 @@
 # Path to your oh-my-zsh installation.
+zstyle ':omz:update' mode disabled
 export ZSH=${HOME}/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
@@ -160,6 +161,24 @@ fi
 # Rancher Desktop
 if [ -d ${HOME}/.rd/bin ]; then
     export PATH=${HOME}/.rd/bin${PATH+:${PATH}}
+fi
+
+# GNU commands
+if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/findutils ]; then
+    export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/findutils/libexec/gnubin${PATH+:${PATH}}
+    export MANPATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/findutils/libexec/gnuman${MANPATH+:${MANPATH}}
+fi
+if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/gawk ]; then
+    export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/gawk/libexec/gnubin${PATH+:${PATH}}
+    export MANPATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/gawk/libexec/gnuman${MANPATH+:${MANPATH}}
+fi
+if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/gnu-sed ]; then
+    export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/gnu-sed/libexec/gnubin${PATH+:${PATH}}
+    export MANPATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/gnu-sed/libexec/gnuman${MANPATH+:${MANPATH}}
+fi
+if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/grep ]; then
+    export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/grep/libexec/gnubin${PATH+:${PATH}}
+    export MANPATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/grep/libexec/gnuman${MANPATH+:${MANPATH}}
 fi
 
 # local usr
