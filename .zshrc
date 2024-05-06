@@ -24,11 +24,20 @@ export LESS=-R
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 export LS_COLORS='di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
 alias ls='ls -G'
-
-# tmux
 export TERM=xterm-256color
 
-# init
+# history
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=100000
+export SAVEHIST=100000
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt share_history
+
+# package manager
 if [ $(uname -s) = 'Darwin' ]; then
     # homebrew
     if [ $(uname -m) = 'arm64' ]; then
@@ -46,22 +55,24 @@ export LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LIBRARY_PATH+:${LIBRARY_
 export LD_LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LD_LIBRARY_PATH+:${LD_LIBRARY_PATH}}
 
 # custom PROMPT
-if [ -f ${PACKAGE_MANAGER_PREFIX_PATH}/etc/bash_completion.d/git-prompt.sh ]; then
-    source ${PACKAGE_MANAGER_PREFIX_PATH}/etc/bash_completion.d/git-prompt.sh
-    export GIT_PS1_SHOWDIRTYSTATE=true
-    export GIT_PS1_SHOWSTASHSTATE=true
-    export GIT_PS1_SHOWCOLORHINTS=true
+() {
+    readonly local git_prompt_path=${PACKAGE_MANAGER_PREFIX_PATH}/etc/bash_completion.d/git-prompt.sh
+    if [ -f ${git_prompt_path} ]; then
+        source ${git_prompt_path}
+        export GIT_PS1_SHOWDIRTYSTATE=true
+        export GIT_PS1_SHOWSTASHSTATE=true
+        export GIT_PS1_SHOWCOLORHINTS=true
 
-    function set_prompt() {
-        export PROMPT="%{%f%k%b%}
+        function set_prompt() {
+            export PROMPT="%{%f%k%b%}
 %{%F{green}%}%n%{%F{blue}%}@%{%F{cyan}%}%m%{%F{green}%} %{%F{yellow}%}%~$(__git_ps1 | sed -E 's/^ \(/ %{%F{blue}%}\[%{%f%}/; s/\)$/%{%F{blue}%}\]%{%f%}/')%{%f%k%b%}%E
 %#%{%f%} "
-        export RPROMPT=''
-    }
-    set_prompt
-    # fill PROMPT when zsh hook precmd
-    add-zsh-hook precmd set_prompt
-fi
+        }
+
+        # fill PROMPT when zsh hooks precmd
+        add-zsh-hook precmd set_prompt
+    fi
+}
 
 # nodebrew
 if $(builtin command -v nodebrew > /dev/null); then
@@ -93,24 +104,17 @@ if $(builtin command -v go > /dev/null); then
     export PATH=${GOPATH}/bin${PATH+:${PATH}}
 fi
 
-# history
-HISTFILE=~/.zsh_history
-HISTSIZE=100000
-SAVEHIST=100000
-setopt extended_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_verify
-setopt share_history
-
 # zsh-completions
-if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh/site-functions ]; then
-    FPATH=${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh/site-functions${FPATH+:${FPATH}}
-fi
-if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh-completions ]; then
-    FPATH=${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh-completions${FPATH+:${FPATH}}
-fi
+() {
+    readonly local zsh_site_functions_path=${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh/site-functions
+    if [ -d ${zsh_site_functions_path} ]; then
+        export FPATH=${zsh_site_functions_path}${FPATH+:${FPATH}}
+    fi
+    readonly local zsh_completions_path=${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh-completions
+    if [ -d ${zsh_completions_path} ]; then
+        export FPATH=${zsh_completions_path}${FPATH+:${FPATH}}
+    fi
+}
 autoload -U compinit
 compinit -u
 
@@ -125,9 +129,12 @@ if $(builtin command -v hub > /dev/null); then
 fi
 
 # zsh-autosuggestions
-if [ -f ${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-    source ${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
+() {
+    readonly local zsh_autosuggestions_path=${PACKAGE_MANAGER_PREFIX_PATH}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    if [ -f ${zsh_autosuggestions_path} ]; then
+        source ${zsh_autosuggestions_path}
+    fi
+}
 
 # direnv
 if $(builtin command -v direnv > /dev/null); then
@@ -135,62 +142,89 @@ if $(builtin command -v direnv > /dev/null); then
 fi
 
 # Google Cloud SDK
-if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk ]; then
-    source ${PACKAGE_MANAGER_PREFIX_PATH}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-    source ${PACKAGE_MANAGER_PREFIX_PATH}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
-fi
+() {
+    readonly local google_cloud_sdk_path=${PACKAGE_MANAGER_PREFIX_PATH}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk
+    if [ -d ${google_cloud_sdk_path} ]; then
+        source ${google_cloud_sdk_path}/completion.zsh.inc
+        source ${google_cloud_sdk_path}/path.zsh.inc
+    fi
+}
 
 # OpenSSL
-if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/openssl@1.1/bin ]; then
-    export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/openssl@1.1/bin${PATH+:${PATH}}
-fi
+() {
+    readonly local openssl_1_1_bin_path=${PACKAGE_MANAGER_PREFIX_PATH}/opt/openssl@1.1/bin
+    if [ -d ${openssl_1_1_bin_path} ]; then
+        export PATH=${openssl_1_1_bin_path}${PATH+:${PATH}}
+    fi
+}
 
 # Java
-if [ -f /usr/libexec/java_home ]; then
-    alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)"
-    alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11)"
-    alias j17="export JAVA_HOME=$(/usr/libexec/java_home -v 17)"
+() {
+    readonly local libexec_java_home_path=/usr/libexec/java_home
+    if [ -f ${libexec_java_home_path} ]; then
+        alias j8="export JAVA_HOME=$(${libexec_java_home_path} -v 1.8)"
+        alias j11="export JAVA_HOME=$(${libexec_java_home_path} -v 11)"
+        alias j17="export JAVA_HOME=$(${libexec_java_home_path} -v 17)"
 
-    eval j8
-fi
+        eval j8
+    fi
+}
 
 # Rust
-if [ -f ${HOME}/.cargo/env ]; then
-    source ${HOME}/.cargo/env
-fi
+() {
+    readonly local cargo_env_path=${HOME}/.cargo/env
+    if [ -f ${cargo_env_path} ]; then
+        source ${cargo_env_path}
+    fi
+}
 
 # makeinfo
-if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/texinfo ]; then
-    export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/texinfo/bin${PATH+:${PATH}}
-fi
+() {
+    readonly local texinfo_path=${PACKAGE_MANAGER_PREFIX_PATH}/opt/texinfo
+    if [ -d ${texinfo_path} ]; then
+        export PATH=${texinfo_path}/bin${PATH+:${PATH}}
+    fi
+}
 
 # Haskell
-if [ -f ${HOME}/.ghcup/env ]; then
-    source ${HOME}/.ghcup/env
-fi
+() {
+    readonly local ghcup_env_path=${HOME}/.ghcup/env
+    if [ -f ${ghcup_env_path} ]; then
+        source ${ghcup_env_path}
+    fi
+}
 
 # Rancher Desktop
-if [ -d ${HOME}/.rd/bin ]; then
-    export PATH=${HOME}/.rd/bin${PATH+:${PATH}}
-fi
+() {
+    readonly local rd_bin_path=${HOME}/.rd/bin
+    if [ -d ${rd_bin_path} ]; then
+        export PATH=${rd_bin_path}${PATH+:${PATH}}
+    fi
+}
 
 # GNU commands
-if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/findutils ]; then
-    export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/findutils/libexec/gnubin${PATH+:${PATH}}
-    export MANPATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/findutils/libexec/gnuman${MANPATH+:${MANPATH}}
-fi
-if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/gawk ]; then
-    export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/gawk/libexec/gnubin${PATH+:${PATH}}
-    export MANPATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/gawk/libexec/gnuman${MANPATH+:${MANPATH}}
-fi
-if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/gnu-sed ]; then
-    export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/gnu-sed/libexec/gnubin${PATH+:${PATH}}
-    export MANPATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/gnu-sed/libexec/gnuman${MANPATH+:${MANPATH}}
-fi
-if [ -d ${PACKAGE_MANAGER_PREFIX_PATH}/opt/grep ]; then
-    export PATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/grep/libexec/gnubin${PATH+:${PATH}}
-    export MANPATH=${PACKAGE_MANAGER_PREFIX_PATH}/opt/grep/libexec/gnuman${MANPATH+:${MANPATH}}
-fi
+() {
+    readonly local findutils_path=${PACKAGE_MANAGER_PREFIX_PATH}/opt/findutils
+    if [ -d ${findutils_path} ]; then
+        export PATH=${findutils_path}/libexec/gnubin${PATH+:${PATH}}
+        export MANPATH=${findutils_path}/libexec/gnuman${MANPATH+:${MANPATH}}
+    fi
+    readonly local gawk_path=${PACKAGE_MANAGER_PREFIX_PATH}/opt/gawk
+    if [ -d ${gawk_path} ]; then
+        export PATH=${gawk_path}/libexec/gnubin${PATH+:${PATH}}
+        export MANPATH=${gawk_path}/libexec/gnuman${MANPATH+:${MANPATH}}
+    fi
+    readonly local gnu_sed_path=${PACKAGE_MANAGER_PREFIX_PATH}/opt/gnu-sed
+    if [ -d ${gnu_sed_path} ]; then
+        export PATH=${gnu_sed_path}/libexec/gnubin${PATH+:${PATH}}
+        export MANPATH=${gnu_sed_path}/libexec/gnuman${MANPATH+:${MANPATH}}
+    fi
+    readonly grep_path=${PACKAGE_MANAGER_PREFIX_PATH}/opt/grep
+    if [ -d ${grep_path} ]; then
+        export PATH=${grep_path}/libexec/gnubin${PATH+:${PATH}}
+        export MANPATH=${grep_path}/libexec/gnuman${MANPATH+:${MANPATH}}
+    fi
+}
 
 # local usr
 # this line sould be placed at the end
