@@ -1,39 +1,29 @@
-# Path to your oh-my-zsh installation.
-zstyle ':omz:update' mode disabled
-export ZSH=${HOME}/.oh-my-zsh
+# # Path to your oh-my-zsh installation.
+# zstyle ':omz:update' mode disabled
+# export ZSH=${HOME}/.oh-my-zsh
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME='blinks'
+# # Set name of the theme to load. Optionally, if you set this to "random"
+# # it'll load a random theme each time that oh-my-zsh is loaded.
+# # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# ZSH_THEME='blinks'
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-if [ $(uname -s) = 'Darwin' ]; then
-    plugins=(git ruby macos bundler brew emoji-clock)
-else
-    plugins=(git ruby bundler brew emoji-clock)
-fi
+# # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# # Example format: plugins=(rails git textmate ruby lighthouse)
+# # Add wisely, as too many plugins slow down shell startup.
+# plugins=''
 
-source ${ZSH}/oh-my-zsh.sh
+# source ${ZSH}/oh-my-zsh.sh
 
 # autoload add-zsh-hook
 autoload -Uz add-zsh-hook
 
-# edit PROMPT
-function set_prompt() {
-    export PROMPT="%{%f%k%b%}
-%{%F{green}%}%n%{%F{blue}%}@%{%F{cyan}%}%m%{%F{green}%} %{%F{yellow}%}%~%{%F{green}%}$(git_prompt_info | sed -e 's/%B//g' -e 's/%K{[^}]*}//g')%{%f%k%b%}%E
-$(_prompt_char) %#%{%f%} "
-    export RPROMPT=''
-}
-set_prompt
-# fill PROMPT when zsh hook precmd
-add-zsh-hook precmd set_prompt
-
-export LC_TIME='C'
+export LC_TIME=C
+export PAGER=less
+export LESS=-R
+export LSCOLORS=Gxfxcxdxbxegedabagacad
+export LS_COLORS='di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
+alias ls='ls -G'
 
 # tmux
 export TERM=xterm-256color
@@ -54,6 +44,24 @@ fi
 export CPATH=${PACKAGE_MANAGER_PREFIX_PATH}/include${CPATH+:${CPATH}}
 export LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LIBRARY_PATH+:${LIBRARY_PATH}}
 export LD_LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LD_LIBRARY_PATH+:${LD_LIBRARY_PATH}}
+
+# custom PROMPT
+if [ -f ${PACKAGE_MANAGER_PREFIX_PATH}/etc/bash_completion.d/git-prompt.sh ]; then
+    source ${PACKAGE_MANAGER_PREFIX_PATH}/etc/bash_completion.d/git-prompt.sh
+    export GIT_PS1_SHOWDIRTYSTATE=true
+    export GIT_PS1_SHOWSTASHSTATE=true
+    export GIT_PS1_SHOWCOLORHINTS=true
+
+    function set_prompt() {
+        export PROMPT="%{%f%k%b%}
+%{%F{green}%}%n%{%F{blue}%}@%{%F{cyan}%}%m%{%F{green}%} %{%F{yellow}%}%~$(__git_ps1 | sed -E 's/^ \(/ %{%F{blue}%}\[%{%f%}/; s/\)$/%{%F{blue}%}\]%{%f%}/')%{%f%k%b%}%E
+%#%{%f%} "
+        export RPROMPT=''
+    }
+    set_prompt
+    # fill PROMPT when zsh hook precmd
+    add-zsh-hook precmd set_prompt
+fi
 
 # nodebrew
 if $(builtin command -v nodebrew > /dev/null); then
@@ -89,8 +97,11 @@ fi
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
-
-# share history in zsh
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_verify
 setopt share_history
 
 # zsh-completions
