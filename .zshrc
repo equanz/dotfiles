@@ -61,6 +61,7 @@ export LD_LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LD_LIBRARY_PATH+:${LD
         source ${git_prompt_path}
         export GIT_PS1_SHOWDIRTYSTATE=true
         export GIT_PS1_SHOWSTASHSTATE=true
+        export GIT_PS1_SHOWUNTRACKEDFILES=true
         export GIT_PS1_SHOWCOLORHINTS=true
 
         function set_prompt() {
