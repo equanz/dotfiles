@@ -37,6 +37,9 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt share_history
 
+# disable stty start/stop in interactive shell
+[[ $- == *i* ]] && stty -ixon
+
 # package manager
 if [ $(uname -s) = 'Darwin' ]; then
     # homebrew
