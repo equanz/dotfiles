@@ -69,7 +69,6 @@
 (setq whitespace-style '(face newline spaces tabs trailing newline-mark space-mark tab-mark trailing-mark))
 (setq whitespace-display-mappings
   '(
-    (newline-mark ?\n [?\u00AC ?\n]) ; newline - not sign
     (tab-mark ?\t [?\u00BB ?\t]) ; tab - right-pointing double angle quotation mark
     (space-mark ?\ [?\u00B7]) ; space - middle dot
   ))
