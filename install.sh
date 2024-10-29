@@ -8,6 +8,8 @@ is_ignores() {
     return 0
 }
 
+WORKDIR=$(pwd)
+
 # make symbolic link
 dotfiles_dir=$(cd $(dirname ${0}) && pwd)
 for dot_path in ${dotfiles_dir}/.??*; do
@@ -55,15 +57,17 @@ if [ $(uname -s) = 'Darwin' ]; then
         read -p "Enter GNU Emacs version (default: ${DEFAULT_EMACS_VERSION}): " EMACS_VERSION
         EMACS_VERSION=${EMACS_VERSION:-${DEFAULT_EMACS_VERSION}}
         mkdir -p ${HOME}/src
-        pushd ${HOME}/src
+        cd ${HOME}/src
 
         # install build dependencies
         HOMEBREW_NO_AUTO_UPDATE=1 brew install autoconf gnutls pkg-config texinfo
 
         # download sources
-        curl -L -o emacs-${EMACS_VERSION}.tar.gz https://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.gz
+        if [ ! -f ${HOME}/src/emacs-${EMACS_VERSION}.tar.gz ]; then
+           curl -L -o emacs-${EMACS_VERSION}.tar.gz https://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.gz
+        fi
         tar xzf emacs-${EMACS_VERSION}.tar.gz
-        pushd emacs-${EMACS_VERSION}
+        cd emacs-${EMACS_VERSION}
 
         read -p "Apply patches to $(pwd) if needed..."
 
@@ -77,8 +81,7 @@ if [ $(uname -s) = 'Darwin' ]; then
         # deploy to /Applications
         cp -R nextstep/Emacs.app /Applications
 
-        popd
-        popd
+        cd ${WORKDIR}
         echo 'You should grant full disk access to /Applications/Emacs.app via System Preferences'
         open '/System/Applications/System Preferences.app'
     else
@@ -100,17 +103,19 @@ elif $(which apt > /dev/null); then
         read -p "Enter GNU Emacs version (default: ${DEFAULT_EMACS_VERSION}): " EMACS_VERSION
         EMACS_VERSION=${EMACS_VERSION:-${DEFAULT_EMACS_VERSION}}
         mkdir -p ${HOME}/src
-        pushd ${HOME}/src
+        cd ${HOME}/src
 
         # install build dependencies
         sudo apt install build-essential autoconf gnutls-bin pkg-config texinfo \
             libgtk-3-dev libwebkit2gtk-4.0-dev libgnutls28-dev libncurses-dev \
             libjpeg-dev libgif-dev libtiff-dev libgccjit-9-dev
 
-        # download sources
-        curl -L -o emacs-${EMACS_VERSION}.tar.gz https://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.gz
+        # download sources=
+        if [ ! -f ${HOME}/src/emacs-${EMACS_VERSION}.tar.gz ]; then
+            curl -L -o emacs-${EMACS_VERSION}.tar.gz https://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.gz
+        fi
         tar xzf emacs-${EMACS_VERSION}.tar.gz
-        pushd emacs-${EMACS_VERSION}
+        cd emacs-${EMACS_VERSION}
 
         read -p "Apply patches to $(pwd) if needed..."
 
@@ -124,8 +129,7 @@ elif $(which apt > /dev/null); then
         make -j8
         make install -j8
 
-        popd
-        popd
+        cd ${WORKDIR}
     else
         echo 'GNU Emacs is already installed'
     fi
