@@ -11,10 +11,10 @@
 	sw = switch
 	rs = restore
 [pager]
-	log = "if [ -f $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight ]; then $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight | less; else less; fi"
-	show = "if [ -f $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight ]; then $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight | less; else less; fi"
-	diff = "if [ -f $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight ]; then $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight | less; else less; fi"
+	log = "if [ -f ${PACKAGE_MANAGER_PREFIX_PATH}/share/git-core/contrib/diff-highlight/diff-highlight ]; then ${PACKAGE_MANAGER_PREFIX_PATH}/share/git-core/contrib/diff-highlight/diff-highlight | less; else less; fi"
+	show = "if [ -f ${PACKAGE_MANAGER_PREFIX_PATH}/share/git-core/contrib/diff-highlight/diff-highlight ]; then ${PACKAGE_MANAGER_PREFIX_PATH}/share/git-core/contrib/diff-highlight/diff-highlight | less; else less; fi"
+	diff = "if [ -f ${PACKAGE_MANAGER_PREFIX_PATH}/share/git-core/contrib/diff-highlight/diff-highlight ]; then ${PACKAGE_MANAGER_PREFIX_PATH}/share/git-core/contrib/diff-highlight/diff-highlight | less; else less; fi"
 [interactive]
-	diffFilter = "if [ -f $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight ]; then $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight; else cat; fi"
+	diffFilter = "if [ -f ${PACKAGE_MANAGER_PREFIX_PATH}/share/git-core/contrib/diff-highlight/diff-highlight ]; then ${PACKAGE_MANAGER_PREFIX_PATH}/share/git-core/contrib/diff-highlight/diff-highlight; else cat; fi"
 [diff]
 	compactionHeuristic = true
