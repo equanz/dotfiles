@@ -163,16 +163,17 @@ fi
 }
 
 # Java
-() {
-    readonly local libexec_java_home_path=/usr/libexec/java_home
-    if [ -f ${libexec_java_home_path} ]; then
-        alias j8="export JAVA_HOME=$(${libexec_java_home_path} -v 1.8)"
-        alias j11="export JAVA_HOME=$(${libexec_java_home_path} -v 11)"
-        alias j17="export JAVA_HOME=$(${libexec_java_home_path} -v 17)"
-
-        eval j8
-    fi
-}
+if [ -f /usr/libexec/java_home ]; then
+    function j() {
+        readonly local libexec_java_home_path=/usr/libexec/java_home
+        if [ "x${1}" != 'x' ]; then
+            export JAVA_HOME=$(${libexec_java_home_path} -v ${1})
+        else
+            export JAVA_HOME=$(${libexec_java_home_path} -v 1.8)
+        fi
+    }
+    eval j
+fi
 
 # Rust
 () {
@@ -233,3 +234,4 @@ fi
 # local usr
 # this line sould be placed at the end
 export PATH=${HOME}/usr/bin${PATH+:${PATH}}
+export FPATH=${HOME}/usr/share${FPATH+:${FPATH}}
