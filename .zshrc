@@ -66,16 +66,18 @@ export LD_LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LD_LIBRARY_PATH+:${LD
         export GIT_PS1_SHOWSTASHSTATE=true
         export GIT_PS1_SHOWUNTRACKEDFILES=true
         export GIT_PS1_SHOWCOLORHINTS=true
+    else
+        function __git_ps1() {}
+    fi
 
-        function set_prompt() {
-            export PROMPT="%{%f%k%b%}
+    function set_prompt() {
+        export PROMPT="%{%f%k%b%}
 %{%F{green}%}%n%{%F{blue}%}@%{%F{cyan}%}%m%{%F{green}%} %{%F{yellow}%}%~$(__git_ps1 | sed -E 's/^ \(/ %{%F{blue}%}\[%{%f%}/; s/\)$/%{%F{blue}%}\]%{%f%}/')%{%f%k%b%}%E
 %#%{%f%} "
-        }
+    }
 
-        # fill PROMPT when zsh hooks precmd
-        add-zsh-hook precmd set_prompt
-    fi
+    # fill PROMPT when zsh hooks precmd
+    add-zsh-hook precmd set_prompt
 }
 
 # nodebrew
