@@ -10,6 +10,16 @@
 # IntelliJ IDEA
 .idea/
 
+# Visual Studio Code
+.vscode/
+
 # Language Server Protocol
 .cache/clangd/index/
 compile_commands.json
+
+# Agents
+CLAUDE.md
+AGENTS.md
+
+# Git
+_wt/
