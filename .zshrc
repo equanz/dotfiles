@@ -1,20 +1,3 @@
-# # Path to your oh-my-zsh installation.
-# zstyle ':omz:update' mode disabled
-# export ZSH=${HOME}/.oh-my-zsh
-
-# # Set name of the theme to load. Optionally, if you set this to "random"
-# # it'll load a random theme each time that oh-my-zsh is loaded.
-# # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME='blinks'
-
-# # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# # Example format: plugins=(rails git textmate ruby lighthouse)
-# # Add wisely, as too many plugins slow down shell startup.
-# plugins=''
-
-# source ${ZSH}/oh-my-zsh.sh
-
 # autoload add-zsh-hook
 autoload -Uz add-zsh-hook
 
@@ -25,6 +8,7 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 export LS_COLORS='di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
 alias ls='ls -G'
 export TERM=xterm-256color
+export TMOUT=0
 
 # history
 export HISTFILE=${HOME}/.zsh_history
@@ -57,7 +41,7 @@ export CPATH=${PACKAGE_MANAGER_PREFIX_PATH}/include${CPATH+:${CPATH}}
 export LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LIBRARY_PATH+:${LIBRARY_PATH}}
 export LD_LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LD_LIBRARY_PATH+:${LD_LIBRARY_PATH}}
 
-# custom PROMPT
+# custom prompt
 () {
     readonly local git_prompt_path=${PACKAGE_MANAGER_PREFIX_PATH}/etc/bash_completion.d/git-prompt.sh
     if [ -f ${git_prompt_path} ]; then
@@ -72,13 +56,16 @@ export LD_LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LD_LIBRARY_PATH+:${LD
 
     function set_prompt() {
         export PROMPT="%{%f%k%b%}
-%{%F{green}%}%n%{%F{blue}%}@%{%F{cyan}%}%m%{%F{green}%} %{%F{yellow}%}%~$(__git_ps1 | sed -E 's/^ \(/ %{%F{blue}%}\[%{%f%}/; s/\)$/%{%F{blue}%}\]%{%f%}/')%{%f%k%b%}%E
+%{%F{green}%}%n%{%F{blue}%}@%{%F{cyan}%}%m%{%F{green}%} %{%F{yellow}%}%~$(__git_ps1 | perl -pe 's/^ \(/ %{%F{blue}%}\[%{%f%}/; s/\)$/%{%F{blue}%}\]%{%f%}/')%{%f%k%b%}%E ${VIRTUAL_ENV_PROMPT}
 %#%{%f%} "
     }
 
-    # fill PROMPT when zsh hooks precmd
+    # fill prompt when zsh hooks precmd
     add-zsh-hook precmd set_prompt
 }
+
+# .local
+export PATH=${HOME}/.local/bin${PATH+:${PATH}}
 
 # nodebrew
 if $(builtin command -v nodebrew > /dev/null); then
@@ -129,7 +116,43 @@ if $(builtin command -v with-readline > /dev/null); then
     alias sftp='with-readline sftp'
 fi
 
-# hub
+# Git
+gwt-add() {
+    local repo_path="$(git worktree list --porcelain 2>/dev/null | grep -E '^worktree' | perl -pe 's/worktree\s+//g' | grep -vF '/_wt/')"
+    local repo_name="$(basename ${repo_path})"
+    local branch_name="${1}"
+    local worktree_name=$(echo -n "${branch_name}" | perl -pe "s/[\?\[\]\/\\\\=<>:;,'\"&\\\$#*()|~\`\!{}%+\r\n\t ]+/-/g")
+    local worktree_path="${repo_path}/_wt/${worktree_name}"
+    shift
+
+    if git rev-parse --verify "${branch_name}" 2> /dev/null; then
+        echo 'exists' >&2
+        git worktree add "${worktree_path}" "${branch_name}" $@ && echo "${worktree_path}"
+    else
+        echo 'not exists' >&2
+        git worktree add -b "${branch_name}" "${worktree_path}" $@ && echo "${worktree_path}"
+    fi
+}
+
+gwt-remove() {
+    local worktree_path="${1}"
+    shift
+
+    git worktree remove "${worktree_path}" $@
+    rmdir "$(dirname ${worktree_path})" 2> /dev/null || true
+}
+
+_gwt-remove() {
+    local repo_name="$(git worktree list --porcelain 2>/dev/null | grep -E '^worktree' | perl -pe 's/worktree\s+//g' | grep -vF '/_wt/')"
+    local worktrees=($(git worktree list --porcelain 2>/dev/null | grep -E '^worktree' | perl -pe 's/worktree\s+//g' | grep -F '/_wt/'))
+    if (( $#worktrees )); then
+        _values 'subcmd' $worktrees
+    fi
+}
+compdef _gwt-remove gwt-remove
+
+# GitHub
+export GH_TELEMETRY=false
 if $(builtin command -v hub > /dev/null); then
     eval "$(hub alias -s)"
 fi
@@ -168,11 +191,16 @@ fi
 if [ -f /usr/libexec/java_home ]; then
     function j() {
         readonly local libexec_java_home_path=/usr/libexec/java_home
+        local java_version=11
+        local java_arch=$(arch | perl -pe 's/^i386$/x86_64/g')
+
         if [ "x${1}" != 'x' ]; then
-            export JAVA_HOME=$(${libexec_java_home_path} -v ${1})
-        else
-            export JAVA_HOME=$(${libexec_java_home_path} -v 1.8)
+            java_version=${1}
+            if [ "x${2}" != 'x' ]; then
+                java_arch=${2}
+            fi
         fi
+        export JAVA_HOME=$(${libexec_java_home_path} -v ${java_version} -a ${java_arch})
     }
     eval j
 fi
@@ -230,6 +258,63 @@ fi
     if [ -d ${grep_path} ]; then
         export PATH=${grep_path}/libexec/gnubin${PATH+:${PATH}}
         export MANPATH=${grep_path}/libexec/gnuman${MANPATH+:${MANPATH}}
+    fi
+}
+
+# 1Password
+() {
+  readonly op_plugin_path=${HOME}/.config/op/plugins.sh
+  if builtin command -v op > /dev/null && [ -f ${op_plugin_path} ]; then
+    source ${op_plugin_path}
+  fi
+}
+
+# bun
+() {
+    if [ -s ${HOME}/.bun/_bun ]; then
+        source ${HOME}/.bun/_bun
+        export BUN_INSTALL=${HOME}/.bun
+        export PATH=${BUN_INSTALL}/bin${PATH+:${PATH}}
+    fi
+}
+
+# Claude Code
+if $(builtin command -v claude > /dev/null); then
+    claude-chat() {
+        readonly local tmp_for_chat=${HOME}/tmp_for_claude
+        if [ ! -d ${tmp_for_chat} ]; then
+            mkdir -p ${tmp_for_chat}
+        fi
+        pushd ${tmp_for_chat} >> /dev/null && claude $@ && popd >> /dev/null
+    }
+fi
+
+# Codex
+if $(builtin command -v codex > /dev/null); then
+    codex-chat() {
+        readonly local tmp_for_chat=${HOME}/tmp_for_codex
+        if [ ! -d ${tmp_for_chat} ]; then
+            mkdir -p ${tmp_for_chat}
+        fi
+        pushd ${tmp_for_chat} >> /dev/null && codex $@ && popd >> /dev/null
+    }
+fi
+
+# fzf
+if $(builtin command -v fzf > /dev/null); then
+    source <(fzf --zsh)
+fi
+
+# mise
+if $(builtin command -v mise > /dev/null); then
+    eval "$(mise activate zsh)"
+fi
+
+# local config
+() {
+    readonly local local_zshrc=${HOME}/.zshrc_local
+    if [ -f ${local_zshrc} ]; then
+        source ${local_zshrc}
     fi
 }
 
