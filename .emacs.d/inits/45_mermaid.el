@@ -4,7 +4,7 @@
   :config
   (unbind-key "C-c C-o" mermaid-mode-map)
   ;; do nothing to avoid remote connection
-  (defun mermaind--make-browser-string (diagram)
+  (defun mermaid--make-browser-string (diagram)
     "http://localhost:8080/")
   (defun mermaid-open-browser ())
 
