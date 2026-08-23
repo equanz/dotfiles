@@ -73,7 +73,7 @@ if [ $(uname -s) = 'Darwin' ]; then
 
         # build
         ./autogen.sh
-        ./configure --without-x --with-ns --with-native-compilation --with-modules --with-xwidgets --with-gif CC=clang
+        ./configure --without-x --with-ns --with-native-compilation --with-modules --with-xwidgets CC=clang
         # use number of cores instead of 8
         make -j8
         make install -j8
@@ -124,7 +124,7 @@ elif $(which apt > /dev/null); then
 
         # build
         ./autogen.sh
-        ./configure --with-pgtk --with-native-compilation --with-modules --with-xwidgets --with-gif --prefix=${EMACS_PREFIX} CC=gcc
+        ./configure --with-pgtk --with-native-compilation --with-modules --with-xwidgets --prefix=${EMACS_PREFIX} CC=gcc
         # use number of cores instead of 8
         make -j8
         make install -j8

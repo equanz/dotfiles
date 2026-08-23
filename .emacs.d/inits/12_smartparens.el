@@ -7,4 +7,5 @@
   (ad-disable-advice 'delete-backward-char 'before 'sp-delete-pair-advice)
   (ad-activate 'delete-backward-char)
 
-  (smartparens-global-mode t))
+  (smartparens-global-mode t)
+  (require 'smartparens-config))
