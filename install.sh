@@ -30,7 +30,7 @@ for dot_path in ${dotfiles_dir}/.??*; do
     fi
 done
 
-DEFAULT_EMACS_VERSION=29.1
+DEFAULT_EMACS_VERSION=30.2
 TPM_PATH=${HOME}/.tmux/plugins/tpm
 if [ $(uname -s) = 'Darwin' ]; then
     echo '\n----Darwin specific steps----\n'
