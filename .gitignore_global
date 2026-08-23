@@ -17,8 +17,11 @@
 .cache/clangd/index/
 compile_commands.json
 
-# Agents
+# Claude Code
 CLAUDE.md
+.claude/settings.local.json
+
+# Codex
 AGENTS.md
 
 # Git
