@@ -9,6 +9,7 @@ is_ignores() {
 }
 
 WORKDIR=$(pwd)
+XDG_CONFIG_HOME="${HOME}/.config"
 
 # make symbolic link
 dotfiles_dir=$(cd $(dirname ${0}) && pwd)
@@ -17,6 +18,20 @@ for dot_path in ${dotfiles_dir}/.??*; do
 
     # check ignores
     is_ignores ${dot_name} || continue
+
+    # .config
+    if [ ${dot_name} = '.config' ]; then
+        mkdir -p ${XDG_CONFIG_HOME}
+        for config_path in ${dotfiles_dir}/.config/??*; do
+            config_name=$(basename ${config_path})
+
+            ls ${XDG_CONFIG_HOME}/${config_name} > /dev/null 2>&1 && echo "The file or directory is already existed: .config/${config_name}" && continue || echo ".config/${config_name}"
+
+            # directory
+            ln -ns ${config_path}/ ${XDG_CONFIG_HOME}/${config_name}
+        done
+        continue
+    fi
 
     # check already exists
     ls ${HOME}/${dot_name} > /dev/null 2>&1 && echo "The file or directory is already existed: ${dot_name}" && continue || echo ${dot_name}
