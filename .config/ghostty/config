@@ -6,5 +6,6 @@ font-family = UDEV Gothic
 font-size = 12.5
 font-feature = -dlig
 font-thicken = true
-
 adjust-cell-width = 10%
+
+macos-option-as-alt = true
