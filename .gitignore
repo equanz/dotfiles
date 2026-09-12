@@ -5,3 +5,4 @@
 !.emacs.d/LICENSE
 !.emacs.d/README.org
 !.emacs.d/init.el
+!.emacs.d/early-init.el

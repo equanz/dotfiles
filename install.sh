@@ -45,7 +45,7 @@ for dot_path in ${dotfiles_dir}/.??*; do
     fi
 done
 
-DEFAULT_EMACS_VERSION=30.2
+DEFAULT_EMACS_VERSION=31.1
 TPM_PATH=${HOME}/.tmux/plugins/tpm
 if [ $(uname -s) = 'Darwin' ]; then
     echo '\n----Darwin specific steps----\n'
@@ -75,7 +75,7 @@ if [ $(uname -s) = 'Darwin' ]; then
         cd ${HOME}/src
 
         # install build dependencies
-        HOMEBREW_NO_AUTO_UPDATE=1 brew install autoconf gnutls pkg-config texinfo
+        HOMEBREW_NO_AUTO_UPDATE=1 brew install autoconf gcc gnutls pkg-config texinfo libgccjit pandoc
 
         # download sources
         if [ ! -f ${HOME}/src/emacs-${EMACS_VERSION}.tar.gz ]; then
