@@ -62,7 +62,7 @@
         },
         {
             "key": "m",
-            "name": "Notes (C-c m)",
+            "name": "Memo (C-c m)",
             "type": "command",
             "command": "equanz.notes.open"
         },

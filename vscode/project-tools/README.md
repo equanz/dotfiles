@@ -1,6 +1,6 @@
 # equanz Project Tools
 
-Dotfiles-owned VS Code commands for keyboard-only project selection, keymap discovery, Explorer confirmation prompts, buffer switching, frames, and notes. Command implementations live below `src/`; pure filesystem and state helpers are covered by `npm test`.
+Dotfiles-owned VS Code commands for keyboard-only project selection, keymap discovery, Explorer confirmation prompts, buffer switching, frames, and memos. Command implementations live below `src/`; pure filesystem and state helpers are covered by `npm test`.
 
 This extension is packaged and installed by `../bootstrap-macos.sh`. Its `package.json` version must be incremented whenever its manifest or runtime code changes. `../keymap.json` is the source for both VS Code keybindings and the bundled C-c h resource; run `node ../scripts/render-keymap.js` after changing it.
 
@@ -18,4 +18,4 @@ For a Markdown source editor, `C-c v` opens a preview to the side while keeping 
 
 Window operations are `C-x o` (next editor group), `C-x 2` / `C-x 3` (split), `C-x 0` (close group), and `C-x 1` (keep one group). Selecting a project always opens its folder workspace in a new window, preserving the current project window. `C-x 5 2` opens the current single-folder workspace or saved `.code-workspace` in a new window; it rejects an untitled multi-root workspace instead of creating a window that will later prompt to save workspace configuration. `C-x 5 0` closes the current window.
 
-`C-c m` opens a picker rooted at `~/Documents/notes`, independent of the workspace. Select an existing Markdown note or type a relative name and confirm with `C-j`; a name without an extension becomes `.md`. The notes directory is created only on the first use. Symlinks are not followed while indexing or opening a typed note.
+`C-c m` opens a memo picker rooted at `~/Documents/notes`, independent of the workspace. Select an existing Markdown memo or type a relative name and confirm with `C-j`; a name without an extension becomes `.md`. The directory is created only on the first use. Symlinks are not followed while indexing or opening a typed memo.

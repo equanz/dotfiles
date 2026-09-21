@@ -858,7 +858,7 @@
         },
         {
             "key": "m",
-            "name": "Notes (C-c m)",
+            "name": "Memo (C-c m)",
             "binding": "ctrl+c m"
         },
         {

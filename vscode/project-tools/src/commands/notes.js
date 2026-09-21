@@ -33,10 +33,10 @@ function createNoteCommands(vscode) {
         try {
             await fs.promises.mkdir(notesRoot, { recursive: true });
             const metadata = await fs.promises.lstat(notesRoot);
-            if (!metadata.isDirectory() || metadata.isSymbolicLink()) throw new Error('Notes root must be a directory.');
+            if (!metadata.isDirectory() || metadata.isSymbolicLink()) throw new Error('Memo root must be a directory.');
             const root = await fs.promises.realpath(notesRoot);
             const picker = vscode.window.createQuickPick();
-            picker.title = 'Notes'; picker.placeholder = 'Choose a note or type a new name (C-j confirm, C-g cancel)';
+            picker.title = 'Memo'; picker.placeholder = 'Choose a memo or type a new name (C-j confirm, C-g cancel)';
             enableFuzzyMatching(picker);
             picker.items = (await noteItems(root, root)).sort((a, b) => a.description.localeCompare(b.description));
             const selected = await new Promise((resolve) => {
@@ -51,17 +51,17 @@ function createNoteCommands(vscode) {
             if (typeof selected !== 'string') {
                 await fs.promises.mkdir(path.dirname(target), { recursive: true });
                 const parent = await fs.promises.realpath(path.dirname(target));
-                if (parent !== root && !parent.startsWith(`${root}${path.sep}`)) throw new Error('Note path escapes the notes root.');
+                if (parent !== root && !parent.startsWith(`${root}${path.sep}`)) throw new Error('Memo path escapes the memo root.');
                 try {
                     const targetMetadata = await fs.promises.lstat(target);
-                    if (!targetMetadata.isFile() || targetMetadata.isSymbolicLink()) throw new Error('Note must be a regular file inside the notes root.');
+                    if (!targetMetadata.isFile() || targetMetadata.isSymbolicLink()) throw new Error('Memo must be a regular file inside the memo root.');
                 } catch (error) {
                     if (error.code !== 'ENOENT') throw error;
                     await fs.promises.writeFile(target, '', { flag: 'wx' });
                 }
             }
             await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(target), { viewColumn: vscode.ViewColumn.Active, preserveFocus: false, preview: false });
-        } catch (error) { vscode.window.showErrorMessage(`Could not open note: ${error.message}`); }
+        } catch (error) { vscode.window.showErrorMessage(`Could not open memo: ${error.message}`); }
     }
     return { 'equanz.notes.open': openNote };
 }

@@ -2,7 +2,7 @@
     "name": "equanz-project-tools",
     "displayName": "Equanz Project Tools",
     "description": "Keyboard-first project commands for the equanz dotfiles.",
-    "version": "0.3.14",
+    "version": "0.3.15",
     "publisher": "equanz",
     "license": "MIT",
     "scripts": {
@@ -104,7 +104,7 @@
             },
             {
                 "command": "equanz.notes.open",
-                "title": "Notes: Open or Create"
+                "title": "Memo: Open or Create"
             },
             {
                 "command": "equanz.markdown.previewToSide",
