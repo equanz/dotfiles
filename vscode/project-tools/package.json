@@ -1,0 +1,143 @@
+{
+    "name": "equanz-project-tools",
+    "displayName": "Equanz Project Tools",
+    "description": "Keyboard-first project commands for the equanz dotfiles.",
+    "version": "0.3.14",
+    "publisher": "equanz",
+    "license": "MIT",
+    "scripts": {
+        "generate:keymap": "node ../scripts/render-keymap.js",
+        "test": "node --test test/*.test.js"
+    },
+    "engines": {
+        "vscode": "^1.85.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "extensionKind": [
+        "ui"
+    ],
+    "capabilities": {
+        "untrustedWorkspaces": {
+            "supported": "limited",
+            "description": "Project workspace overrides are ignored in Restricted Mode.",
+            "restrictedConfigurations": [
+                "projectManager.projectsLocation"
+            ]
+        }
+    },
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./src/extension.js",
+    "files": [
+        "src",
+        "resources",
+        "README.md"
+    ],
+    "contributes": {
+        "commands": [
+            {
+                "command": "equanz.project.add",
+                "title": "Project: Add Directory"
+            },
+            {
+                "command": "equanz.project.addFromMenu",
+                "title": "Project: Add Directory from Project Menu"
+            },
+            {
+                "command": "equanz.project.cancelDelete",
+                "title": "Project: Cancel Remove Registration"
+            },
+            {
+                "command": "equanz.project.confirmDelete",
+                "title": "Project: Confirm Remove Registration"
+            },
+            {
+                "command": "equanz.project.deleteFromMenu",
+                "title": "Project: Remove Registration from Project Menu"
+            },
+            {
+                "command": "equanz.project.enterDirectory",
+                "title": "Project: Enter Selected Directory"
+            },
+            {
+                "command": "equanz.project.menu",
+                "title": "Project: Menu"
+            },
+            {
+                "command": "equanz.project.parentDirectory",
+                "title": "Project: Parent Directory"
+            },
+            {
+                "command": "equanz.project.switchFromMenu",
+                "title": "Project: Switch from Project Menu"
+            },
+            {
+                "command": "equanz.file.find",
+                "title": "File: Find by Path"
+            },
+            {
+                "command": "equanz.file.enterDirectory",
+                "title": "File: Enter Selected Directory"
+            },
+            {
+                "command": "equanz.file.parentDirectory",
+                "title": "File: Parent Directory"
+            },
+            {
+                "command": "equanz.buffer.switch",
+                "title": "Buffer: Switch in Active Editor Group"
+            },
+            {
+                "command": "equanz.buffer.kill",
+                "title": "Buffer: Kill Active Editor"
+            },
+            {
+                "command": "equanz.buffer.confirmKill",
+                "title": "Buffer: Discard Changes and Kill"
+            },
+            {
+                "command": "equanz.buffer.cancelKill",
+                "title": "Buffer: Cancel Kill"
+            },
+            {
+                "command": "equanz.notes.open",
+                "title": "Notes: Open or Create"
+            },
+            {
+                "command": "equanz.markdown.previewToSide",
+                "title": "Markdown: Open Preview to Side and Keep Source Focused"
+            },
+            {
+                "command": "equanz.frame.menu",
+                "title": "Frame: Menu"
+            },
+            {
+                "command": "equanz.frame.new",
+                "title": "Frame: Open Folder or Saved Workspace in New Window"
+            },
+            {
+                "command": "equanz.frame.close",
+                "title": "Frame: Close Window"
+            },
+            {
+                "command": "equanz.keymap.show",
+                "title": "Keymap: Show"
+            },
+            {
+                "command": "equanz.explorer.moveToTrash",
+                "title": "Explorer: Move to Trash"
+            },
+            {
+                "command": "equanz.explorer.confirmTrash",
+                "title": "Explorer: Confirm Move to Trash"
+            },
+            {
+                "command": "equanz.explorer.cancelTrash",
+                "title": "Explorer: Cancel Move to Trash"
+            }
+        ]
+    }
+}

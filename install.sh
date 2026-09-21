@@ -59,7 +59,7 @@ if [ $(uname -s) = 'Darwin' ]; then
     fi
 
     # install base commands
-    HOMEBREW_NO_AUTO_UPDATE=1 brew install git hub tmux zsh
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install git hub tmux zsh node
     if [ ! -d ${TPM_PATH} ]; then
         git clone https://github.com/tmux-plugins/tpm.git ${TPM_PATH}
     fi
@@ -101,6 +101,16 @@ if [ $(uname -s) = 'Darwin' ]; then
         open '/System/Applications/System Preferences.app'
     else
         echo 'GNU Emacs is already installed'
+    fi
+
+    if [ -d '/Applications/Visual Studio Code.app' ]; then
+        echo '\n----VS Code setup----\n'
+        if ! "${dotfiles_dir}/vscode/bootstrap-macos.sh"; then
+            echo 'VS Code setup failed.' >&2
+            exit 1
+        fi
+    else
+        echo 'VS Code is not installed; skipped VS Code setup.'
     fi
 elif $(which apt > /dev/null); then
     echo '\n----Debian specific steps----\n'

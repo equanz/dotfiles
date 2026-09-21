@@ -1,0 +1,131 @@
+{
+    "bindings": [
+        {
+            "key": "f",
+            "name": "Project file (C-c C-f)",
+            "type": "command",
+            "command": "workbench.action.quickOpen"
+        },
+        {
+            "key": "d",
+            "name": "Project directory (C-c C-d)",
+            "type": "command",
+            "command": "goToFolder.open"
+        },
+        {
+            "key": "p",
+            "name": "Project menu (C-c p)",
+            "type": "command",
+            "command": "equanz.project.menu"
+        },
+        {
+            "key": "a",
+            "name": "Add project (arbitrary directory; C-c C-a)",
+            "type": "command",
+            "command": "equanz.project.add"
+        },
+        {
+            "key": "P",
+            "name": "Project Manager view (C-c C-P)",
+            "type": "command",
+            "command": "workbench.view.extension.project-manager"
+        },
+        {
+            "key": "g",
+            "name": "Project ripgrep (C-c C-g)",
+            "type": "command",
+            "command": "workbench.action.quickTextSearch"
+        },
+        {
+            "key": "o",
+            "name": "Explorer (C-c o)",
+            "type": "command",
+            "command": "workbench.view.explorer"
+        },
+        {
+            "key": "t",
+            "name": "Terminal (C-c t)",
+            "type": "command",
+            "command": "workbench.action.terminal.toggleTerminal"
+        },
+        {
+            "key": "e",
+            "name": "Diagnostics (C-c e)",
+            "type": "command",
+            "command": "workbench.actions.view.problems"
+        },
+        {
+            "key": "n",
+            "name": "Notifications (C-c n; C-o when visible)",
+            "type": "command",
+            "command": "notifications.showList"
+        },
+        {
+            "key": "m",
+            "name": "Notes (C-c m)",
+            "type": "command",
+            "command": "equanz.notes.open"
+        },
+        {
+            "key": "D",
+            "name": "Git diff (C-c C-v)",
+            "type": "command",
+            "command": "git.openChange"
+        },
+        {
+            "key": "v",
+            "name": "Markdown preview to side (C-c v)",
+            "type": "command",
+            "command": "equanz.markdown.previewToSide"
+        },
+        {
+            "key": "V",
+            "name": "Markdown preview in editor (C-c V)",
+            "type": "command",
+            "command": "markdown.reopenAsPreview"
+        },
+        {
+            "key": "w",
+            "name": "Window operations (C-x ...)",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "o",
+                    "name": "Other window (C-x o)",
+                    "type": "command",
+                    "command": "workbench.action.focusNextGroup"
+                },
+                {
+                    "key": "2",
+                    "name": "Split below (C-x 2)",
+                    "type": "command",
+                    "command": "workbench.action.splitEditorDown"
+                },
+                {
+                    "key": "3",
+                    "name": "Split right (C-x 3)",
+                    "type": "command",
+                    "command": "workbench.action.splitEditorRight"
+                },
+                {
+                    "key": "1",
+                    "name": "One window (C-x 1)",
+                    "type": "command",
+                    "command": "workbench.action.joinAllGroups"
+                },
+                {
+                    "key": "0",
+                    "name": "Delete window (C-x 0)",
+                    "type": "command",
+                    "command": "workbench.action.closeGroup"
+                },
+                {
+                    "key": "5 2",
+                    "name": "New frame (C-x 5 2)",
+                    "type": "command",
+                    "command": "equanz.frame.new"
+                }
+            ]
+        }
+    ]
+}

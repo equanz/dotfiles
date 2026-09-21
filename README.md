@@ -12,5 +12,7 @@ $ ./install.sh
 
 Additionaly, read [here](./.emacs.d/README.org) for GNU Emacs.
 
+On macOS, when Visual Studio Code is already installed, `./install.sh` also converges the [VS Code configuration](./vscode/README.md). It does not install Visual Studio Code itself.
+
 ## License
 Licensed under [MIT License](./LICENSE) if not mentioned.

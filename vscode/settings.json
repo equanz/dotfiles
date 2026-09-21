@@ -1,0 +1,48 @@
+{
+    "chat.titleBar.openInAgentsWindow.enabled": false,
+    "chat.titleBar.signIn.enabled": false,
+    "chat.restoreLastPanelSession": false,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.cursorStyle": "block",
+    "editor.renderWhitespace": "all",
+    "editor.minimap.enabled": false,
+    "editor.snippetSuggestions": "none",
+    "emacs-mcx.useMetaPrefixAlt": true,
+    "emacs-mcx.useMetaPrefixMacCmd": false,
+    "explorer.confirmDelete": false,
+    "extensions.autoUpdate": "off",
+    "extensions.supportUntrustedWorkspaces": {
+        "piecebyte.go-to-folder-search": {
+            "supported": true,
+            "version": "0.0.3"
+        },
+        "sumomoneko.migemo-isearch": {
+            "supported": true,
+            "version": "0.4.0"
+        }
+    },
+    "files.simpleDialog": true,
+    "git.decorations.enabled": true,
+    "migemo-isearch.useMetaPrefixMacCmd": false,
+    "projectManager.groupList": false,
+    "projectManager.projectsLocation": "$home/.local/state/vscode/project-manager",
+    "projectManager.removeCurrentProjectFromList": true,
+    "projectManager.showProjectNameInStatusBar": false,
+    "projectManager.sortList": "Name",
+    "scm.diffDecorations": "all",
+    "terminal.integrated.defaultLocation": "panel",
+    "window.commandCenter": false,
+    "workbench.colorCustomizations": {
+        "editorCursor.background": "#282C34",
+        "editorCursor.foreground": "#528BFF"
+    },
+    "workbench.commandPalette.experimental.enableNaturalLanguageSearch": false,
+    "workbench.commandPalette.experimental.suggestCommands": false,
+    "workbench.commandPalette.history": 100,
+    "workbench.commandPalette.preserveInput": false,
+    "workbench.commandPalette.showAskInChat": false,
+    "workbench.quickOpen.closeOnFocusLost": false,
+    "workbench.quickOpen.preserveInput": false,
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "workbench.secondarySideBar.forceMaximized": false
+}

@@ -1,0 +1,916 @@
+{
+    "keybindings": [
+        {
+            "key": "ctrl+x ctrl+f",
+            "command": "equanz.file.find",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+l",
+            "command": "equanz.file.parentDirectory",
+            "when": "equanz.filePicker && inQuickInput"
+        },
+        {
+            "key": "ctrl+l",
+            "command": "equanz.project.parentDirectory",
+            "when": "equanz.projectDirectoryPicker && inQuickInput"
+        },
+        {
+            "key": "ctrl+j",
+            "command": "equanz.project.enterDirectory",
+            "when": "equanz.projectDirectoryPicker && inQuickInput"
+        },
+        {
+            "key": "ctrl+x b",
+            "command": "equanz.buffer.switch",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+x k",
+            "command": "equanz.buffer.kill",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "y",
+            "command": "equanz.buffer.confirmKill",
+            "when": "equanz.bufferKillConfirm && inQuickInput"
+        },
+        {
+            "key": "n",
+            "command": "equanz.buffer.cancelKill",
+            "when": "equanz.bufferKillConfirm && inQuickInput"
+        },
+        {
+            "key": "ctrl+x o",
+            "command": "workbench.action.focusNextGroup",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+x 2",
+            "command": "workbench.action.splitEditorDown",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+x 3",
+            "command": "workbench.action.splitEditorRight",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+x 0",
+            "command": "workbench.action.closeGroup",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+x 1",
+            "command": "workbench.action.joinAllGroups",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+x 5",
+            "command": "equanz.frame.menu",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "2",
+            "command": "equanz.frame.new",
+            "when": "equanz.frameMenu && inQuickInput"
+        },
+        {
+            "key": "0",
+            "command": "equanz.frame.close",
+            "when": "equanz.frameMenu && inQuickInput"
+        },
+        {
+            "key": "ctrl+x ctrl+c",
+            "command": "workbench.action.quit",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "alt+x",
+            "command": "workbench.action.showCommands",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+p",
+            "command": "quickInput.previous",
+            "when": "inQuickInput && !migemo-isearch.inIsearchMode"
+        },
+        {
+            "key": "ctrl+n",
+            "command": "quickInput.next",
+            "when": "inQuickInput && !migemo-isearch.inIsearchMode"
+        },
+        {
+            "key": "ctrl+n",
+            "command": "workbench.action.interactivePlayground.arrowDown",
+            "when": "interactivePlaygroundFocus && !editorTextFocus"
+        },
+        {
+            "key": "ctrl+p",
+            "command": "workbench.action.interactivePlayground.arrowUp",
+            "when": "interactivePlaygroundFocus && !editorTextFocus"
+        },
+        {
+            "key": "ctrl+j",
+            "command": "quickInput.accept",
+            "when": "inQuickInput && !migemo-isearch.inIsearchMode && !equanz.projectDirectoryPicker"
+        },
+        {
+            "key": "ctrl+g",
+            "command": "quickInput.hide",
+            "when": "inQuickInput"
+        },
+        {
+            "key": "ctrl+s",
+            "command": "-emacs-mcx.isearchForward",
+            "when": "!findInputFocussed"
+        },
+        {
+            "key": "ctrl+r",
+            "command": "-emacs-mcx.isearchBackward",
+            "when": "!findInputFocussed"
+        },
+        {
+            "key": "ctrl+c ctrl+f",
+            "command": "workbench.action.quickOpen",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+c ctrl+d",
+            "command": "goToFolder.open",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+c ctrl+a",
+            "command": "equanz.project.add",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+c p",
+            "command": "equanz.project.menu",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "a",
+            "command": "equanz.project.addFromMenu",
+            "when": "equanz.projectMenu && inQuickInput"
+        },
+        {
+            "key": "p",
+            "command": "equanz.project.switchFromMenu",
+            "when": "equanz.projectMenu && inQuickInput"
+        },
+        {
+            "key": "d",
+            "command": "equanz.project.deleteFromMenu",
+            "when": "equanz.projectMenu && inQuickInput"
+        },
+        {
+            "key": "ctrl+c shift+p",
+            "command": "workbench.view.extension.project-manager",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+c ctrl+g",
+            "command": "workbench.action.quickTextSearch",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+c o",
+            "command": "workbench.view.explorer",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+c ctrl+n",
+            "command": "workbench.files.action.createFileFromExplorer",
+            "when": "filesExplorerFocus"
+        },
+        {
+            "key": "ctrl+c ctrl+m",
+            "command": "workbench.files.action.createFolderFromExplorer",
+            "when": "filesExplorerFocus"
+        },
+        {
+            "key": "ctrl+c ctrl+k",
+            "command": "equanz.explorer.moveToTrash",
+            "when": "filesExplorerFocus"
+        },
+        {
+            "key": "y",
+            "command": "equanz.explorer.confirmTrash",
+            "when": "equanz.trashConfirm && inQuickInput"
+        },
+        {
+            "key": "n",
+            "command": "equanz.explorer.cancelTrash",
+            "when": "equanz.trashConfirm && inQuickInput"
+        },
+        {
+            "key": "shift+y",
+            "command": "equanz.explorer.confirmTrash",
+            "when": "equanz.trashConfirm && inQuickInput"
+        },
+        {
+            "key": "shift+n",
+            "command": "equanz.explorer.cancelTrash",
+            "when": "equanz.trashConfirm && inQuickInput"
+        },
+        {
+            "key": "y",
+            "command": "equanz.project.confirmDelete",
+            "when": "equanz.projectDeleteConfirm && inQuickInput"
+        },
+        {
+            "key": "n",
+            "command": "equanz.project.cancelDelete",
+            "when": "equanz.projectDeleteConfirm && inQuickInput"
+        },
+        {
+            "key": "shift+y",
+            "command": "equanz.project.confirmDelete",
+            "when": "equanz.projectDeleteConfirm && inQuickInput"
+        },
+        {
+            "key": "shift+n",
+            "command": "equanz.project.cancelDelete",
+            "when": "equanz.projectDeleteConfirm && inQuickInput"
+        },
+        {
+            "key": "ctrl+c ctrl+r",
+            "command": "renameFile",
+            "when": "filesExplorerFocus"
+        },
+        {
+            "key": "ctrl+c ctrl+y",
+            "command": "runCommands",
+            "args": {
+                "commands": [
+                    "filesExplorer.copy",
+                    "filesExplorer.paste"
+                ]
+            },
+            "when": "filesExplorerFocus"
+        },
+        {
+            "key": "space",
+            "command": "list.toggleExpand",
+            "when": "filesExplorerFocus"
+        },
+        {
+            "key": "ctrl+c t",
+            "command": "workbench.action.terminal.toggleTerminal",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+g",
+            "command": "workbench.action.focusActiveEditorGroup",
+            "when": "terminalFocus"
+        },
+        {
+            "key": "ctrl+c e",
+            "command": "workbench.actions.view.problems",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+c ]",
+            "command": "editor.action.marker.nextInFiles",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+c [",
+            "command": "editor.action.marker.prevInFiles",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+c ctrl+n",
+            "command": "editor.action.dirtydiff.next",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+c ctrl+p",
+            "command": "editor.action.dirtydiff.previous",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+c ctrl+v",
+            "command": "git.openChange",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "ctrl+c v",
+            "command": "equanz.markdown.previewToSide",
+            "when": "editorLangId == markdown && editorTextFocus"
+        },
+        {
+            "key": "ctrl+c shift+v",
+            "command": "markdown.reopenAsPreview",
+            "when": "editorLangId == markdown && editorTextFocus"
+        },
+        {
+            "key": "ctrl+c h",
+            "command": "equanz.keymap.show",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+shift+n",
+            "command": "workbench.action.increaseViewHeight",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+shift+p",
+            "command": "workbench.action.decreaseViewHeight",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+shift+f",
+            "command": "workbench.action.increaseViewWidth",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+shift+b",
+            "command": "workbench.action.decreaseViewWidth",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+j",
+            "command": "acceptSelectedSuggestion",
+            "when": "suggestWidgetVisible && textInputFocus"
+        },
+        {
+            "key": "ctrl+o",
+            "command": "notifications.focusToasts",
+            "when": "notificationToastsVisible"
+        },
+        {
+            "key": "ctrl+n",
+            "command": "notifications.focusNextToast",
+            "when": "notificationFocus && notificationToastsVisible"
+        },
+        {
+            "key": "ctrl+p",
+            "command": "notifications.focusPreviousToast",
+            "when": "notificationFocus && notificationToastsVisible"
+        },
+        {
+            "key": "ctrl+j",
+            "command": "notification.acceptPrimaryAction",
+            "when": "notificationFocus || notificationCenterVisible"
+        },
+        {
+            "key": "ctrl+g",
+            "command": "notifications.hideToasts",
+            "when": "notificationFocus || notificationToastsVisible"
+        },
+        {
+            "key": "ctrl+g",
+            "command": "notifications.hideList",
+            "when": "notificationCenterVisible"
+        },
+        {
+            "key": "ctrl+k",
+            "command": "notification.clear",
+            "when": "notificationFocus"
+        },
+        {
+            "key": "ctrl+c n",
+            "command": "notifications.showList",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+c m",
+            "command": "equanz.notes.open",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+a",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+c",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+x",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+v",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+z",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+z",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+s",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+s",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+o",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+p",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+p",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+f",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+e",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+g",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+g",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "alt+cmd+f",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+f",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+h",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+w",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+w",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+q",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+n",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+n",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+b",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+j",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+/",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+d",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+l",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+u",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+i",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+r",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+y",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+k",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+t",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+o",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+left",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+right",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+up",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+down",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+home",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+end",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+pageup",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+pagedown",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+backspace",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+delete",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+[",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+]",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+[",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+]",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+\\",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+enter",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+enter",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+k",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+,",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+.",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+-",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+=",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+0",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+1",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+2",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+3",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+4",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+5",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+6",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+7",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+8",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "cmd+9",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+e",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+a",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+i",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+j",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+l",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+q",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+r",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+y",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+x",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+d",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+u",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+m",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+b",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+c",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+t",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "shift+cmd+v",
+            "command": "noop",
+            "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+z",
+            "command": "undo"
+        },
+        {
+            "key": "ctrl+shift+z",
+            "command": "redo"
+        }
+    ],
+    "help": [
+        {
+            "key": "f",
+            "name": "Project file (C-c C-f)",
+            "binding": "ctrl+c ctrl+f"
+        },
+        {
+            "key": "d",
+            "name": "Project directory (C-c C-d)",
+            "binding": "ctrl+c ctrl+d"
+        },
+        {
+            "key": "p",
+            "name": "Project menu (C-c p)",
+            "binding": "ctrl+c p"
+        },
+        {
+            "key": "a",
+            "name": "Add project (arbitrary directory; C-c C-a)",
+            "binding": "ctrl+c ctrl+a"
+        },
+        {
+            "key": "P",
+            "name": "Project Manager view (C-c C-P)",
+            "binding": "ctrl+c shift+p"
+        },
+        {
+            "key": "g",
+            "name": "Project ripgrep (C-c C-g)",
+            "binding": "ctrl+c ctrl+g"
+        },
+        {
+            "key": "o",
+            "name": "Explorer (C-c o)",
+            "binding": "ctrl+c o"
+        },
+        {
+            "key": "t",
+            "name": "Terminal (C-c t)",
+            "binding": "ctrl+c t"
+        },
+        {
+            "key": "e",
+            "name": "Diagnostics (C-c e)",
+            "binding": "ctrl+c e"
+        },
+        {
+            "key": "n",
+            "name": "Notifications (C-c n; C-o when visible)",
+            "binding": "ctrl+c n"
+        },
+        {
+            "key": "m",
+            "name": "Notes (C-c m)",
+            "binding": "ctrl+c m"
+        },
+        {
+            "key": "D",
+            "name": "Git diff (C-c C-v)",
+            "binding": "ctrl+c ctrl+v"
+        },
+        {
+            "key": "v",
+            "name": "Markdown preview to side (C-c v)",
+            "binding": "ctrl+c v"
+        },
+        {
+            "key": "V",
+            "name": "Markdown preview in editor (C-c V)",
+            "binding": "ctrl+c shift+v"
+        },
+        {
+            "key": "w",
+            "name": "Window operations (C-x ...)",
+            "bindings": [
+                {
+                    "key": "o",
+                    "name": "Other window (C-x o)",
+                    "binding": "ctrl+x o"
+                },
+                {
+                    "key": "2",
+                    "name": "Split below (C-x 2)",
+                    "binding": "ctrl+x 2"
+                },
+                {
+                    "key": "3",
+                    "name": "Split right (C-x 3)",
+                    "binding": "ctrl+x 3"
+                },
+                {
+                    "key": "1",
+                    "name": "One window (C-x 1)",
+                    "binding": "ctrl+x 1"
+                },
+                {
+                    "key": "0",
+                    "name": "Delete window (C-x 0)",
+                    "binding": "ctrl+x 0"
+                },
+                {
+                    "key": "5 2",
+                    "name": "New frame (C-x 5 2)",
+                    "binding": "2"
+                }
+            ]
+        }
+    ]
+}
