@@ -65,33 +65,34 @@ export LD_LIBRARY_PATH=${PACKAGE_MANAGER_PREFIX_PATH}/lib${LD_LIBRARY_PATH+:${LD
 
 # .local
 export PATH=${HOME}/.local/bin${PATH+:${PATH}}
+export FPATH=${HOME}/.local/share/zsh/site-functions${FPATH+:${FPATH}}
 
 # nodebrew
-if $(builtin command -v nodebrew > /dev/null); then
+if builtin command -v nodebrew >/dev/null 2>&1; then
     export PATH=${HOME}/.nodebrew/current/bin${PATH+:${PATH}}
 fi
 
 # n
-if $(builtin command -v n > /dev/null); then
+if builtin command -v n >/dev/null 2>&1; then
     export N_PREFIX=${HOME}/.n
     export PATH=${N_PREFIX}/bin${PATH+:${PATH}}
 fi
 
 # rbenv
-if $(builtin command -v rbenv > /dev/null); then
+if builtin command -v rbenv >/dev/null 2>&1; then
     export PATH=${HOME}/.rbenv/bin${PATH+:${PATH}}
     eval "$(rbenv init -)"
 fi
 
 # pyenv
-if $(builtin command -v pyenv > /dev/null); then
+if builtin command -v pyenv >/dev/null 2>&1; then
     export PYENV_ROOT=${HOME}/.pyenv
     export PATH=${PYENV_ROOT}/bin${PATH+:${PATH}}
     eval "$(pyenv init -)"
 fi
 
 # golang
-if $(builtin command -v go > /dev/null); then
+if builtin command -v go >/dev/null 2>&1; then
     export GOPATH=${HOME}/go
     export PATH=${GOPATH}/bin${PATH+:${PATH}}
 fi
@@ -111,7 +112,7 @@ autoload -U compinit
 compinit -u
 
 # with-readline alias (sftp)
-if $(builtin command -v with-readline > /dev/null); then
+if builtin command -v with-readline >/dev/null 2>&1; then
     alias sftp='with-readline sftp'
 fi
 
@@ -152,7 +153,7 @@ compdef _gwt-remove gwt-remove
 
 # GitHub
 export GH_TELEMETRY=false
-if $(builtin command -v hub > /dev/null); then
+if builtin command -v hub >/dev/null 2>&1; then
     eval "$(hub alias -s)"
 fi
 
@@ -165,7 +166,7 @@ fi
 }
 
 # direnv
-if $(builtin command -v direnv > /dev/null); then
+if builtin command -v direnv >/dev/null 2>&1; then
     eval "$(direnv hook zsh)"
 fi
 
@@ -187,7 +188,7 @@ fi
 }
 
 # Java
-if [ -f /usr/libexec/java_home ]; then
+if ! builtin command -v mise >/dev/null 2>&1 && [ -f /usr/libexec/java_home ]; then
     function j() {
         readonly local libexec_java_home_path=/usr/libexec/java_home
         local java_version=11
@@ -278,7 +279,7 @@ fi
 }
 
 # Claude Code
-if $(builtin command -v claude > /dev/null); then
+if builtin command -v claude >/dev/null 2>&1; then
     claude-chat() {
         readonly local tmp_for_chat=${HOME}/tmp_for_claude
         if [ ! -d ${tmp_for_chat} ]; then
@@ -289,7 +290,7 @@ if $(builtin command -v claude > /dev/null); then
 fi
 
 # Codex
-if $(builtin command -v codex > /dev/null); then
+if builtin command -v codex >/dev/null 2>&1; then
     codex-chat() {
         readonly local tmp_for_chat=${HOME}/tmp_for_codex
         if [ ! -d ${tmp_for_chat} ]; then
@@ -300,12 +301,12 @@ if $(builtin command -v codex > /dev/null); then
 fi
 
 # fzf
-if $(builtin command -v fzf > /dev/null); then
+if builtin command -v fzf >/dev/null 2>&1; then
     source <(fzf --zsh)
 fi
 
 # mise
-if $(builtin command -v mise > /dev/null); then
+if builtin command -v mise >/dev/null 2>&1; then
     eval "$(mise activate zsh)"
 fi
 
