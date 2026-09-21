@@ -9,3 +9,5 @@ font-thicken = true
 adjust-cell-width = 10%
 
 macos-option-as-alt = true
+
+keybind = super+d=unbind
