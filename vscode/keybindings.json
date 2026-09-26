@@ -25,6 +25,16 @@
         "when": "!terminalFocus"
     },
     {
+        "key": "ctrl+x n",
+        "command": "workbench.action.nextEditorInGroup",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+x p",
+        "command": "workbench.action.previousEditorInGroup",
+        "when": "!terminalFocus"
+    },
+    {
         "key": "ctrl+x k",
         "command": "equanz.buffer.kill",
         "when": "!terminalFocus"
@@ -118,6 +128,16 @@
         "key": "ctrl+g",
         "command": "quickInput.hide",
         "when": "inQuickInput"
+    },
+    {
+        "key": "ctrl+g",
+        "command": "closeFindWidget",
+        "when": "findWidgetVisible"
+    },
+    {
+        "key": "alt+;",
+        "command": "editor.action.commentLine",
+        "when": "editorTextFocus && editorHasSelection && !editorReadonly"
     },
     {
         "key": "ctrl+s",

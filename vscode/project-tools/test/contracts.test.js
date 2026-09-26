@@ -83,6 +83,18 @@ test('keymap renderer is current and every help binding resolves', () => {
         binding.key === 'ctrl+c shift+v' && binding.command === 'markdown.reopenAsPreview' &&
         binding.when === 'editorLangId == markdown && editorTextFocus'
     ));
+    assert.ok(source.keybindings.some((binding) =>
+        binding.key === 'ctrl+g' && binding.command === 'closeFindWidget' && binding.when === 'findWidgetVisible'
+    ));
+    assert.ok(source.keybindings.some((binding) =>
+        binding.key === 'ctrl+x n' && binding.command === 'workbench.action.nextEditorInGroup' && binding.when === '!terminalFocus'
+    ));
+    assert.ok(source.keybindings.some((binding) =>
+        binding.key === 'ctrl+x p' && binding.command === 'workbench.action.previousEditorInGroup' && binding.when === '!terminalFocus'
+    ));
+    assert.equal(source.keybindings.some((binding) => binding.command === 'equanz.buffer.next' || binding.command === 'equanz.buffer.previous'), false);
+    const settings = JSON.parse(fs.readFileSync(path.join(vscodeRoot, 'settings.json'), 'utf8'));
+    assert.equal(settings['emacs-mcx.cursorMoveOnFindWidget'], true);
     const localCommands = new Set(manifest.contributes.commands.map((entry) => entry.command));
     for (const binding of source.keybindings) {
         if (binding.command?.startsWith('equanz.')) assert.ok(localCommands.has(binding.command), binding.command);
@@ -306,11 +318,48 @@ test('C-x b distinguishes and reopens Markdown source and full preview buffers',
     };
     const { commands: bufferCommands } = createBufferCommands(vscode);
     await bufferCommands['equanz.buffer.switch']();
-    assert.deepEqual(items.map((item) => item.label), ['Edit example.md', 'Preview example.md']);
+    assert.deepEqual(items.map((item) => item.label), ['example.md', 'Preview example.md']);
     assert.deepEqual(commands, [[
         'vscode.openWith', uri, 'vscode.markdown.preview.editor',
         { viewColumn: 1, preserveFocus: false, preview: false }
     ]]);
+});
+
+test('buffer commands retain name-based switching and no longer implement tab cycling', async () => {
+    class Uri {
+        constructor(value) { this.value = value; this.scheme = 'file'; this.fsPath = value; }
+        toString() { return this.value; }
+    }
+    const a = new Uri('/tmp/a.md');
+    const b = new Uri('/tmp/b.md');
+    const group = {
+        tabs: [
+            { label: 'a.md', input: { uri: a } },
+            { label: 'a.md', input: { uri: a, viewType: 'vscode.markdown.preview.editor' } },
+            { label: 'b.md', input: { uri: b } }
+        ]
+    };
+    group.activeTab = group.tabs[0];
+    const executed = [];
+    const vscode = {
+        Uri,
+        ViewColumn: { Active: 1 },
+        commands: {
+            executeCommand: async (...args) => {
+                executed.push(args);
+                const viewType = args[0] === 'vscode.openWith' ? args[2] : undefined;
+                group.activeTab = group.tabs.find((tab) => tab.input.uri === args[1] && tab.input.viewType === viewType);
+            }
+        },
+        window: { tabGroups: { all: [group], activeTabGroup: group } }
+    };
+    const { commands } = createBufferCommands(vscode);
+    assert.equal(commands['equanz.buffer.next'], undefined);
+    assert.equal(commands['equanz.buffer.previous'], undefined);
+    vscode.window.showQuickPick = async (items) => items.find((item) => item.viewType);
+    await commands['equanz.buffer.switch']();
+    assert.deepEqual(executed.map(([id, uri]) => [id, uri.fsPath]), [['vscode.openWith', '/tmp/a.md']]);
+    assert.ok(executed.every((call) => call.at(-1).viewColumn === 1));
 });
 
 test('C-c v opens a side preview and restores source-editor focus', async () => {

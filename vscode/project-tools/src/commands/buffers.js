@@ -20,7 +20,8 @@ function createBufferCommands(vscode) {
                 const key = `${uri.toString()}\u0000${viewType || 'text'}`;
                 if (items.has(key)) continue;
                 items.set(key, {
-                    label: viewType ? `Preview ${tab.label}` : `Edit ${tab.label}`,
+                    key,
+                    label: viewType ? `Preview ${tab.label}` : tab.label,
                     description: uri.scheme === 'file' ? uri.fsPath : uri.toString(),
                     uri,
                     viewType,
@@ -28,17 +29,24 @@ function createBufferCommands(vscode) {
                 });
             }
         }
-        return [...items.values()].sort((left, right) => (left.order < 0 ? Infinity : left.order) - (right.order < 0 ? Infinity : right.order) || left.label.localeCompare(right.label));
+        return [...items.values()].sort((left, right) =>
+            (left.order < 0 ? Infinity : left.order) - (right.order < 0 ? Infinity : right.order) ||
+            left.uri.toString().localeCompare(right.uri.toString()) ||
+            Number(Boolean(left.viewType)) - Number(Boolean(right.viewType))
+        );
     }
-    async function switchBuffer() {
-        const selected = await vscode.window.showQuickPick(openBufferItems(), { matchOnDescription: true, matchOnDetail: true, placeHolder: 'Switch buffer in this editor group (C-j confirm, C-g cancel)' });
-        if (!selected) return;
+    async function openBuffer(selected) {
         const options = { viewColumn: vscode.ViewColumn.Active, preserveFocus: false, preview: false };
         if (selected.viewType) {
             await vscode.commands.executeCommand('vscode.openWith', selected.uri, selected.viewType, options);
         } else {
             await vscode.commands.executeCommand('vscode.open', selected.uri, options);
         }
+    }
+    async function switchBuffer() {
+        const selected = await vscode.window.showQuickPick(openBufferItems(), { matchOnDescription: true, matchOnDetail: true, placeHolder: 'Switch buffer in this editor group (C-j confirm, C-g cancel)' });
+        if (!selected) return;
+        await openBuffer(selected);
     }
     async function killBuffer() {
         const group = vscode.window.tabGroups.activeTabGroup;

@@ -10,6 +10,7 @@
     "editor.unicodeHighlight.nonBasicASCII": false,
     "editor.minimap.enabled": false,
     "editor.snippetSuggestions": "none",
+    "emacs-mcx.cursorMoveOnFindWidget": true,
     "emacs-mcx.useMetaPrefixAlt": true,
     "emacs-mcx.useMetaPrefixMacCmd": false,
     "explorer.confirmDelete": false,
