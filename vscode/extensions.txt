@@ -3,4 +3,5 @@ tlaplus.vscode-ide@2026.9.120300
 sumomoneko.migemo-isearch@0.4.0
 alefragnani.project-manager@13.1.0
 piecebyte.go-to-folder-search@0.0.3
+haskell.haskell@2.8.2
 # equanz.equanz-project-tools is a dotfiles-owned local extension installed by bootstrap-macos.sh.

@@ -48,5 +48,6 @@
     "workbench.quickOpen.closeOnFocusLost": false,
     "workbench.quickOpen.preserveInput": false,
     "workbench.secondarySideBar.defaultVisibility": "hidden",
-    "workbench.secondarySideBar.forceMaximized": false
+    "workbench.secondarySideBar.forceMaximized": false,
+    "haskell.manageHLS": "GHCup"
 }
