@@ -11,12 +11,17 @@ function flattenKeymap(bindings, prefix = '') {
 }
 
 function createKeymapCommands(vscode) {
-    async function showKeymap() {
-        const items = flattenKeymap(keymap.bindings);
-        const selected = await vscode.window.showQuickPick(items, { placeHolder: 'Keymap (C-j confirm, C-g cancel)' });
+    async function showBindings(bindings, placeHolder) {
+        const selected = await vscode.window.showQuickPick(flattenKeymap(bindings), { placeHolder });
         if (selected) await vscode.commands.executeCommand(selected.command, selected.args);
     }
-    return { 'equanz.keymap.show': showKeymap };
+    return {
+        'equanz.keymap.show': () => showBindings(keymap.bindings, 'Keymap (C-j confirm, C-g cancel)'),
+        'equanz.keymap.showExplorer': () => showBindings(
+            keymap.bindings.find((entry) => entry.key === 'x').bindings,
+            'Explorer keymap (C-j confirm, C-g cancel)'
+        )
+    };
 }
 
 module.exports = { createKeymapCommands, flattenKeymap };

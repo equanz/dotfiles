@@ -201,6 +201,16 @@
             "when": "!terminalFocus"
         },
         {
+            "key": "enter",
+            "command": "list.select",
+            "when": "filesExplorerFocus && !inputFocus"
+        },
+        {
+            "key": "ctrl+j",
+            "command": "list.select",
+            "when": "filesExplorerFocus && !inputFocus"
+        },
+        {
             "key": "ctrl+c ctrl+n",
             "command": "workbench.files.action.createFileFromExplorer",
             "when": "filesExplorerFocus"
@@ -330,6 +340,11 @@
             "key": "ctrl+c h",
             "command": "equanz.keymap.show",
             "when": "!terminalFocus"
+        },
+        {
+            "key": "ctrl+c h",
+            "command": "equanz.keymap.showExplorer",
+            "when": "filesExplorerFocus && !inputFocus"
         },
         {
             "key": "ctrl+shift+n",
@@ -826,6 +841,62 @@
         }
     ],
     "help": [
+        {
+            "key": "x",
+            "name": "Explorer operations (C-c o, then C-c h)",
+            "bindings": [
+                {
+                    "key": "o",
+                    "name": "Open selected file (Enter or C-j; C-n/p move)",
+                    "binding": "enter"
+                },
+                {
+                    "key": "f",
+                    "name": "Create file (C-c C-n)",
+                    "binding": "ctrl+c ctrl+n"
+                },
+                {
+                    "key": "d",
+                    "name": "Create directory (C-c C-m)",
+                    "binding": "ctrl+c ctrl+m"
+                },
+                {
+                    "key": "r",
+                    "name": "Rename (C-c C-r)",
+                    "binding": "ctrl+c ctrl+r"
+                },
+                {
+                    "key": "y",
+                    "name": "Duplicate (C-c C-y)",
+                    "binding": "ctrl+c ctrl+y"
+                },
+                {
+                    "key": "k",
+                    "name": "Move to Trash (C-c C-k)",
+                    "binding": "ctrl+c ctrl+k"
+                },
+                {
+                    "key": "SPC",
+                    "name": "Expand or collapse directory (Space)",
+                    "binding": "space"
+                }
+            ]
+        },
+        {
+            "key": "b",
+            "name": "Switch buffer (C-x b)",
+            "binding": "ctrl+x b"
+        },
+        {
+            "key": "N",
+            "name": "Next tab in editor group (C-x n)",
+            "binding": "ctrl+x n"
+        },
+        {
+            "key": "B",
+            "name": "Previous tab in editor group (C-x p)",
+            "binding": "ctrl+x p"
+        },
         {
             "key": "f",
             "name": "Project file (C-c C-f)",

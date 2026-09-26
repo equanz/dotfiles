@@ -2,7 +2,7 @@
     "name": "equanz-project-tools",
     "displayName": "Equanz Project Tools",
     "description": "Keyboard-first project commands for the equanz dotfiles.",
-    "version": "0.3.21",
+    "version": "0.3.22",
     "publisher": "equanz",
     "license": "MIT",
     "scripts": {
@@ -125,6 +125,10 @@
             {
                 "command": "equanz.keymap.show",
                 "title": "Keymap: Show"
+            },
+            {
+                "command": "equanz.keymap.showExplorer",
+                "title": "Keymap: Show Explorer Operations"
             },
             {
                 "command": "equanz.explorer.moveToTrash",

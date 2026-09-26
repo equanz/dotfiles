@@ -200,6 +200,16 @@
         "when": "!terminalFocus"
     },
     {
+        "key": "enter",
+        "command": "list.select",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "list.select",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
         "key": "ctrl+c ctrl+n",
         "command": "workbench.files.action.createFileFromExplorer",
         "when": "filesExplorerFocus"
@@ -329,6 +339,11 @@
         "key": "ctrl+c h",
         "command": "equanz.keymap.show",
         "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+c h",
+        "command": "equanz.keymap.showExplorer",
+        "when": "filesExplorerFocus && !inputFocus"
     },
     {
         "key": "ctrl+shift+n",

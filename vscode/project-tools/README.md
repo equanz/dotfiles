@@ -2,13 +2,15 @@
 
 Dotfiles-owned VS Code commands for keyboard-only project selection, keymap discovery, Explorer confirmation prompts, buffer switching, frames, and memos. Command implementations live below `src/`; pure filesystem and state helpers are covered by `npm test`.
 
+In the File Explorer, `Enter` or `C-j` opens the selected file; `C-c C-r` renames it. `C-c h` shows only Explorer operations while the File Explorer has focus, and the general keymap elsewhere.
+
 This extension is packaged and installed by `../bootstrap-macos.sh`. Its `package.json` version must be incremented whenever its manifest or runtime code changes. `../keymap.json` is the source for both VS Code keybindings and the bundled C-c h resource; run `node ../scripts/render-keymap.js` after changing it.
 
 Project registrations are machine-local state at `~/.local/state/vscode/project-manager/projects.json`, not dotfiles data. The location is configured through `projectManager.projectsLocation`.
 
 Add Project is a directory chooser. Its input contains an editable absolute path, and its candidates show matching child directory names ending in `/`. `/` commits a directory component and removing that trailing slash returns to the parent candidates. `C-j` enters the selected directory, `C-l` returns to its parent, and Enter selects a directory.
 
-`C-x b` lists open URI-backed editors and opens the selected buffer in the currently active editor group. A Markdown source and its full preview are separate entries, labelled `Edit` and `Preview`; selecting a full preview keeps it as a preview. Side previews are VS Code webviews and cannot be addressed through the public tab API. It does not move or close the source editor, so a buffer may remain visible in more than one group.
+`C-x b` lists open URI-backed editors and opens the selected buffer in the currently active editor group. `C-x n` and `C-x p` move to the next or previous tab in that editor group; they do not switch groups or windows. A Markdown source and its full preview are separate entries: the source uses its filename, while the full preview is prefixed `Preview`. Side previews are VS Code webviews and cannot be addressed through the public tab API. Switching does not move or close the source editor, so a buffer may remain visible in more than one group.
 
 For a Markdown source editor, `C-c v` opens a preview to the side while keeping focus in the source editor, and `C-c V` replaces the source editor with a full preview. Use `C-x b` to return to a full preview in the active editor group.
 

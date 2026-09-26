@@ -1,6 +1,79 @@
 {
     "bindings": [
         {
+            "key": "x",
+            "name": "Explorer operations (C-c o, then C-c h)",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "o",
+                    "name": "Open selected file (Enter or C-j; C-n/p move)",
+                    "type": "command",
+                    "command": "list.select"
+                },
+                {
+                    "key": "f",
+                    "name": "Create file (C-c C-n)",
+                    "type": "command",
+                    "command": "workbench.files.action.createFileFromExplorer"
+                },
+                {
+                    "key": "d",
+                    "name": "Create directory (C-c C-m)",
+                    "type": "command",
+                    "command": "workbench.files.action.createFolderFromExplorer"
+                },
+                {
+                    "key": "r",
+                    "name": "Rename (C-c C-r)",
+                    "type": "command",
+                    "command": "renameFile"
+                },
+                {
+                    "key": "y",
+                    "name": "Duplicate (C-c C-y)",
+                    "type": "command",
+                    "command": "runCommands",
+                    "args": {
+                        "commands": [
+                            "filesExplorer.copy",
+                            "filesExplorer.paste"
+                        ]
+                    }
+                },
+                {
+                    "key": "k",
+                    "name": "Move to Trash (C-c C-k)",
+                    "type": "command",
+                    "command": "equanz.explorer.moveToTrash"
+                },
+                {
+                    "key": "SPC",
+                    "name": "Expand or collapse directory (Space)",
+                    "type": "command",
+                    "command": "list.toggleExpand"
+                }
+            ]
+        },
+        {
+            "key": "b",
+            "name": "Switch buffer (C-x b)",
+            "type": "command",
+            "command": "equanz.buffer.switch"
+        },
+        {
+            "key": "N",
+            "name": "Next tab in editor group (C-x n)",
+            "type": "command",
+            "command": "workbench.action.nextEditorInGroup"
+        },
+        {
+            "key": "B",
+            "name": "Previous tab in editor group (C-x p)",
+            "type": "command",
+            "command": "workbench.action.previousEditorInGroup"
+        },
+        {
             "key": "f",
             "name": "Project file (C-c C-f)",
             "type": "command",

@@ -76,6 +76,24 @@ test('keymap renderer is current and every help binding resolves', () => {
         binding.when === 'equanz.projectDirectoryPicker && inQuickInput'
     ));
     assert.ok(source.keybindings.some((binding) =>
+        binding.key === 'alt+;' && binding.command === 'editor.action.commentLine' &&
+        binding.when === 'editorTextFocus && editorHasSelection && !editorReadonly'
+    ));
+    for (const key of ['enter', 'ctrl+j']) {
+        assert.ok(source.keybindings.some((binding) =>
+            binding.key === key && binding.command === 'list.select' &&
+            binding.when === 'filesExplorerFocus && !inputFocus'
+        ));
+    }
+    assert.ok(source.keybindings.some((binding) =>
+        binding.key === 'ctrl+c ctrl+r' && binding.command === 'renameFile' &&
+        binding.when === 'filesExplorerFocus'
+    ));
+    assert.ok(source.keybindings.some((binding) =>
+        binding.key === 'ctrl+c h' && binding.command === 'equanz.keymap.showExplorer' &&
+        binding.when === 'filesExplorerFocus && !inputFocus'
+    ));
+    assert.ok(source.keybindings.some((binding) =>
         binding.key === 'ctrl+c v' && binding.command === 'equanz.markdown.previewToSide' &&
         binding.when === 'editorLangId == markdown && editorTextFocus'
     ));
@@ -106,6 +124,21 @@ test('keymap renderer is current and every help binding resolves', () => {
     });
     visit(rendered.bindings);
     for (const command of resourceCommands) assert.ok(localCommands.has(command), command);
+});
+
+test('Explorer keymap lists Explorer actions instead of unrelated project actions', async () => {
+    let shown;
+    const vscode = {
+        commands: { executeCommand: async () => undefined },
+        window: {
+            showQuickPick: async (items) => { shown = items; return undefined; }
+        }
+    };
+    await createKeymapCommands(vscode)['equanz.keymap.showExplorer']();
+    assert.ok(shown.some((item) => item.command === 'list.select'));
+    assert.ok(shown.some((item) => item.command === 'renameFile'));
+    assert.ok(shown.some((item) => item.command === 'equanz.explorer.moveToTrash'));
+    assert.ok(!shown.some((item) => item.command === 'equanz.project.add'));
 });
 
 test('path minibuffer helpers preserve explicit paths and directory input', () => {
