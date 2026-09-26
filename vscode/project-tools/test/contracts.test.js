@@ -242,6 +242,9 @@ test('project picker uses the same slash commit and trailing slash rollback', as
         await commands['equanz.project.enterDirectory']();
         assert.equal(quickPick.value, `${path.join(root, 'project')}${path.sep}`);
         assert.ok(quickPick.items.some((item) => item.path === path.join(root, 'project', 'child')));
+        quickPick.value = `${path.join(root, 'project')}${path.sep}.`;
+        await callbacks.change(quickPick.value);
+        assert.deepEqual(quickPick.items.map((item) => item.label), ['.hidden/']);
         await commands['equanz.project.parentDirectory']();
         assert.equal(quickPick.value, `${root}${path.sep}`);
         assert.ok(quickPick.items.some((item) => item.path === path.join(root, 'project-other')));
