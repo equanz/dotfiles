@@ -4,6 +4,7 @@ const path = require('node:path');
 const { directoryInput, expandedProjectRoot, pathFromInput, projectRootValue } = require('../lib/paths');
 const { reconcileDirectoryInput } = require('../lib/directory-input');
 const { projectFilePath, readProjects, writeProjects } = require('../lib/project-store');
+const { pathPickerItems } = require('../lib/path-picker');
 const { enableFuzzyMatching, setContext } = require('../lib/quick-input');
 
 async function directoryEntries(directory) {
@@ -40,13 +41,18 @@ function createProjectCommands(vscode) {
         const quickPick = vscode.window.createQuickPick();
         const picker = {
             currentDirectory: path.resolve(os.homedir()), quickPick, updateId: 0,
+            loadedDirectory: undefined, entries: [],
             update: async (value) => {
                 const updateId = ++picker.updateId;
-                quickPick.busy = true;
+                const directory = picker.currentDirectory;
+                const needsInventory = picker.loadedDirectory !== directory;
+                if (needsInventory) quickPick.busy = true;
                 try {
-                    const items = await itemsForDirectory(picker.currentDirectory);
+                    const items = needsInventory ? await itemsForDirectory(directory) : picker.entries;
                     if (updateId === picker.updateId) {
-                        quickPick.items = items;
+                        picker.entries = items;
+                        picker.loadedDirectory = directory;
+                        quickPick.items = pathPickerItems(items, value ?? quickPick.value, directory);
                         quickPick.title = `Add Project: ${picker.currentDirectory}`;
                         if (value !== undefined) {
                             quickPick.value = value;
@@ -76,7 +82,7 @@ function createProjectCommands(vscode) {
         setContext(vscode, 'equanz.projectDirectoryPicker', true);
         quickPick.title = `Add Project: ${picker.currentDirectory}`;
         quickPick.placeholder = 'Path and fuzzy filter';
-        enableFuzzyMatching(quickPick);
+        quickPick.sortByLabel = false;
         return new Promise((resolve) => {
             quickPick.onDidAccept(async () => {
                 const typedPath = pathFromInput(quickPick.value, picker.currentDirectory);
@@ -96,13 +102,14 @@ function createProjectCommands(vscode) {
                 quickPick.validationMessage = 'Select a directory or type a valid directory path.';
             });
             quickPick.onDidChangeValue(async (value) => {
-                await reconcileDirectoryInput({
+                const directoryChanged = await reconcileDirectoryInput({
                     value,
                     currentDirectory: picker.currentDirectory,
                     quickPick,
                     setCurrentDirectory: (directory) => { picker.currentDirectory = directory; },
                     update: picker.update
                 });
+                if (!directoryChanged) await picker.update();
             });
             quickPick.onDidHide(() => {
                 quickPick.dispose();

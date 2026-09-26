@@ -1,12 +1,14 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { pathFromInput } = require('./paths');
+const { directoryInput, pathFromInput } = require('./paths');
 
 async function reconcileDirectoryInput({ value, currentDirectory, quickPick, setCurrentDirectory, update }) {
     const inputPath = pathFromInput(value, currentDirectory);
     if (!value.endsWith(path.sep)) {
         // Removing a committed trailing slash returns the candidate base to its parent.
-        if (inputPath === currentDirectory) {
+        const committedInput = directoryInput(currentDirectory);
+        const inputWithoutTrailingSlash = committedInput.endsWith(path.sep) ? committedInput.slice(0, -1) : committedInput;
+        if (value === inputWithoutTrailingSlash) {
             const parent = path.dirname(currentDirectory);
             if (parent !== currentDirectory) {
                 setCurrentDirectory(parent);

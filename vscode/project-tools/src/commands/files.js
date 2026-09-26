@@ -3,7 +3,8 @@ const os = require('node:os');
 const path = require('node:path');
 const { directoryInput, pathFromInput } = require('../lib/paths');
 const { reconcileDirectoryInput } = require('../lib/directory-input');
-const { enableFuzzyMatching, setContext } = require('../lib/quick-input');
+const { pathPickerItems } = require('../lib/path-picker');
+const { setContext } = require('../lib/quick-input');
 
 async function fileEntries(directory) {
     const entries = await fs.promises.readdir(directory, { withFileTypes: true });
@@ -46,13 +47,19 @@ function createFileCommands(vscode) {
             currentDirectory: initialFileDirectory(vscode),
             quickPick,
             updateId: 0,
+            loadedDirectory: undefined,
+            entries: [],
             update: async (value) => {
                 const updateId = ++picker.updateId;
-                quickPick.busy = true;
+                const directory = picker.currentDirectory;
+                const needsInventory = picker.loadedDirectory !== directory;
+                if (needsInventory) quickPick.busy = true;
                 try {
-                    const items = await itemsForFilePicker(picker.currentDirectory);
+                    const items = needsInventory ? await itemsForFilePicker(directory) : picker.entries;
                     if (updateId === picker.updateId) {
-                        quickPick.items = items;
+                        picker.entries = items;
+                        picker.loadedDirectory = directory;
+                        quickPick.items = pathPickerItems(items, value ?? quickPick.value, directory);
                         quickPick.title = 'Find File';
                         if (value !== undefined) {
                             quickPick.value = value;
@@ -82,17 +89,18 @@ function createFileCommands(vscode) {
         setContext(vscode, 'equanz.filePicker', true);
         quickPick.title = 'Find File';
         quickPick.placeholder = 'Path and fuzzy filter';
-        enableFuzzyMatching(quickPick);
+        quickPick.sortByLabel = false;
 
         return new Promise((resolve) => {
             quickPick.onDidChangeValue(async (value) => {
-                await reconcileDirectoryInput({
+                const directoryChanged = await reconcileDirectoryInput({
                     value,
                     currentDirectory: picker.currentDirectory,
                     quickPick,
                     setCurrentDirectory: (directory) => { picker.currentDirectory = directory; },
                     update: picker.update
                 });
+                if (!directoryChanged) await picker.update();
             });
             quickPick.onDidAccept(async () => {
                 const selected = quickPick.activeItems[0];

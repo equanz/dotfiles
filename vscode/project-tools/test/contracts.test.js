@@ -7,9 +7,11 @@ const { execFileSync } = require('node:child_process');
 const { activateWith } = require('../src/activate');
 const { createBufferCommands } = require('../src/commands/buffers');
 const { createFileCommands, fileEntries } = require('../src/commands/files');
+const { createKeymapCommands } = require('../src/commands/keymap');
 const { createMarkdownCommands } = require('../src/commands/markdown');
 const { createProjectCommands } = require('../src/commands/projects');
 const { directoryInput, isExplicitPathInput, pathFromInput } = require('../src/lib/paths');
+const { pathPickerItems } = require('../src/lib/path-picker');
 const { readProjects, writeProjects } = require('../src/lib/project-store');
 
 const extensionRoot = path.resolve(__dirname, '..');
@@ -114,6 +116,27 @@ test('file picker inventory is immediate children only', async () => {
     }
 });
 
+test('path picker ranks filename subsequences and keeps the path tail visible', () => {
+    const root = '/tmp/very/long/directory';
+    const items = ['pulsar-client-node', 'pulsar', 'other'].map((name) => ({
+        label: path.join(root, name), path: path.join(root, name), action: 'file'
+    }));
+    const filtered = pathPickerItems(items, `${root}/plsr`, root);
+    assert.deepEqual(filtered.map((item) => item.label), ['pulsar', 'pulsar-client-node']);
+    assert.ok(filtered.every((item) => item.alwaysShow));
+    assert.deepEqual(pathPickerItems(items, `${root}/pulsar`, root).map((item) => item.label), [
+        'pulsar', 'pulsar-client-node'
+    ]);
+    const mixed = pathPickerItems([
+        { path: path.join(root, 'source'), action: 'directory' },
+        { path: path.join(root, 'source.txt'), action: 'file' }
+    ], `${root}/source`, root);
+    assert.deepEqual(mixed.map(({ label, path: itemPath }) => [label, itemPath]), [
+        ['source/', path.join(root, 'source')],
+        ['source.txt', path.join(root, 'source.txt')]
+    ]);
+});
+
 test('file picker commits a typed directory only after slash', async () => {
     const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'equanz-file-picker-slash-'));
     let quickPick;
@@ -140,14 +163,18 @@ test('file picker commits a typed directory only after slash', async () => {
         await fs.promises.mkdir(path.join(root, 'pulsar'));
         await fs.promises.writeFile(path.join(root, 'pulsar', 'child.txt'), 'x');
         await fs.promises.mkdir(path.join(root, 'pulsar-client-node'));
+        await fs.promises.mkdir(path.join(root, '.hidden'));
         vscode.window.activeTextEditor = { document: { uri: { scheme: 'file', fsPath: path.join(root, 'current.txt') } } };
         const commands = createFileCommands(vscode);
         const pending = commands['equanz.file.find']();
-        await waitFor(() => quickPick.items.length === 2, 'file picker did not finish its initial inventory');
-        assert.deepEqual(quickPick.items.map((item) => item.path), [path.join(root, 'pulsar'), path.join(root, 'pulsar-client-node')]);
+        await waitFor(() => quickPick.items.length === 3, 'file picker did not finish its initial inventory');
+        assert.deepEqual(quickPick.items.map((item) => item.label), ['.hidden/', 'pulsar/', 'pulsar-client-node/']);
         quickPick.value = path.join(root, 'pulsar');
         await callbacks.change(quickPick.value);
         assert.deepEqual(quickPick.items.map((item) => item.path), [path.join(root, 'pulsar'), path.join(root, 'pulsar-client-node')]);
+        quickPick.value = `${root}${path.sep}.`;
+        await callbacks.change(quickPick.value);
+        assert.deepEqual(quickPick.items.map((item) => item.label), ['.hidden/']);
         quickPick.value = `${path.join(root, 'pulsar')}${path.sep}`;
         await callbacks.change(quickPick.value);
         assert.deepEqual(quickPick.items.map((item) => item.path), [path.join(root, 'pulsar', 'child.txt')]);
@@ -188,6 +215,7 @@ test('project picker uses the same slash commit and trailing slash rollback', as
     try {
         await fs.promises.mkdir(path.join(root, 'project'));
         await fs.promises.mkdir(path.join(root, 'project', 'child'));
+        await fs.promises.mkdir(path.join(root, 'project', '.hidden'));
         await fs.promises.mkdir(path.join(root, 'project-other'));
         const commands = createProjectCommands(vscode);
         const pending = commands['equanz.project.add']();
