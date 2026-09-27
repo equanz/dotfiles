@@ -101,6 +101,11 @@
             "when": "!terminalFocus"
         },
         {
+            "key": "ctrl+y",
+            "command": "editor.action.clipboardPasteAction",
+            "when": "inputFocus && !editorTextFocus && !terminalFocus && !isComposing"
+        },
+        {
             "key": "ctrl+p",
             "command": "quickInput.previous",
             "when": "inQuickInput && !migemo-isearch.inIsearchMode"

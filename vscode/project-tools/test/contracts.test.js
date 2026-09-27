@@ -110,6 +110,10 @@ test('keymap renderer is current and every help binding resolves', () => {
     assert.ok(source.keybindings.some((binding) =>
         binding.key === 'ctrl+x p' && binding.command === 'workbench.action.previousEditorInGroup' && binding.when === '!terminalFocus'
     ));
+    assert.ok(source.keybindings.some((binding) =>
+        binding.key === 'ctrl+y' && binding.command === 'editor.action.clipboardPasteAction' &&
+        binding.when === 'inputFocus && !editorTextFocus && !terminalFocus && !isComposing'
+    ));
     assert.equal(source.keybindings.some((binding) => binding.command === 'equanz.buffer.next' || binding.command === 'equanz.buffer.previous'), false);
     const settings = JSON.parse(fs.readFileSync(path.join(vscodeRoot, 'settings.json'), 'utf8'));
     assert.equal(settings['emacs-mcx.cursorMoveOnFindWidget'], true);
