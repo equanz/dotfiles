@@ -204,6 +204,59 @@ test('project picker uses the same slash commit and trailing slash rollback', as
     }
 });
 
+test('project menu switches the current window and can open a new window', async () => {
+    const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'equanz-project-switch-'));
+    const opened = [];
+    const vscode = {
+        Uri: { file: (value) => ({ fsPath: value }) },
+        commands: { executeCommand: async (...args) => { opened.push(args); } },
+        workspace: { getConfiguration: () => ({ get: () => root }) },
+        window: {
+            showQuickPick: async (items, options) => {
+                assert.equal(items.length, 1);
+                assert.equal(options.matchOnDescription, true);
+                assert.equal(options.matchOnDetail, true);
+                return items[0];
+            }
+        }
+    };
+    try {
+        await writeProjects(path.join(root, 'projects.json'), [
+            { name: 'project', rootPath: path.join(root, 'project'), enabled: true }
+        ]);
+        const commands = createProjectCommands(vscode);
+        await commands['equanz.project.switchFromMenu']();
+        await commands['equanz.project.newWindowFromMenu']();
+        assert.deepEqual(opened, [
+            ['vscode.openFolder', { fsPath: path.join(root, 'project') }, { forceReuseWindow: true }],
+            ['vscode.openFolder', { fsPath: path.join(root, 'project') }, { forceNewWindow: true }]
+        ]);
+    } finally {
+        await fs.promises.rm(root, { recursive: true, force: true });
+    }
+});
+
+test('project picker cancellation does not open a folder', async () => {
+    const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'equanz-project-cancel-'));
+    const opened = [];
+    const vscode = {
+        commands: { executeCommand: async (...args) => { opened.push(args); } },
+        workspace: { getConfiguration: () => ({ get: () => root }) },
+        window: { showQuickPick: async () => undefined }
+    };
+    try {
+        await writeProjects(path.join(root, 'projects.json'), [
+            { name: 'project', rootPath: path.join(root, 'project'), enabled: true }
+        ]);
+        const commands = createProjectCommands(vscode);
+        await commands['equanz.project.switchFromMenu']();
+        await commands['equanz.project.newWindowFromMenu']();
+        assert.deepEqual(opened, []);
+    } finally {
+        await fs.promises.rm(root, { recursive: true, force: true });
+    }
+});
+
 test('C-x k closes clean tabs and uses y/n only for dirty tabs', async () => {
     const executed = [];
     const closed = [];

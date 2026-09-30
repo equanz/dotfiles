@@ -87,7 +87,7 @@
         },
         {
             "key": "p",
-            "name": "Project menu (C-c p)",
+            "name": "Project menu (C-c p; p switches here, n opens a new window)",
             "type": "command",
             "command": "equanz.project.menu"
         },

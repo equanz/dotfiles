@@ -185,6 +185,11 @@
         "when": "equanz.projectMenu && inQuickInput"
     },
     {
+        "key": "n",
+        "command": "equanz.project.newWindowFromMenu",
+        "when": "equanz.projectMenu && inQuickInput"
+    },
+    {
         "key": "d",
         "command": "equanz.project.deleteFromMenu",
         "when": "equanz.projectMenu && inQuickInput"

@@ -198,9 +198,16 @@ function createProjectCommands(vscode) {
         } catch (error) { vscode.window.showErrorMessage(`Could not remove project: ${error.message}`); }
     }
 
-    async function switchProject() {
-        const selected = await vscode.window.showQuickPick(await projectItems(), { matchOnDescription: true, matchOnDetail: true, placeHolder: 'Switch project (C-j confirm, C-g cancel)' });
-        if (selected) await vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(expandedProjectRoot(selected.project.rootPath)), { forceNewWindow: true });
+    async function openProject(forceNewWindow) {
+        const selected = await vscode.window.showQuickPick(await projectItems(), {
+            matchOnDescription: true,
+            matchOnDetail: true,
+            placeHolder: `${forceNewWindow ? 'Open project in new window' : 'Switch project'} (C-j or Enter confirm, C-g cancel)`
+        });
+        if (selected) {
+            const options = forceNewWindow ? { forceNewWindow: true } : { forceReuseWindow: true };
+            await vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(expandedProjectRoot(selected.project.rootPath)), options);
+        }
     }
 
     async function runMenuAction(action) {
@@ -208,7 +215,8 @@ function createProjectCommands(vscode) {
         if (menu) { menu.quickPick.hide(); await menu.closed; }
         if (action === 'add') await addProject();
         if (action === 'delete') await deleteProject();
-        if (action === 'switch') await switchProject();
+        if (action === 'switch') await openProject(false);
+        if (action === 'newWindow') await openProject(true);
     }
 
     function showMenu() {
@@ -217,11 +225,12 @@ function createProjectCommands(vscode) {
         const menu = { quickPick };
         activeMenu = menu;
         setContext(vscode, 'equanz.projectMenu', true);
-        quickPick.title = 'Project'; quickPick.placeholder = 'a: add project  p: switch project  C-g: cancel';
+        quickPick.title = 'Project'; quickPick.placeholder = 'a: add project  p: switch here  n: new window  C-g: cancel';
         enableFuzzyMatching(quickPick);
         quickPick.items = [
             { label: 'a  Add project', description: 'Choose an arbitrary directory', action: 'add' },
-            { label: 'p  Switch project', description: 'Open a registered project', action: 'switch' },
+            { label: 'p  Switch project here', description: 'Open a registered project in this window', action: 'switch' },
+            { label: 'n  Open project in new window', description: 'Preserve this window', action: 'newWindow' },
             { label: 'd  Remove project registration', description: 'Remove only the bookmark, not the directory', action: 'delete' }
         ];
         menu.closed = new Promise((resolve) => quickPick.onDidHide(() => { quickPick.dispose(); if (activeMenu === menu) activeMenu = undefined; setContext(vscode, 'equanz.projectMenu', false); resolve(); }));
@@ -238,6 +247,7 @@ function createProjectCommands(vscode) {
         'equanz.project.enterDirectory': () => activeDirectoryPicker?.enterSelected(),
         'equanz.project.menu': showMenu,
         'equanz.project.parentDirectory': () => activeDirectoryPicker?.goParent(),
+        'equanz.project.newWindowFromMenu': () => runMenuAction('newWindow'),
         'equanz.project.switchFromMenu': () => runMenuAction('switch')
     };
 }

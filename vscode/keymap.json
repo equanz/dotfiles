@@ -186,6 +186,11 @@
             "when": "equanz.projectMenu && inQuickInput"
         },
         {
+            "key": "n",
+            "command": "equanz.project.newWindowFromMenu",
+            "when": "equanz.projectMenu && inQuickInput"
+        },
+        {
             "key": "d",
             "command": "equanz.project.deleteFromMenu",
             "when": "equanz.projectMenu && inQuickInput"
@@ -914,7 +919,7 @@
         },
         {
             "key": "p",
-            "name": "Project menu (C-c p)",
+            "name": "Project menu (C-c p; p switches here, n opens a new window)",
             "binding": "ctrl+c p"
         },
         {

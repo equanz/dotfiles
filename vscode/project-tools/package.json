@@ -2,7 +2,7 @@
     "name": "equanz-project-tools",
     "displayName": "Equanz Project Tools",
     "description": "Keyboard-first project commands for the equanz dotfiles.",
-    "version": "0.3.22",
+    "version": "0.3.23",
     "publisher": "equanz",
     "license": "MIT",
     "scripts": {
@@ -65,6 +65,10 @@
             {
                 "command": "equanz.project.menu",
                 "title": "Project: Menu"
+            },
+            {
+                "command": "equanz.project.newWindowFromMenu",
+                "title": "Project: Open in New Window from Project Menu"
             },
             {
                 "command": "equanz.project.parentDirectory",
