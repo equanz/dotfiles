@@ -59,7 +59,15 @@ if [ $(uname -s) = 'Darwin' ]; then
     fi
 
     # install base commands
-    HOMEBREW_NO_AUTO_UPDATE=1 brew install git hub tmux zsh node
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install git hub tmux zsh
+    if ! command -v mise > /dev/null 2>&1; then
+        curl -fsSL https://mise.run | sh
+        export PATH="${HOME}/.local/bin:${PATH}"
+        command -v mise > /dev/null 2>&1 || exit 1
+    fi
+    if ! mise where node@24 > /dev/null 2>&1; then
+        mise install node@24 || exit 1
+    fi
     if [ ! -d ${TPM_PATH} ]; then
         git clone https://github.com/tmux-plugins/tpm.git ${TPM_PATH}
     fi

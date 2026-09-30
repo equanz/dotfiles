@@ -39,19 +39,18 @@ code_bin=$(code_cli) || {
     exit 1
 }
 
-if ! command -v node >/dev/null 2>&1; then
-    echo 'Node.js 22 or later is required for the dotfiles-owned VS Code extension.' >&2
+if ! command -v mise >/dev/null 2>&1; then
+    echo 'mise is required; run the repository-root install.sh first.' >&2
     exit 1
 fi
-node_major=$(node -p 'process.versions.node.split(".")[0]')
-if [ "$node_major" -lt 22 ]; then
-    echo 'Node.js 22 or later is required for the dotfiles-owned VS Code extension.' >&2
+if ! mise where node@24 >/dev/null 2>&1; then
+    echo 'Node.js 24 must be installed through mise; run the repository-root install.sh first.' >&2
     exit 1
 fi
 if [ "$mode" = check ]; then
-    node "$script_dir/scripts/render-keymap.js" --check
+    mise exec node@24 -- node "$script_dir/scripts/render-keymap.js" --check
 else
-    node "$script_dir/scripts/render-keymap.js"
+    mise exec node@24 -- node "$script_dir/scripts/render-keymap.js"
 fi
 
 link_is_current() {
@@ -144,23 +143,19 @@ else
 fi
 
 local_extension_source="$script_dir/project-tools"
-local_extension_version=$(node -e 'const fs = require("node:fs"); const manifest = JSON.parse(fs.readFileSync(process.argv[1], "utf8")); process.stdout.write(manifest.version);' "$local_extension_source/package.json")
+local_extension_version=$(mise exec node@24 -- node -e 'const fs = require("node:fs"); const manifest = JSON.parse(fs.readFileSync(process.argv[1], "utf8")); process.stdout.write(manifest.version);' "$local_extension_source/package.json")
 expected_local_extension="equanz.equanz-project-tools@${local_extension_version}"
 if extension_is_current "$expected_local_extension"; then
     echo "Verified VS Code extension: $expected_local_extension"
 else
     mark_drift "extension $expected_local_extension"
     if [ "$mode" = apply ]; then
-        if ! command -v npx >/dev/null 2>&1; then
-            echo 'npx is required to package the dotfiles-owned VS Code extension.' >&2
-            exit 1
-        fi
         temporary_extension_dir=$(mktemp -d "${TMPDIR:-/tmp}/equanz-project-tools.XXXXXX")
         trap 'rm -rf "$temporary_extension_dir"' EXIT HUP INT TERM
         local_extension_vsix="$temporary_extension_dir/${expected_local_extension}.vsix"
         (
             CDPATH= cd "$local_extension_source"
-            npm_config_cache="$temporary_extension_dir/npm-cache" npx --yes '@vscode/vsce@3.9.2' package \
+            npm_config_cache="$temporary_extension_dir/npm-cache" mise exec node@24 -- npx --yes '@vscode/vsce@3.9.2' package \
                 --no-dependencies --allow-missing-repository --skip-license --out "$local_extension_vsix"
         )
         install_extension "$local_extension_vsix"
