@@ -45,6 +45,10 @@
     "workbench.commandPalette.history": 100,
     "workbench.commandPalette.preserveInput": false,
     "workbench.commandPalette.showAskInChat": false,
+    "workbench.editor.customLabels.enabled": true,
+    "workbench.editor.customLabels.patterns": {
+        "**/Documents/notes/**/*.md": "Memo: ${filename}.${extname}"
+    },
     "workbench.quickOpen.closeOnFocusLost": false,
     "workbench.quickOpen.preserveInput": false,
     "workbench.secondarySideBar.defaultVisibility": "hidden",
