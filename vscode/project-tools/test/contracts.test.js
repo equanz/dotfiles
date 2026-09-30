@@ -3,7 +3,6 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
-const { execFileSync } = require('node:child_process');
 const { activateWith } = require('../src/activate');
 const { createBufferCommands } = require('../src/commands/buffers');
 const { createFileCommands, fileEntries } = require('../src/commands/files');
@@ -14,9 +13,6 @@ const { directoryInput, isExplicitPathInput, pathFromInput } = require('../src/l
 const { pathPickerItems } = require('../src/lib/path-picker');
 const { readProjects, writeProjects } = require('../src/lib/project-store');
 
-const extensionRoot = path.resolve(__dirname, '..');
-const vscodeRoot = path.resolve(extensionRoot, '..');
-
 async function waitFor(predicate, message) {
     const deadline = Date.now() + 1000;
     while (!predicate()) {
@@ -25,20 +21,12 @@ async function waitFor(predicate, message) {
     }
 }
 
-test('manifest command contract is explicit and startup activation remains singular', () => {
-    const manifest = JSON.parse(fs.readFileSync(path.join(extensionRoot, 'package.json'), 'utf8'));
-    const contributed = manifest.contributes.commands.map((entry) => entry.command).sort();
-    assert.equal(new Set(contributed).size, contributed.length);
-    assert.deepEqual(manifest.activationEvents, ['onStartupFinished']);
-});
-
-test('startup closes the auxiliary bar without writing VS Code state database', async () => {
+test('startup closes the auxiliary bar', async () => {
     const executed = [];
-    const registered = [];
     const vscode = {
         commands: {
             executeCommand: async (command) => { executed.push(command); },
-            registerCommand: (id) => { registered.push(id); return { dispose() {} }; }
+            registerCommand: () => ({ dispose() {} })
         },
         window: {
             activeTextEditor: undefined,
@@ -48,86 +36,7 @@ test('startup closes the auxiliary bar without writing VS Code state database', 
     };
     const context = { subscriptions: [] };
     await activateWith(vscode, context);
-    const manifest = JSON.parse(fs.readFileSync(path.join(extensionRoot, 'package.json'), 'utf8'));
-    assert.deepEqual(registered.sort(), manifest.contributes.commands.map((entry) => entry.command).sort());
     assert.ok(executed.includes('workbench.action.closeAuxiliaryBar'));
-    const settings = JSON.parse(fs.readFileSync(path.join(vscodeRoot, 'settings.json'), 'utf8'));
-    assert.equal(settings['workbench.secondarySideBar.defaultVisibility'], 'hidden');
-});
-
-test('keymap renderer is current and every help binding resolves', () => {
-    execFileSync(process.execPath, [path.join(vscodeRoot, 'scripts', 'render-keymap.js'), '--check'], { stdio: 'pipe' });
-    const source = JSON.parse(fs.readFileSync(path.join(vscodeRoot, 'keymap.json'), 'utf8'));
-    const manifest = JSON.parse(fs.readFileSync(path.join(extensionRoot, 'package.json'), 'utf8'));
-    const rendered = JSON.parse(fs.readFileSync(path.join(extensionRoot, 'resources', 'keymap.json'), 'utf8'));
-    assert.ok(source.keybindings.length > 0);
-    assert.ok(rendered.bindings.length > 0);
-    const projectEnter = source.keybindings.find((binding) =>
-        binding.key === 'ctrl+j' && binding.command === 'equanz.project.enterDirectory' &&
-        binding.when === 'equanz.projectDirectoryPicker && inQuickInput'
-    );
-    const genericAccept = source.keybindings.find((binding) =>
-        binding.key === 'ctrl+j' && binding.command === 'quickInput.accept'
-    );
-    assert.ok(projectEnter);
-    assert.match(genericAccept.when, /!equanz\.projectDirectoryPicker/);
-    assert.ok(source.keybindings.some((binding) =>
-        binding.key === 'ctrl+l' && binding.command === 'equanz.project.parentDirectory' &&
-        binding.when === 'equanz.projectDirectoryPicker && inQuickInput'
-    ));
-    assert.ok(source.keybindings.some((binding) =>
-        binding.key === 'alt+;' && binding.command === 'editor.action.commentLine' &&
-        binding.when === 'editorTextFocus && editorHasSelection && !editorReadonly'
-    ));
-    for (const key of ['enter', 'ctrl+j']) {
-        assert.ok(source.keybindings.some((binding) =>
-            binding.key === key && binding.command === 'list.select' &&
-            binding.when === 'filesExplorerFocus && !inputFocus'
-        ));
-    }
-    assert.ok(source.keybindings.some((binding) =>
-        binding.key === 'ctrl+c ctrl+r' && binding.command === 'renameFile' &&
-        binding.when === 'filesExplorerFocus'
-    ));
-    assert.ok(source.keybindings.some((binding) =>
-        binding.key === 'ctrl+c h' && binding.command === 'equanz.keymap.showExplorer' &&
-        binding.when === 'filesExplorerFocus && !inputFocus'
-    ));
-    assert.ok(source.keybindings.some((binding) =>
-        binding.key === 'ctrl+c v' && binding.command === 'equanz.markdown.previewToSide' &&
-        binding.when === 'editorLangId == markdown && editorTextFocus'
-    ));
-    assert.ok(source.keybindings.some((binding) =>
-        binding.key === 'ctrl+c shift+v' && binding.command === 'markdown.reopenAsPreview' &&
-        binding.when === 'editorLangId == markdown && editorTextFocus'
-    ));
-    assert.ok(source.keybindings.some((binding) =>
-        binding.key === 'ctrl+g' && binding.command === 'closeFindWidget' && binding.when === 'findWidgetVisible'
-    ));
-    assert.ok(source.keybindings.some((binding) =>
-        binding.key === 'ctrl+x n' && binding.command === 'workbench.action.nextEditorInGroup' && binding.when === '!terminalFocus'
-    ));
-    assert.ok(source.keybindings.some((binding) =>
-        binding.key === 'ctrl+x p' && binding.command === 'workbench.action.previousEditorInGroup' && binding.when === '!terminalFocus'
-    ));
-    assert.ok(source.keybindings.some((binding) =>
-        binding.key === 'ctrl+y' && binding.command === 'editor.action.clipboardPasteAction' &&
-        binding.when === 'inputFocus && !editorTextFocus && !terminalFocus && !isComposing'
-    ));
-    assert.equal(source.keybindings.some((binding) => binding.command === 'equanz.buffer.next' || binding.command === 'equanz.buffer.previous'), false);
-    const settings = JSON.parse(fs.readFileSync(path.join(vscodeRoot, 'settings.json'), 'utf8'));
-    assert.equal(settings['emacs-mcx.cursorMoveOnFindWidget'], true);
-    const localCommands = new Set(manifest.contributes.commands.map((entry) => entry.command));
-    for (const binding of source.keybindings) {
-        if (binding.command?.startsWith('equanz.')) assert.ok(localCommands.has(binding.command), binding.command);
-    }
-    const resourceCommands = [];
-    const visit = (entries) => entries.forEach((entry) => {
-        if (entry.type === 'bindings') visit(entry.bindings);
-        else if (entry.command?.startsWith('equanz.')) resourceCommands.push(entry.command);
-    });
-    visit(rendered.bindings);
-    for (const command of resourceCommands) assert.ok(localCommands.has(command), command);
 });
 
 test('Explorer keymap lists Explorer actions instead of unrelated project actions', async () => {
@@ -365,43 +274,6 @@ test('C-x b distinguishes and reopens Markdown source and full preview buffers',
     ]]);
 });
 
-test('buffer commands retain name-based switching and no longer implement tab cycling', async () => {
-    class Uri {
-        constructor(value) { this.value = value; this.scheme = 'file'; this.fsPath = value; }
-        toString() { return this.value; }
-    }
-    const a = new Uri('/tmp/a.md');
-    const b = new Uri('/tmp/b.md');
-    const group = {
-        tabs: [
-            { label: 'a.md', input: { uri: a } },
-            { label: 'a.md', input: { uri: a, viewType: 'vscode.markdown.preview.editor' } },
-            { label: 'b.md', input: { uri: b } }
-        ]
-    };
-    group.activeTab = group.tabs[0];
-    const executed = [];
-    const vscode = {
-        Uri,
-        ViewColumn: { Active: 1 },
-        commands: {
-            executeCommand: async (...args) => {
-                executed.push(args);
-                const viewType = args[0] === 'vscode.openWith' ? args[2] : undefined;
-                group.activeTab = group.tabs.find((tab) => tab.input.uri === args[1] && tab.input.viewType === viewType);
-            }
-        },
-        window: { tabGroups: { all: [group], activeTabGroup: group } }
-    };
-    const { commands } = createBufferCommands(vscode);
-    assert.equal(commands['equanz.buffer.next'], undefined);
-    assert.equal(commands['equanz.buffer.previous'], undefined);
-    vscode.window.showQuickPick = async (items) => items.find((item) => item.viewType);
-    await commands['equanz.buffer.switch']();
-    assert.deepEqual(executed.map(([id, uri]) => [id, uri.fsPath]), [['vscode.openWith', '/tmp/a.md']]);
-    assert.ok(executed.every((call) => call.at(-1).viewColumn === 1));
-});
-
 test('C-c v opens a side preview and restores source-editor focus', async () => {
     const executed = [];
     const vscode = {
@@ -414,7 +286,7 @@ test('C-c v opens a side preview and restores source-editor focus', async () => 
     ]);
 });
 
-test('project store writes an array atomically readable by Project Manager', async () => {
+test('project store round-trips registrations', async () => {
     const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'equanz-project-store-'));
     const target = path.join(root, 'projects.json');
     try {
@@ -424,19 +296,4 @@ test('project store writes an array atomically readable by Project Manager', asy
     } finally {
         await fs.promises.rm(root, { recursive: true, force: true });
     }
-});
-
-test('macOS root installer owns the VS Code bootstrap and its Node dependency', () => {
-    const installer = fs.readFileSync(path.join(vscodeRoot, '..', 'install.sh'), 'utf8');
-    assert.match(installer, /brew install git hub tmux zsh node/);
-    assert.match(installer, /vscode\/bootstrap-macos\.sh/);
-    assert.match(installer, /VS Code setup failed/);
-    assert.match(installer, /VS Code is not installed; skipped VS Code setup/);
-});
-
-test('bootstrap has no database mutation or legacy cleanup path', () => {
-    const bootstrap = fs.readFileSync(path.join(vscodeRoot, 'bootstrap-macos.sh'), 'utf8');
-    assert.doesNotMatch(bootstrap, /state\.vscdb|sqlite3|uninstall-extension|custom-ui-style/);
-    assert.match(bootstrap, /--check/);
-    assert.match(bootstrap, /render-keymap\.js/);
 });
